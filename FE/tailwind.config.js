@@ -11,11 +11,13 @@ export default {
         textLight: "#11142D",
         textLight2nd: "#808191",
         divideLight: "#E4E4E4",
+        backgroundLight: "#F4F4F4",
 
         dark: "#1A1D1F",
         textDark: "#EFEFEF",
         textDark2nd: "#6F767E",
         dividerDark: "#272B30",
+        backgroundDark: "#111315",
       },
     },
   },
