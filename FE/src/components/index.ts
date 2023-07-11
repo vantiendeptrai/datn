@@ -9,6 +9,7 @@ import Avatar from "./client/Avatar";
 
 // Share
 import Container from "./Container";
+import Input from "./Input";
 import Logo from "./Logo";
 import MenuItem from "./MenuItem";
 
@@ -24,6 +25,7 @@ export {
 
   // Share
   Container,
+  Input,
   Logo,
   MenuItem,
 };

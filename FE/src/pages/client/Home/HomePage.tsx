@@ -1,4 +1,9 @@
+import { useState } from "react";
+import { Input } from "../../../components";
+
 const HomePage = () => {
+  const [email, setEmail] = useState("");
+
   return (
     <>
       <div
@@ -7,7 +12,13 @@ const HomePage = () => {
         text-textPrimary
         dark:text-textDark"
       >
-        Trang chủ
+        <Input
+          id="email"
+          label="Email"
+          placeholder="Nhập email của bạn"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </div>
     </>
   );
