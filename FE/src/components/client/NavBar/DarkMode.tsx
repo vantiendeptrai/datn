@@ -1,7 +1,10 @@
 import { useCallback } from "react";
 
 import { HiOutlineDesktopComputer } from "react-icons/hi";
+import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
+
 import { ChangeTheme } from "../..";
+
 import { useDarkMode, useUserMenu } from "../../../hooks";
 
 type DarkModeProps = {
@@ -23,14 +26,19 @@ const DarkMode = ({ theme, handleChangeTheme }: DarkModeProps) => {
       <div
         onClick={toggleOpen}
         className="
+        hidden
+        md:block
         cursor-pointer
-        text-textLight2nd
-        dark:text-textDark2nd
-        hover:text-primary
-        dark:hover:text-primary
+        text-primary
         "
       >
-        <HiOutlineDesktopComputer size={20} />
+        {theme === "dark" ? (
+          <BsFillMoonStarsFill size={20} />
+        ) : theme === "light" ? (
+          <BsFillSunFill size={20} />
+        ) : (
+          <HiOutlineDesktopComputer size={20} />
+        )}
       </div>
 
       {darkMode.isOpen && (

@@ -1,32 +1,23 @@
-import { ChangeEvent } from "react";
-
 type InputProps = {
   id: string;
   label: string;
-  value: string | number;
   placeholder: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   type?: string;
+  disabled?: boolean;
 };
 
-const Input = ({
-  id,
-  label,
-  value,
-  placeholder,
-  onChange,
-  type,
-}: InputProps) => {
+const Input = ({ id, label, placeholder, disabled, type }: InputProps) => {
   return (
     <>
       <div
         className="
-        relative"
+        "
       >
         <label
           htmlFor={id}
           className="
-          text-textLight"
+          text-textLight
+          dark:text-textDark"
         >
           {label}
         </label>
@@ -34,16 +25,24 @@ const Input = ({
         <input
           id={id}
           type={type}
-          value={value}
+          disabled={disabled}
           placeholder={placeholder}
-          onChange={onChange}
           className="
           w-full
           px-4
           py-3
           outline-none
           rounded-xl
+          transition
+          border-2
+          disabled:opacity-70
+          disabled:cursor-not-allowed
+          border-divideLight
+          dark:border-dividerDark
+          bg-light
+          dark:bg-dark
           text-textLight2nd
+          dark:text-textDark2nd
           peer"
         />
       </div>

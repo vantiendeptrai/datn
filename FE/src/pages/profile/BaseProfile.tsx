@@ -1,11 +1,11 @@
 import { useCallback, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
-import { NavBar } from "../../components";
+import { NavBar, Sidebar } from "../../components";
 
 import { useTheme } from "../../hooks";
 
-const BaseClient = () => {
+const BaseProfile = () => {
   const { theme, handleChangeTheme } = useTheme();
 
   const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -63,10 +63,14 @@ const BaseClient = () => {
           handleChangeTheme={handleChangeTheme}
         />
 
-        <Outlet />
+        <div className="flex gap-3">
+          <Sidebar />
+
+          <Outlet />
+        </div>
       </div>
     </>
   );
 };
 
-export default BaseClient;
+export default BaseProfile;

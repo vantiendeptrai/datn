@@ -5,12 +5,12 @@ const Search = () => {
     <>
       <div
         className="
+        m-5
         w-full
         md:w-auto
-        rounded-xl
         transition
+        rounded-xl
         cursor-pointer
-        m-5
         bg-backgroundLight
         dark:bg-backgroundDark"
       >
@@ -36,9 +36,9 @@ const Search = () => {
             type="text"
             placeholder="Tìm kiếm"
             className="
+            pr-3
             w-full
             outline-none
-            pr-3
             text-textLight2nd
             bg-backgroundLight
             dark:text-textDark2nd

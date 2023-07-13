@@ -1,5 +1,5 @@
-import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
 import { HiOutlineDesktopComputer } from "react-icons/hi";
+import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
 
 import { MenuItem } from "../..";
 
@@ -14,12 +14,11 @@ const ChangeTheme = ({ theme, handleChangeTheme }: ChangeThemeProps) => {
       <div
         className="
           absolute
-          right-14
-          md:right-28
           top-16
-          transition
+          right-14
           border
           rounded-xl
+          md:right-28
           dark:rounded-xl
           shadow-xl
           dark:shadow-xl

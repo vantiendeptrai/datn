@@ -1,10 +1,10 @@
 import { Helmet } from "react-helmet";
 
-const HomePage = () => {
+const ReservationPage = () => {
   return (
     <>
       <Helmet>
-        <title>Trang chủ</title>
+        <title>Lịch sử đặt phòng</title>
       </Helmet>
 
       <div
@@ -12,10 +12,10 @@ const HomePage = () => {
         text-textLight
         dark:text-textDark"
       >
-        Trang chủ
+        Lịch sử đặt phòng
       </div>
     </>
   );
 };
 
-export default HomePage;
+export default ReservationPage;

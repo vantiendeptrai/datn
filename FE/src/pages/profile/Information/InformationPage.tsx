@@ -1,10 +1,10 @@
 import { Helmet } from "react-helmet";
 
-const HomePage = () => {
+const InformationPage = () => {
   return (
     <>
       <Helmet>
-        <title>Trang chủ</title>
+        <title>Thông tin người dùng</title>
       </Helmet>
 
       <div
@@ -12,10 +12,10 @@ const HomePage = () => {
         text-textLight
         dark:text-textDark"
       >
-        Trang chủ
+        Thông tin người dùng
       </div>
     </>
   );
 };
 
-export default HomePage;
+export default InformationPage;

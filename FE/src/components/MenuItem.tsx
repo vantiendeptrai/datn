@@ -29,14 +29,14 @@ const MenuItem = ({
         cursor-pointer
         rounded-xl
         w-full
-          ${
-            active
-              ? "text-primary hover:bg-backgroundLight dark:hover:bg-backgroundDark"
-              : "text-textLight2nd dark:text-textDark2nd hover:bg-backgroundLight dark:hover:bg-backgroundDark"
-          }
+        ${
+          active
+            ? "text-primary hover:bg-backgroundLight dark:hover:bg-backgroundDark"
+            : "text-textLight2nd dark:text-textDark2nd hover:bg-backgroundLight dark:hover:bg-backgroundDark"
+        }
         `}
       >
-        {Icon && <Icon size={15} />}
+        {Icon && <Icon size={20} />}
 
         <span>{label}</span>
       </button>

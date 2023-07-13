@@ -1,6 +1,12 @@
 import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { Avatar, DarkMode, MenuItem } from "../..";
+import { CiLogin, CiLogout } from "react-icons/ci";
+import { SiGnuprivacyguard } from "react-icons/si";
+import { AiOutlineUser, AiOutlineHistory } from "react-icons/ai";
+
+import { Avatar, MenuItem } from "../..";
+
 import { useDarkMode, useUserMenu } from "../../../hooks";
 
 type UserMenuProps = {
@@ -11,6 +17,8 @@ type UserMenuProps = {
 const UserMenu = ({ isLogin, imageUser }: UserMenuProps) => {
   const darkMode = useDarkMode();
   const userMenu = useUserMenu();
+
+  const navigate = useNavigate();
 
   const toggleOpen = useCallback(() => {
     userMenu.isOpen ? userMenu.onClose() : userMenu.onOpen(),
@@ -50,15 +58,33 @@ const UserMenu = ({ isLogin, imageUser }: UserMenuProps) => {
           >
             {isLogin ? (
               <>
-                <MenuItem label="Thông tin cá nhân" />
-                <MenuItem label="Lịch sử đặt phòng" />
-                <hr />
-                <MenuItem label="Đăng xuất" />
+                <MenuItem
+                  label="Thông tin cá nhân"
+                  icon={AiOutlineUser}
+                  onClick={() => navigate("/profile")}
+                />
+                <MenuItem
+                  label="Lịch sử đặt phòng"
+                  icon={AiOutlineHistory}
+                  onClick={() => navigate("/profile/reservation")}
+                />
+
+                <hr className="border-divideLight dark:border-dividerDark" />
+
+                <MenuItem label="Đăng xuất" icon={CiLogout} />
               </>
             ) : (
               <>
-                <MenuItem label="Đăng nhập" />
-                <MenuItem label="Đăng ký" />
+                <MenuItem
+                  label="Đăng nhập"
+                  icon={CiLogin}
+                  onClick={() => navigate("/auth")}
+                />
+                <MenuItem
+                  label="Đăng ký"
+                  icon={SiGnuprivacyguard}
+                  onClick={() => navigate("/auth/register")}
+                />
               </>
             )}
           </div>

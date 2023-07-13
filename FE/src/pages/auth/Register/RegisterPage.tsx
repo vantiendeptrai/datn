@@ -3,7 +3,7 @@ const RegisterPage = () => {
     <>
       <div
         className="
-        text-textPrimary
+        text-textLight
         dark:text-textDark"
       >
         Đăng ký
