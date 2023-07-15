@@ -18,6 +18,8 @@ const NavBar = ({
       <div
         className="
         w-full
+        py-3
+        md:p-0
         bg-light
         dark:bg-dark"
       >
@@ -28,21 +30,24 @@ const NavBar = ({
             flex-row
             items-center
             justify-between
-            gap-10"
+            gap-5"
           >
             <Logo />
 
+            <Search />
+
             <div
               className="
-              relative
-              w-full"
+              flex
+              flex-row
+              gap-5
+              justify-center
+              items-center"
             >
-              <Search />
+              <DarkMode theme={theme} handleChangeTheme={handleChangeTheme} />
+
+              <UserMenu isLogin={isLogin} imageUser={imageUser} />
             </div>
-
-            <DarkMode theme={theme} handleChangeTheme={handleChangeTheme} />
-
-            <UserMenu isLogin={isLogin} imageUser={imageUser} />
           </div>
         </Container>
       </div>

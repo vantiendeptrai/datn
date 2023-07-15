@@ -16,7 +16,7 @@ export default {
         dark: "#1A1D1F",
         textDark: "#EFEFEF",
         textDark2nd: "#6F767E",
-        dividerDark: "#272B30",
+        divideDark: "#272B30",
         backgroundDark: "#111315",
       },
     },

@@ -12,7 +12,7 @@ const Container = ({ children }: ContainerProps) => {
         max-w-[2520px]
         mx-auto
         xl:px-10
-        md:px-50
+        md:px-5
         sm:px-2
         px-4"
       >

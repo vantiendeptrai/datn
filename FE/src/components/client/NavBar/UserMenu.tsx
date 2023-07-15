@@ -49,7 +49,7 @@ const UserMenu = ({ isLogin, imageUser }: UserMenuProps) => {
             shadow-xl
             dark:shadow-xl
             border-divideLight
-            dark:border-dividerDark
+            dark:border-divideDark
             bg-light
             dark:bg-dark
             shadow-backgroundLight
@@ -68,7 +68,7 @@ const UserMenu = ({ isLogin, imageUser }: UserMenuProps) => {
                   onClick={() => navigate("/profile/reservation")}
                 />
 
-                <hr className="border-divideLight dark:border-dividerDark" />
+                <hr className="border-divideLight dark:border-divideDark" />
 
                 <MenuItem label="Đăng xuất" icon={CiLogout} />
               </>

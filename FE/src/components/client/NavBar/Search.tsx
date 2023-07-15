@@ -5,45 +5,78 @@ const Search = () => {
     <>
       <div
         className="
-        m-5
         w-full
-        md:w-auto
-        transition
-        rounded-xl
+        md:w-1/2
+        py-2
+        rounded-full
         cursor-pointer
-        bg-backgroundLight
-        dark:bg-backgroundDark"
+        border-[1px]
+        border-divideLight
+        dark:border-divideDark
+        text-textLight
+        dark:text-textDark"
       >
         <div
           className="
           flex
+          flex-row
           items-center
-          gap-3
-          p-1"
+          justify-between"
         >
           <div
             className="
-            transition
-            py-3
-            pl-3
-            text-textLight2nd
-            dark:text-textDark2nd"
+            text-sm 
+            font-semibold 
+            px-6"
           >
-            <AiOutlineSearch />
+            Vị trí
           </div>
 
-          <input
-            type="text"
-            placeholder="Tìm kiếm"
+          <div
             className="
-            pr-3
-            w-full
-            outline-none
-            text-textLight2nd
-            bg-backgroundLight
-            dark:text-textDark2nd
-            dark:bg-backgroundDark"
-          />
+            hidden
+            md:block
+            text-sm
+            font-semibold
+            px-6
+            flex-1
+            text-center
+            border-x-[1px]
+            border-divideLight
+            dark:border-divideDark"
+          >
+            Thời gian
+          </div>
+
+          <div
+            className="
+            text-sm
+            font-semibold
+            pl-6
+            pr-2
+            flex
+            flex-row
+            items-center
+            gap-3"
+          >
+            <div
+              className="
+              hidden
+              md:block"
+            >
+              Khách
+            </div>
+
+            <div
+              className="
+              p-2
+              rounded-full
+              bg-backgroundLight
+              dark:bg-backgroundDark"
+            >
+              <AiOutlineSearch size={20} />
+            </div>
+          </div>
         </div>
       </div>
     </>

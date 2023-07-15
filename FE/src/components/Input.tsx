@@ -38,7 +38,7 @@ const Input = ({ id, label, placeholder, disabled, type }: InputProps) => {
           disabled:opacity-70
           disabled:cursor-not-allowed
           border-divideLight
-          dark:border-dividerDark
+          dark:border-divideDark
           bg-light
           dark:bg-dark
           text-textLight2nd

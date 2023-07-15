@@ -23,7 +23,7 @@ const ChangeTheme = ({ theme, handleChangeTheme }: ChangeThemeProps) => {
           shadow-xl
           dark:shadow-xl
           border-divideLight
-          dark:border-dividerDark
+          dark:border-divideDark
           bg-light
           dark:bg-dark
           shadow-backgroundLight
