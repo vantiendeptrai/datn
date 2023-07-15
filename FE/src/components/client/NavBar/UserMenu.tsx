@@ -6,7 +6,6 @@ import { SiGnuprivacyguard } from "react-icons/si";
 import { AiOutlineUser, AiOutlineHistory } from "react-icons/ai";
 
 import { Avatar, MenuItem } from "../..";
-
 import { useDarkMode, useUserMenu } from "../../../hooks";
 
 type UserMenuProps = {

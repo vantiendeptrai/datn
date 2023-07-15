@@ -2,13 +2,11 @@
 import BaseAdmin from "./admin/BaseAdmin";
 import BaseAuth from "./auth/BaseAuth";
 import BaseClient from "./client/BaseClient";
-import BaseProfile from "./profile/BaseProfile";
 
 // Route
 import RouteAdmin from "./admin/RouteAdmin";
 import RouteAuth from "./auth/RouteAuth";
 import RouteClient from "./client/RouteClient";
-import RouteProfile from "./profile/RouteProfile";
 
 // Admin
 import DashboardPage from "./admin/Dashboard/DashboardPage";
@@ -24,24 +22,20 @@ import RegisterPage from "./auth/Register/RegisterPage";
 import HomePage from "./client/Home/HomePage";
 import HotelList from "./client/HotelList/HotelList";
 import HotelDetailPage from "./client/HotelDetail/HotelDetailPage";
-import ProfilePage from "./profile/Information/InformationPage";
-
-// Profile
-import InformationPage from "./profile/Information/InformationPage";
-import ReservationPage from "./profile/Reservation/ReservationPage";
+import ProfilePage from "./client/Profile/Information/InformationPage";
+import InformationPage from "./client/Profile/Information/InformationPage";
+import ReservationPage from "./client/Profile/Reservation/ReservationPage";
 
 export {
   // Base
   BaseAdmin,
   BaseAuth,
   BaseClient,
-  BaseProfile,
 
   // Route
   RouteAdmin,
   RouteAuth,
   RouteClient,
-  RouteProfile,
 
   // Admin
   DashboardPage,
@@ -58,8 +52,6 @@ export {
   HotelList,
   HotelDetailPage,
   ProfilePage,
-
-  // Profile
   InformationPage,
   ReservationPage,
 };

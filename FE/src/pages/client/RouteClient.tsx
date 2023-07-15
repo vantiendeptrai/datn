@@ -1,6 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 
-import { BaseClient, HomePage, HotelDetailPage, HotelList } from "..";
+import {
+  BaseClient,
+  HomePage,
+  HotelDetailPage,
+  HotelList,
+  InformationPage,
+  ReservationPage,
+} from "..";
 
 const RouteClient = () => {
   return (
@@ -10,6 +17,8 @@ const RouteClient = () => {
           <Route index element={<HomePage />} />
           <Route path="hotel-list" element={<HotelList />} />
           <Route path="hotel-detail/:id" element={<HotelDetailPage />} />
+          <Route path="profile" element={<InformationPage />} />
+          <Route path="profile/reservation" element={<ReservationPage />} />
         </Route>
       </Routes>
     </>

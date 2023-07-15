@@ -4,7 +4,6 @@ import { HiOutlineDesktopComputer } from "react-icons/hi";
 import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
 
 import { ChangeTheme } from "../..";
-
 import { useDarkMode, useUserMenu } from "../../../hooks";
 
 type DarkModeProps = {
