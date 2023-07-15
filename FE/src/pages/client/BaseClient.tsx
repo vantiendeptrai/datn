@@ -16,7 +16,7 @@ const BaseClient = () => {
       >
         <NavBar
           imageUser=""
-          isLogin={false}
+          isLogin={true}
           theme={theme}
           handleChangeTheme={handleChangeTheme}
         />

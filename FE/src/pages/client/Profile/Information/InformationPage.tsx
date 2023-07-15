@@ -1,12 +1,6 @@
-import { Helmet } from "react-helmet";
-
 const InformationPage = () => {
   return (
     <>
-      <Helmet>
-        <title>Thông tin người dùng</title>
-      </Helmet>
-
       <div
         className="
         text-textLight
