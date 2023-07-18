@@ -31,9 +31,9 @@ const Input = ({ id, label, placeholder, disabled, type }: InputProps) => {
           w-full
           px-4
           py-3
-          outline-none
           rounded-xl
           transition
+          outline-none
           border-2
           disabled:opacity-70
           disabled:cursor-not-allowed

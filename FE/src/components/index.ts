@@ -7,10 +7,12 @@ import UserMenu from "./client/NavBar/UserMenu";
 import Avatar from "./client/Avatar";
 
 // Share
-import Container from "./Container";
-import Input from "./Input";
-import Logo from "./Logo";
-import MenuItem from "./MenuItem";
+import Button from "./share/Button";
+import Container from "./share/Container";
+import Input from "./share/Input";
+import Logo from "./share/Logo";
+import MenuItem from "./share/MenuItem";
+
 import Sidebar from "./Sidebar";
 
 export {
@@ -23,6 +25,7 @@ export {
   Avatar,
 
   // Share
+  Button,
   Container,
   Input,
   Logo,
