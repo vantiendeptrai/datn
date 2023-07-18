@@ -1,3 +1,5 @@
+import { Button } from "../../../components";
+
 const HomePage = () => {
   return (
     <>
@@ -6,7 +8,7 @@ const HomePage = () => {
         text-textLight
         dark:text-textDark"
       >
-        Trang chủ
+        <Button label="Hủy" onClick={() => alert("1")} outline />
       </div>
     </>
   );

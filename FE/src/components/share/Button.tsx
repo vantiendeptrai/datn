@@ -3,11 +3,18 @@ import { IconType } from "react-icons";
 type ButtonProps = {
   label: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  outline?: boolean;
   disabled?: boolean;
   icon?: IconType;
 };
 
-const Button = ({ label, onClick, disabled, icon: Icon }: ButtonProps) => {
+const Button = ({
+  label,
+  outline,
+  onClick,
+  disabled,
+  icon: Icon,
+}: ButtonProps) => {
   return (
     <>
       <button
@@ -20,11 +27,14 @@ const Button = ({ label, onClick, disabled, icon: Icon }: ButtonProps) => {
         py-3
         rounded-xl
         transition
-        hover:opacity-80
+        hover:opacity-60
         disabled:opacity-70
         disabled:cursor-not-allowed
-        text-textDark
-        bg-primary
+        ${
+          outline
+            ? "bg-light text-textLight border-2 border-divideLight"
+            : "bg-primary text-textDark"
+        }
       `}
       >
         {Icon && (
