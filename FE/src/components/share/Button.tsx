@@ -27,7 +27,7 @@ const Button = ({
         py-3
         rounded-xl
         transition
-        hover:opacity-60
+        hover:opacity-80
         disabled:opacity-70
         disabled:cursor-not-allowed
         ${
