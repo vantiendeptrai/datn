@@ -19,7 +19,10 @@ const NavBar = ({
         className="
         w-full
         py-3
-        md:p-0
+        fixed
+        z-50
+        shadow
+        md:p-1.5
         bg-light
         dark:bg-dark"
       >

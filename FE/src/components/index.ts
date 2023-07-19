@@ -1,3 +1,8 @@
+// Home
+import Attractive from "./client/Home/Attractive";
+import AttractiveCard from "./client/Home/AttractiveCard";
+import Carousel from "./client/Home/Carousel";
+
 // Modal
 import LoginModal from "./client/Modal/LoginModal";
 import Modal from "./client/Modal/Modal";
@@ -19,6 +24,11 @@ import Logo from "./share/Logo";
 import MenuItem from "./share/MenuItem";
 
 export {
+  // Home
+  Attractive,
+  AttractiveCard,
+  Carousel,
+
   // Modal
   LoginModal,
   Modal,

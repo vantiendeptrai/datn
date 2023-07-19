@@ -46,6 +46,7 @@ const UserMenu = ({ isLogin, imageUser }: UserMenuProps) => {
           <div
             className="
             absolute
+            z-10
             w-[200px]
             right-0
             top-10
@@ -53,14 +54,11 @@ const UserMenu = ({ isLogin, imageUser }: UserMenuProps) => {
             border
             rounded-xl
             dark:rounded-xl
-            shadow-xl
             dark:shadow-xl
             border-divideLight
             dark:border-divideDark
             bg-light
-            dark:bg-dark
-            shadow-backgroundLight
-            dark:shadow-backgroundDark"
+            dark:bg-dark"
           >
             {isLogin ? (
               <>
