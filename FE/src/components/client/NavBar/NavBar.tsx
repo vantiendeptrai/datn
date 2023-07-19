@@ -35,7 +35,7 @@ const NavBar = ({
             justify-between
             gap-5"
           >
-            <Logo />
+            <Logo hidden />
 
             <Search />
 

@@ -19,6 +19,7 @@ export default {
         divideDark: "#272B30",
         backgroundDark: "#111315",
       },
+
       fontFamily: {
         dancing: ["Dancing Script", "sans-serif"],
       },

@@ -1,3 +1,8 @@
+//Footer
+import Footer from "./client/Footer/Footer";
+import FooterBottom from "./client/Footer/FooterBottom";
+import FooterCenter from "./client/Footer/FooterCenter";
+
 // Home
 import Attractive from "./client/Home/Attractive";
 import AttractiveCard from "./client/Home/AttractiveCard";
@@ -26,6 +31,11 @@ import Logo from "./share/Logo";
 import MenuItem from "./share/MenuItem";
 
 export {
+  //Footer
+  Footer,
+  FooterBottom,
+  FooterCenter,
+
   // Home
   Attractive,
   AttractiveCard,

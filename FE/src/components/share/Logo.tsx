@@ -1,6 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
-const Logo = () => {
+type LogoProps = {
+  hidden?: boolean;
+};
+
+const Logo = ({ hidden }: LogoProps) => {
   const navigate = useNavigate();
 
   return (
@@ -11,10 +15,10 @@ const Logo = () => {
         width={100}
         height={100}
         onClick={() => navigate("/")}
-        className="
-        hidden
-        md:block
-        cursor-pointer"
+        className={`
+        cursor-pointer
+        ${hidden ? "hidden md:block" : ""}
+        `}
       />
     </>
   );
