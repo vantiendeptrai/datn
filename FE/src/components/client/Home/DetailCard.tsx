@@ -31,8 +31,8 @@ const DetailCard = ({
         ease-linear
         ${
           reverse
-            ? "hover:scale-x-105 hover:scale-y-105 origin-bottom-right"
-            : "hover:scale-x-105 hover:scale-y-105 origin-bottom-left"
+            ? "md:hover:scale-x-105 md:hover:scale-y-105 md:origin-bottom-right"
+            : "md:hover:scale-x-105 md:hover:scale-y-105 md:origin-bottom-left"
         }
         `}
       >
@@ -44,7 +44,7 @@ const DetailCard = ({
           h-auto
           min-h-[100%]
           align-middle
-          ${isHover ? "blur-sm" : ""}
+          ${isHover ? "md:blur-sm" : ""}
           `}
         />
 
@@ -52,54 +52,62 @@ const DetailCard = ({
           <>
             <div
               className="
-              absolute
-              inset-0
-              bg-neutral-800/70
-              opacity-100"
-            />
-
-            <h3
-              className={`
-              uppercase
-              absolute
-              text-xl
-              text-textDark
-              cursor-pointer
-              hover:border-b
-              ${reverse ? "top-20 left-5" : "top-20 right-5"}
-              `}
+              hidden
+              md:block"
             >
-              {title}
-            </h3>
+              <div
+                className="
+                absolute
+                inset-0
+                hidden
+                md:block
+                bg-neutral-800/70
+                opacity-100"
+              />
 
-            <span
-              className={`
-              uppercase
-              absolute
-              text-xl
-              text-textDark
-              cursor-pointer
-              hover:border-b
-              ${reverse ? "top-32 left-5" : "top-32 right-5"}
-              `}
-            >
-              {label}
-            </span>
+              <h3
+                className={`
+                uppercase
+                absolute
+                text-xl
+                text-textDark
+                cursor-pointer
+                hover:border-b
+                ${reverse ? "top-20 left-5" : "top-20 right-5"}
+                `}
+              >
+                {title}
+              </h3>
 
-            <p
-              className={`
-              absolute
-              top-[40%]
-              w-56
-              text-[12px]
-              text-justify
-              cursor-pointer
-              text-textDark
-              ${reverse ? "right-[15%]" : "left-[15%]"}
-              `}
-            >
-              {description}
-            </p>
+              <span
+                className={`
+                uppercase
+                absolute
+                text-xl
+                text-textDark
+                cursor-pointer
+                hover:border-b
+                ${reverse ? "top-32 left-5" : "top-32 right-5"}
+                `}
+              >
+                {label}
+              </span>
+
+              <p
+                className={`
+                absolute
+                top-[40%]
+                w-56
+                text-[12px]
+                text-justify
+                cursor-pointer
+                text-textDark
+                ${reverse ? "right-[15%]" : "left-[15%]"}
+                `}
+              >
+                {description}
+              </p>
+            </div>
           </>
         )}
       </div>
