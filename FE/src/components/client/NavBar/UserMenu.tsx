@@ -6,7 +6,12 @@ import { SiGnuprivacyguard } from "react-icons/si";
 import { AiOutlineUser, AiOutlineHistory } from "react-icons/ai";
 
 import { Avatar, MenuItem } from "../..";
-import { useDarkMode, useLoginModal, useUserMenu } from "../../../hooks";
+import {
+  useDarkMode,
+  useLoginModal,
+  useRegisterModal,
+  useUserMenu,
+} from "../../../hooks";
 
 type UserMenuProps = {
   isLogin: boolean;
@@ -16,7 +21,8 @@ type UserMenuProps = {
 const UserMenu = ({ isLogin, imageUser }: UserMenuProps) => {
   const darkMode = useDarkMode();
   const userMenu = useUserMenu();
-  const login = useLoginModal();
+  const loginModal = useLoginModal();
+  const registerModal = useRegisterModal();
 
   const navigate = useNavigate();
 
@@ -78,12 +84,12 @@ const UserMenu = ({ isLogin, imageUser }: UserMenuProps) => {
                 <MenuItem
                   label="Đăng nhập"
                   icon={CiLogin}
-                  onClick={() => login.onOpen()}
+                  onClick={loginModal.onOpen}
                 />
                 <MenuItem
                   label="Đăng ký"
                   icon={SiGnuprivacyguard}
-                  onClick={() => navigate("/auth/register")}
+                  onClick={registerModal.onOpen}
                 />
               </>
             )}

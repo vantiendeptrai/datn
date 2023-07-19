@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-import { LoginModal, NavBar } from "../../components";
+import { LoginModal, NavBar, RegisterModal } from "../../components";
 import { useTheme } from "../../hooks";
 
 const BaseClient = () => {
@@ -21,6 +21,7 @@ const BaseClient = () => {
         />
 
         <LoginModal />
+        <RegisterModal />
 
         <Outlet />
       </div>
