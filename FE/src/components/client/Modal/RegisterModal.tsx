@@ -131,8 +131,8 @@ const RegisterModal = () => {
       isOpen={registerModal.isOpen}
       onClose={registerModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
-      title="Đăng nhập"
-      actionLabel="Đăng nhập"
+      title="Đăng ký"
+      actionLabel="Đăng ký"
       body={bodyContent}
       footer={footerContent}
     />
