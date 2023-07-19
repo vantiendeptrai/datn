@@ -112,7 +112,7 @@ const Modal = ({
               lg:h-auto
               md:h-auto
               border-0 
-              rounded-xl
+              md:rounded-xl
               shadow-lg 
               relative 
               flex 

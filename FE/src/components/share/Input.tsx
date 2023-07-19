@@ -32,8 +32,6 @@ const Input = ({
         <label
           htmlFor={id}
           className={`
-          text-textLight
-          dark:text-textDark
           ${
             errors[id]
               ? "text-red-500 dark:text-red-500"
