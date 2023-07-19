@@ -1,6 +1,6 @@
 // Modal
-import Modal from "./client/Modal/Modal";
 import LoginModal from "./client/Modal/LoginModal";
+import Modal from "./client/Modal/Modal";
 
 // Navbar
 import ChangeTheme from "./client/NavBar/ChangeTheme";
@@ -9,21 +9,18 @@ import NavBar from "./client/NavBar/NavBar";
 import Search from "./client/NavBar/Search";
 import UserMenu from "./client/NavBar/UserMenu";
 
-import Avatar from "./client/Avatar";
-
 // Share
+import Avatar from "./share/Avatar";
 import Button from "./share/Button";
 import Container from "./share/Container";
 import Input from "./share/Input";
 import Logo from "./share/Logo";
 import MenuItem from "./share/MenuItem";
 
-import Sidebar from "./Sidebar";
-
 export {
   // Modal
-  Modal,
   LoginModal,
+  Modal,
 
   // Navbar
   ChangeTheme,
@@ -31,13 +28,12 @@ export {
   NavBar,
   Search,
   UserMenu,
-  Avatar,
 
   // Share
+  Avatar,
   Button,
   Container,
   Input,
   Logo,
   MenuItem,
-  Sidebar,
 };

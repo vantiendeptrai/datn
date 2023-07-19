@@ -14,9 +14,8 @@ import UserManagerPage from "./admin/UserManager/UserManagerPage";
 
 // Client
 import HomePage from "./client/Home/HomePage";
-import HotelList from "./client/HotelList/HotelList";
 import HotelDetailPage from "./client/HotelDetail/HotelDetailPage";
-import ProfilePage from "./client/Profile/Information/InformationPage";
+import HotelList from "./client/HotelList/HotelList";
 import InformationPage from "./client/Profile/Information/InformationPage";
 import ReservationPage from "./client/Profile/Reservation/ReservationPage";
 
@@ -39,7 +38,6 @@ export {
   HomePage,
   HotelList,
   HotelDetailPage,
-  ProfilePage,
   InformationPage,
   ReservationPage,
 };
