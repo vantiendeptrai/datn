@@ -1,6 +1,11 @@
 import { Outlet } from "react-router-dom";
 
+import { Footer, NavBar } from "../../components";
+import { useTheme } from "../../hooks";
+
 const BaseAdmin = () => {
+  const { theme, handleChangeTheme } = useTheme();
+
   return (
     <>
       <div
@@ -8,7 +13,19 @@ const BaseAdmin = () => {
         bg-backgroundLight
         dark:bg-backgroundDark"
       >
-        <Outlet />
+        <NavBar
+          imageUser=""
+          isLogin={false}
+          theme={theme}
+          handleChangeTheme={handleChangeTheme}
+          admin
+        />
+
+        <div>
+          <Outlet />
+        </div>
+
+        <Footer admin />
       </div>
     </>
   );

@@ -1,9 +1,19 @@
 import { FooterBottom, FooterCenter } from "../..";
 
-const Footer = () => {
+type FooterProps = {
+  admin?: boolean;
+};
+
+const Footer = ({ admin }: FooterProps) => {
   return (
     <>
-      <FooterCenter />
+      <div
+        className={`
+        ${admin ? "hidden" : ""}
+        `}
+      >
+        <FooterCenter />
+      </div>
 
       <FooterBottom />
     </>

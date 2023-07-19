@@ -5,10 +5,12 @@ type NavBarProps = {
   isLogin: boolean;
   imageUser: string;
   handleChangeTheme: (theme: string) => void;
+  admin?: boolean;
 };
 
 const NavBar = ({
   isLogin,
+  admin,
   theme,
   imageUser,
   handleChangeTheme,
@@ -19,10 +21,10 @@ const NavBar = ({
         className="
         w-full
         py-3
-        fixed
-        z-50
+        px-5
+        md:px-0
+        md:py-0
         shadow
-        md:p-1.5
         bg-light
         dark:bg-dark"
       >
@@ -37,7 +39,7 @@ const NavBar = ({
           >
             <Logo hidden />
 
-            <Search />
+            <Search admin={admin} />
 
             <div
               className="
@@ -47,7 +49,11 @@ const NavBar = ({
               justify-center
               items-center"
             >
-              <DarkMode theme={theme} handleChangeTheme={handleChangeTheme} />
+              <DarkMode
+                admin={admin}
+                theme={theme}
+                handleChangeTheme={handleChangeTheme}
+              />
 
               <UserMenu isLogin={isLogin} imageUser={imageUser} />
             </div>

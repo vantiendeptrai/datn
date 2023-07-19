@@ -8,10 +8,11 @@ import { useDarkMode, useUserMenu } from "../../../hooks";
 
 type DarkModeProps = {
   theme: string | null;
+  admin?: boolean;
   handleChangeTheme: (theme: string) => void;
 };
 
-const DarkMode = ({ theme, handleChangeTheme }: DarkModeProps) => {
+const DarkMode = ({ admin, theme, handleChangeTheme }: DarkModeProps) => {
   const darkMode = useDarkMode();
   const userMenu = useUserMenu();
 
@@ -24,12 +25,11 @@ const DarkMode = ({ theme, handleChangeTheme }: DarkModeProps) => {
     <>
       <div
         onClick={toggleOpen}
-        className="
-        hidden
-        md:block
+        className={`
         cursor-pointer
         text-primary
-        "
+        ${admin ? "" : "hidden md:block"}
+       `}
       >
         {theme === "dark" ? (
           <BsFillMoonStarsFill size={20} />
