@@ -1,4 +1,4 @@
-import { Attractive, Carousel, Container } from "../../../components";
+import { Attractive, Carousel, Container, Detail } from "../../../components";
 
 const HomePage = () => {
   const listImage = [
@@ -19,6 +19,8 @@ const HomePage = () => {
 
       <Container>
         <Attractive />
+
+        <Detail />
       </Container>
     </>
   );

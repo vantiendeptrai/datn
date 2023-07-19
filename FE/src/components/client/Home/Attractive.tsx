@@ -1,4 +1,4 @@
-import AttractiveCard from "./AttractiveCard";
+import { AttractiveCard } from "../..";
 
 const Attractive = () => {
   return (

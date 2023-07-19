@@ -2,6 +2,8 @@
 import Attractive from "./client/Home/Attractive";
 import AttractiveCard from "./client/Home/AttractiveCard";
 import Carousel from "./client/Home/Carousel";
+import Detail from "./client/Home/Detail";
+import DetailCard from "./client/Home/DetailCard";
 
 // Modal
 import LoginModal from "./client/Modal/LoginModal";
@@ -28,6 +30,8 @@ export {
   Attractive,
   AttractiveCard,
   Carousel,
+  Detail,
+  DetailCard,
 
   // Modal
   LoginModal,
