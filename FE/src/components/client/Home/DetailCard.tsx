@@ -3,6 +3,7 @@ import { useState } from "react";
 type DetailCardProps = {
   src: string;
   title: string;
+  content: string;
   label: string;
   description: string;
   reverse?: boolean;
@@ -11,6 +12,7 @@ type DetailCardProps = {
 const DetailCard = ({
   src,
   title,
+  content,
   label,
   description,
   reverse,
@@ -61,7 +63,7 @@ const DetailCard = ({
                 inset-0
                 hidden
                 md:block
-                bg-neutral-800/70
+                bg-neutral-800/80
                 opacity-100"
               />
 
@@ -69,7 +71,8 @@ const DetailCard = ({
                 className={`
                 uppercase
                 absolute
-                text-xl
+                font-dancing
+                text-2xl
                 text-textDark
                 cursor-pointer
                 hover:border-b
@@ -83,7 +86,8 @@ const DetailCard = ({
                 className={`
                 uppercase
                 absolute
-                text-xl
+                text-2xl
+                font-dancing
                 text-textDark
                 cursor-pointer
                 hover:border-b
@@ -98,7 +102,8 @@ const DetailCard = ({
                 absolute
                 top-[40%]
                 w-56
-                text-[12px]
+                font-dancing
+                text-sm
                 text-justify
                 cursor-pointer
                 text-textDark
@@ -111,6 +116,24 @@ const DetailCard = ({
           </>
         )}
       </div>
+
+      {isHover && (
+        <h2
+          className={`
+          absolute
+          z-10
+          text-7xl
+          font-dancing
+          text-textDark
+          duration-300
+          top-2/3
+          transition-all
+          ${reverse ? "right-1/4" : "left-1/4"}
+          `}
+        >
+          {content}
+        </h2>
+      )}
     </>
   );
 };

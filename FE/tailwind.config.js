@@ -20,7 +20,7 @@ export default {
         backgroundDark: "#111315",
       },
       fontFamily: {
-        agnes: ["SH Imogen Agnes", "sans-serif"],
+        dancing: ["Dancing Script", "sans-serif"],
       },
     },
   },
