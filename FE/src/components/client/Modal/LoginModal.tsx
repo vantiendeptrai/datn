@@ -1,10 +1,35 @@
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+
 import { FcGoogle } from "react-icons/fc";
 
 import { Button, Input, Modal } from "../..";
 import { useLoginModal } from "../../../hooks";
+import { useState } from "react";
 
 const LoginModal = () => {
-  const login = useLoginModal();
+  const loginModal = useLoginModal();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FieldValues>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    console.log(data);
+
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  };
 
   const bodyContent = (
     <div
@@ -13,13 +38,25 @@ const LoginModal = () => {
       flex-col
       gap-4"
     >
-      <Input id="email" label="Email" placeholder="Email" />
+      <Input
+        id="email"
+        label="Email"
+        placeholder="Email"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
 
       <Input
         id="password"
         label="Password"
         type="password"
         placeholder="Password"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
       />
     </div>
   );
@@ -70,10 +107,10 @@ const LoginModal = () => {
   );
   return (
     <Modal
-      disabled={false}
-      isOpen={login.isOpen}
-      onClose={() => login.onClose()}
-      onSubmit={() => alert("Login")}
+      disabled={isLoading}
+      isOpen={loginModal.isOpen}
+      onClose={loginModal.onClose}
+      onSubmit={handleSubmit(onSubmit)}
       title="Đăng nhập"
       actionLabel="Đăng nhập"
       body={bodyContent}

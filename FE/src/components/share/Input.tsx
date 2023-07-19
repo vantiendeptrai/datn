@@ -1,23 +1,45 @@
+import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+
 type InputProps = {
   id: string;
   label: string;
-  placeholder: string;
   type?: string;
   disabled?: boolean;
+  required?: boolean;
+  placeholder: string;
+  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors;
 };
 
-const Input = ({ id, label, placeholder, disabled, type }: InputProps) => {
+const Input = ({
+  id,
+  label,
+  type,
+  disabled,
+  required,
+  placeholder,
+  register,
+  errors,
+}: InputProps) => {
   return (
     <>
       <div
         className="
+        w-full
+        relative
         "
       >
         <label
           htmlFor={id}
-          className="
+          className={`
           text-textLight
-          dark:text-textDark"
+          dark:text-textDark
+          ${
+            errors[id]
+              ? "text-red-500 dark:text-red-500"
+              : "text-textLight dark:text-textDark"
+          }
+          `}
         >
           {label}
         </label>
@@ -27,7 +49,8 @@ const Input = ({ id, label, placeholder, disabled, type }: InputProps) => {
           type={type}
           disabled={disabled}
           placeholder={placeholder}
-          className="
+          {...register(id, { required })}
+          className={`
           w-full
           px-4
           py-3
@@ -43,7 +66,12 @@ const Input = ({ id, label, placeholder, disabled, type }: InputProps) => {
           dark:bg-dark
           text-textLight2nd
           dark:text-textDark2nd
-          peer"
+          ${
+            errors[id]
+              ? "border-red-500 focus:border-red-500 dark:border-red-500 dark:focus:border-red-500"
+              : "border-divideLight focus:border-divideLight dark:border-divideDark dark:focus:border-divideDark"
+          }
+          `}
         />
       </div>
     </>
