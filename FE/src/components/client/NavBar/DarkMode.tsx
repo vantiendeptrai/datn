@@ -4,7 +4,7 @@ import { HiOutlineDesktopComputer } from "react-icons/hi";
 import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
 
 import { ChangeTheme } from "../..";
-import { useDarkMode, useUserMenu } from "../../../hooks";
+import { useDarkMode, useSidebarMenu, useUserMenu } from "../../../hooks";
 
 type DarkModeProps = {
   theme: string | null;
@@ -15,11 +15,13 @@ type DarkModeProps = {
 const DarkMode = ({ admin, theme, handleChangeTheme }: DarkModeProps) => {
   const darkMode = useDarkMode();
   const userMenu = useUserMenu();
+  const sideBarMenu = useSidebarMenu();
 
   const toggleOpen = useCallback(() => {
     darkMode.isOpen ? darkMode.onClose() : darkMode.onOpen(),
-      userMenu.onClose();
-  }, [darkMode, userMenu]);
+      userMenu.onClose(),
+      sideBarMenu.onClose();
+  }, [darkMode, userMenu, sideBarMenu]);
 
   return (
     <>

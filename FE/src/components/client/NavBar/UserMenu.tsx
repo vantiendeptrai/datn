@@ -10,6 +10,7 @@ import {
   useDarkMode,
   useLoginModal,
   useRegisterModal,
+  useSidebarMenu,
   useUserMenu,
 } from "../../../hooks";
 
@@ -21,6 +22,7 @@ type UserMenuProps = {
 const UserMenu = ({ isLogin, imageUser }: UserMenuProps) => {
   const darkMode = useDarkMode();
   const userMenu = useUserMenu();
+  const sideBarMenu = useSidebarMenu();
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
 
@@ -28,8 +30,9 @@ const UserMenu = ({ isLogin, imageUser }: UserMenuProps) => {
 
   const toggleOpen = useCallback(() => {
     userMenu.isOpen ? userMenu.onClose() : userMenu.onOpen(),
-      darkMode.onClose();
-  }, [darkMode, userMenu]);
+      darkMode.onClose(),
+      sideBarMenu.onClose();
+  }, [darkMode, userMenu, sideBarMenu]);
 
   return (
     <>

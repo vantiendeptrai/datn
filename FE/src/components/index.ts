@@ -1,3 +1,6 @@
+//Dashboard
+import DashboardCard from "./admin/Dashboard/DashboardCard";
+
 //Footer
 import Footer from "./client/Footer/Footer";
 import FooterBottom from "./client/Footer/FooterBottom";
@@ -29,8 +32,12 @@ import Container from "./share/Container";
 import Input from "./share/Input";
 import Logo from "./share/Logo";
 import MenuItem from "./share/MenuItem";
+import Sidebar from "./share/Sidebar";
 
 export {
+  //Dashboard
+  DashboardCard,
+
   //Footer
   Footer,
   FooterBottom,
@@ -62,4 +69,5 @@ export {
   Input,
   Logo,
   MenuItem,
+  Sidebar,
 };
