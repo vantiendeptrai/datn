@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-import { Footer, NavBar } from "../../components";
+import { NavBar, Sidebar } from "../../components";
 import { useTheme } from "../../hooks";
 
 const BaseAdmin = () => {
@@ -21,11 +21,16 @@ const BaseAdmin = () => {
           admin
         />
 
-        <div>
+        <div
+          className="
+          flex
+          gap-3
+          p-3"
+        >
+          <Sidebar />
+
           <Outlet />
         </div>
-
-        <Footer admin />
       </div>
     </>
   );
