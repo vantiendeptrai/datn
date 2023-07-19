@@ -15,10 +15,9 @@ const ChangeTheme = ({ theme, handleChangeTheme }: ChangeThemeProps) => {
         className="
           absolute
           top-16
-          right-14
+          right-20
           border
           rounded-xl
-          md:right-28
           dark:rounded-xl
           shadow-xl
           dark:shadow-xl
