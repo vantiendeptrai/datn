@@ -32,7 +32,7 @@ const Button = ({
         disabled:cursor-not-allowed
         ${
           outline
-            ? "bg-light text-textLight border-2 border-divideLight"
+            ? "bg-light dark:bg-dark text-textLight dark:text-textDark border-2 border-divideLight dark:border-divideDark"
             : "bg-primary text-textDark"
         }
       `}

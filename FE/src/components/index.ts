@@ -1,9 +1,13 @@
-// Client
+// Modal
+import Modal from "./client/Modal/Modal";
+
+// Navbar
 import ChangeTheme from "./client/NavBar/ChangeTheme";
 import DarkMode from "./client/NavBar/DarkMode";
 import NavBar from "./client/NavBar/NavBar";
 import Search from "./client/NavBar/Search";
 import UserMenu from "./client/NavBar/UserMenu";
+
 import Avatar from "./client/Avatar";
 
 // Share
@@ -16,7 +20,10 @@ import MenuItem from "./share/MenuItem";
 import Sidebar from "./Sidebar";
 
 export {
-  // Client
+  // Modal
+  Modal,
+
+  // Navbar
   ChangeTheme,
   DarkMode,
   NavBar,

@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 
 import { NavBar } from "../../components";
 import { useTheme } from "../../hooks";
+import LoginModal from "../../components/client/Modal/LoginModal";
 
 const BaseClient = () => {
   const { theme, handleChangeTheme } = useTheme();
@@ -16,10 +17,12 @@ const BaseClient = () => {
       >
         <NavBar
           imageUser=""
-          isLogin={true}
+          isLogin={false}
           theme={theme}
           handleChangeTheme={handleChangeTheme}
         />
+
+        <LoginModal />
 
         <Outlet />
       </div>
