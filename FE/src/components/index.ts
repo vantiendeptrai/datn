@@ -1,5 +1,6 @@
 // Modal
 import Modal from "./client/Modal/Modal";
+import LoginModal from "./client/Modal/LoginModal";
 
 // Navbar
 import ChangeTheme from "./client/NavBar/ChangeTheme";
@@ -22,6 +23,7 @@ import Sidebar from "./Sidebar";
 export {
   // Modal
   Modal,
+  LoginModal,
 
   // Navbar
   ChangeTheme,

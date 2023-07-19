@@ -1,8 +1,7 @@
 import { Outlet } from "react-router-dom";
 
-import { NavBar } from "../../components";
+import { LoginModal, NavBar } from "../../components";
 import { useTheme } from "../../hooks";
-import LoginModal from "../../components/client/Modal/LoginModal";
 
 const BaseClient = () => {
   const { theme, handleChangeTheme } = useTheme();
@@ -11,7 +10,6 @@ const BaseClient = () => {
     <>
       <div
         className="
-        h-screen
         bg-backgroundLight
         dark:bg-backgroundDark"
       >
