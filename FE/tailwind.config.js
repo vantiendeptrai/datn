@@ -19,6 +19,9 @@ export default {
         divideDark: "#272B30",
         backgroundDark: "#111315",
       },
+      fontFamily: {
+        agnes: ["SH Imogen Agnes", "sans-serif"],
+      },
     },
   },
   plugins: [],
