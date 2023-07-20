@@ -4,32 +4,34 @@ import { HiOutlineDesktopComputer } from "react-icons/hi";
 import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
 
 import { ChangeTheme } from "../..";
-import { useDarkMode, useUserMenu } from "../../../hooks";
+import { useDarkMode, useSidebarMenu, useUserMenu } from "../../../hooks";
 
 type DarkModeProps = {
   theme: string | null;
+  admin?: boolean;
   handleChangeTheme: (theme: string) => void;
 };
 
-const DarkMode = ({ theme, handleChangeTheme }: DarkModeProps) => {
+const DarkMode = ({ admin, theme, handleChangeTheme }: DarkModeProps) => {
   const darkMode = useDarkMode();
   const userMenu = useUserMenu();
+  const sideBarMenu = useSidebarMenu();
 
   const toggleOpen = useCallback(() => {
     darkMode.isOpen ? darkMode.onClose() : darkMode.onOpen(),
-      userMenu.onClose();
-  }, [darkMode, userMenu]);
+      userMenu.onClose(),
+      sideBarMenu.onClose();
+  }, [darkMode, userMenu, sideBarMenu]);
 
   return (
     <>
       <div
         onClick={toggleOpen}
-        className="
-        hidden
-        md:block
+        className={`
         cursor-pointer
         text-primary
-        "
+        ${admin ? "" : "hidden md:block"}
+       `}
       >
         {theme === "dark" ? (
           <BsFillMoonStarsFill size={20} />

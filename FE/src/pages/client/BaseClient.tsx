@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-import { NavBar } from "../../components";
+import { Footer, LoginModal, NavBar, RegisterModal } from "../../components";
 import { useTheme } from "../../hooks";
 
 const BaseClient = () => {
@@ -10,18 +10,22 @@ const BaseClient = () => {
     <>
       <div
         className="
-        h-screen
         bg-backgroundLight
         dark:bg-backgroundDark"
       >
         <NavBar
           imageUser=""
-          isLogin={true}
+          isLogin={false}
           theme={theme}
           handleChangeTheme={handleChangeTheme}
         />
 
+        <LoginModal />
+        <RegisterModal />
+
         <Outlet />
+
+        <Footer />
       </div>
     </>
   );

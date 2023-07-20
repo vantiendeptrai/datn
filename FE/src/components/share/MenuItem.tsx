@@ -31,14 +31,14 @@ const MenuItem = ({
         w-full
         ${
           active
-            ? "text-primary hover:bg-backgroundLight dark:hover:bg-backgroundDark"
+            ? "bg-primary hover:opacity-80 text-light"
             : "text-textLight2nd dark:text-textDark2nd hover:bg-backgroundLight dark:hover:bg-backgroundDark"
         }
         `}
       >
         {Icon && <Icon size={20} />}
 
-        <span>{label}</span>
+        <span className="text-left">{label}</span>
       </button>
     </>
   );
