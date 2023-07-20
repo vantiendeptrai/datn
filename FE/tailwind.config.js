@@ -19,6 +19,17 @@ export default {
         divideDark: "#272B30",
         backgroundDark: "#111315",
       },
+<<<<<<< Updated upstream
+=======
+
+      fontFamily: {
+        dancing: ["Dancing Script", "sans-serif"],
+      },
+
+      screens: {
+        'nam': { 'max': '900px' }
+      }
+>>>>>>> Stashed changes
     },
   },
   plugins: [],
