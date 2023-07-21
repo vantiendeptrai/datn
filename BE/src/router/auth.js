@@ -1,8 +1,9 @@
 import express from "express";
-import { getAll } from "../controller/product";
+
+import { register } from "../controller/auth";
 
 const router = express.Router();
 
-router.get("/", getAll);
+router.post("/register", register);
 
 export default router;
