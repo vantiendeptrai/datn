@@ -21,7 +21,7 @@ export default {
       },
 
       fontFamily: {
-        dancing: ["Dancing Script", "sans-serif"],
+        EzLasso: ["Ez Lasso", "sans-serif"],
       },
     },
   },

@@ -36,7 +36,10 @@ const UserMenu = ({ isLogin, imageUser }: UserMenuProps) => {
 
   return (
     <>
-      <div className="relative">
+      <div
+        className="
+        relative"
+      >
         <div
           onClick={toggleOpen}
           className="
