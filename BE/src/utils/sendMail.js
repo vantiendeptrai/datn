@@ -1,6 +1,8 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 
+import { emailRegister } from "../views";
+
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
@@ -18,7 +20,7 @@ const sendMailRegister = async (name, email) => {
     to: email,
     subject: "Đăng ký tài khoản thành công",
     text: "Chào bạn, " + name,
-    html: "" + name,
+    html: emailRegister(name),
   });
 };
 
