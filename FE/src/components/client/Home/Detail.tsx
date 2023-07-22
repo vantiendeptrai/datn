@@ -23,6 +23,7 @@ const Detail = ({ data }: DetailProps) => {
       >
         {data.map((item) => (
           <DetailCard
+            key={item.title}
             src={item.src}
             title={item.title}
             label={item.label}

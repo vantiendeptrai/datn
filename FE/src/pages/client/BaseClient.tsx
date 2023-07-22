@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 import { Footer, LoginModal, NavBar, RegisterModal } from "../../components";
 import { useTheme } from "../../hooks";
@@ -20,6 +21,7 @@ const BaseClient = () => {
           handleChangeTheme={handleChangeTheme}
         />
 
+        <Toaster />
         <LoginModal />
         <RegisterModal />
 
