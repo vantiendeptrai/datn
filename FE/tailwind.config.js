@@ -23,6 +23,10 @@ export default {
       fontFamily: {
         dancing: ["Dancing Script", "sans-serif"],
       },
+
+      screens: {
+        'nam': { 'max': '900px' }
+      }
     },
   },
   plugins: [],
