@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 const BaseClient = () => {
   const { theme, handleChangeTheme } = useTheme();
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
     async function fetchCurrentUser() {
@@ -27,8 +27,8 @@ const BaseClient = () => {
         dark:bg-backgroundDark"
       >
         <NavBar
-          imageUser=""
-          isLogin={false}
+          imageUser={currentUser?.image}
+          isLogin={currentUser !== null}
           theme={theme}
           handleChangeTheme={handleChangeTheme}
         />
