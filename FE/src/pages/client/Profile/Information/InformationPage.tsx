@@ -52,7 +52,7 @@ const InformationPage = () => {
 
             <img
               alt="Avatar"
-              src={"Banner.png" || "/Danh sách khánh sạn "}
+              src={"/images/profile/Banner.png" || "/Danh sách khánh sạn "}
               className="max-w-full"
             />
 
