@@ -23,6 +23,10 @@ export default {
       fontFamily: {
         EzLasso: ["Ez Lasso", "sans-serif"],
       },
+
+      screens: {
+        nam: { max: "900px" },
+      },
     },
   },
   plugins: [],
