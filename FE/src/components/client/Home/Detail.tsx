@@ -19,15 +19,11 @@ const Detail = ({ data }: DetailProps) => {
         flex
         flex-col
         md:flex-row
-        py-5
-        relative
-        gap-0.5
-        transition-all
-        duration-300
-        ease-linear"
+        py-5"
       >
         {data.map((item) => (
           <DetailCard
+            key={item.title}
             src={item.src}
             title={item.title}
             label={item.label}

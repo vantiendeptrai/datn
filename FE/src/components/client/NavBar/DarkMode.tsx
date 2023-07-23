@@ -8,11 +8,10 @@ import { useDarkMode, useSidebarMenu, useUserMenu } from "../../../hooks";
 
 type DarkModeProps = {
   theme: string | null;
-  admin?: boolean;
   handleChangeTheme: (theme: string) => void;
 };
 
-const DarkMode = ({ admin, theme, handleChangeTheme }: DarkModeProps) => {
+const DarkMode = ({ theme, handleChangeTheme }: DarkModeProps) => {
   const darkMode = useDarkMode();
   const userMenu = useUserMenu();
   const sideBarMenu = useSidebarMenu();
@@ -30,7 +29,8 @@ const DarkMode = ({ admin, theme, handleChangeTheme }: DarkModeProps) => {
         className={`
         cursor-pointer
         text-primary
-        ${admin ? "" : "hidden md:block"}
+        hidden
+        md:block
        `}
       >
         {theme === "dark" ? (

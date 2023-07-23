@@ -49,11 +49,7 @@ const NavBar = ({
               justify-center
               items-center"
             >
-              <DarkMode
-                admin={admin}
-                theme={theme}
-                handleChangeTheme={handleChangeTheme}
-              />
+              <DarkMode theme={theme} handleChangeTheme={handleChangeTheme} />
 
               <UserMenu isLogin={isLogin} imageUser={imageUser} />
             </div>
