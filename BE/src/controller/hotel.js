@@ -87,16 +87,8 @@ export const update = async (req, res) => {
             });
         }
         const newHotel = {
-            name: req.body.name || data.name,
-            image: req.body.image || data.image,
-            status: req.body.status || data.status,
-            address: req.body.address || data.address,
-            phone: isPhoneNumberValid || data.phone,
-            email: req.body.email || data.email,
-            description: req.body.description || data.description,
-            amenities: req.body.amenities || data.amenities,
-            city: req.body.city || data.city,
-
+            ...req.body,
+            phone: isPhoneNumberValid
         }
         // console.log(newHotel);
         const updateHotel = await Hotel.findByIdAndUpdate(data._id, newHotel, { new: true })
