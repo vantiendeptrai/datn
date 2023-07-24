@@ -3,7 +3,7 @@ import Form from "../Form/Form";
 import { useUserMenu } from "../../../../hooks";
 
 const InformationPage = () => {
-  const Banner = "/images/profile/Banner.png";
+  const Banner = "../../../../../public/Banner.png";
   const userMenu = useUserMenu();
   return (
     <>
@@ -46,14 +46,9 @@ const InformationPage = () => {
             </section>
 
             <img
-              alt="Avatar"
-<<<<<<< Updated upstream
-              src={"Banner.png" || "/Danh sách khánh sạn "}
-              className="max-w-full"
-=======
               src={Banner || "/Danh sách khánh sạn "}
+              alt="Avatar"
               className="w-full"
->>>>>>> Stashed changes
             />
 
             <Form />
