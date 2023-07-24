@@ -25,7 +25,10 @@ const Sidebar = () => {
           flex-col
           rounded-xl
           cursor-pointer
-          bg-light dark:bg-dark"
+          bg-light
+          dark:bg-dark
+          h-full
+          min-h-screen"
         >
           <MenuItem
             label="Dashboard"
