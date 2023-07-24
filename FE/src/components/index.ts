@@ -34,6 +34,11 @@ import Logo from "./share/Logo";
 import MenuItem from "./share/MenuItem";
 import Sidebar from "./share/Sidebar";
 
+
+// detail 
+import Imagedetai from "./client/detail/image_detail";
+import Productdetail from "./client/detail/product_detail";
+
 export {
   //Dashboard
   DashboardCard,
