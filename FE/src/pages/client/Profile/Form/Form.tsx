@@ -18,6 +18,9 @@ export default function Form() {
     defaultValues: {},
   });
 
+  // Check if imgBanner exists
+  const hasImgBanner = Boolean(imgBanner);
+
   return (
     <section className=" max-w-full dark:bg-[#1A1D1F] bg-[#FCFCFC] pb-[10px]  ">
       {imgBanner}
@@ -121,7 +124,7 @@ export default function Form() {
 
         <App />
 
-        {imgBanner ? (
+        {hasImgBanner ? (
           <div className="nam:mb-[20px] top-[440px] right-9 max-w-lg lg:absolute lg:bottom-[200px] lg:mt-[120px]">
             <button className="max-w-lg mr-[20px] p-[10px] rounded-[8px] bg-[#fff] font-black border-2 dark:text-black">
               Hủy
