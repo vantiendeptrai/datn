@@ -36,7 +36,8 @@ const InformationPage = () => {
           dark:bg-dark
           rounded-xl
           pb-3
-          min-h-screen"
+          min-h-screen
+          w-full"
         >
           <Information imageUser="" handleSubmit={handleSubmit(onSubmit)} />
 
