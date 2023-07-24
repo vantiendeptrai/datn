@@ -1,13 +1,15 @@
 const UserManagerPage = () => {
   return (
     <>
-      <div
+      <h2
         className="
-        text-textLight
-        dark:text-textDark"
+          text-3xl
+          font-medium
+          text-textLight
+          dark:text-textDark"
       >
         Quản lý người dùng
-      </div>
+      </h2>
     </>
   );
 };

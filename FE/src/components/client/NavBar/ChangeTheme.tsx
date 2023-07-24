@@ -14,20 +14,17 @@ const ChangeTheme = ({ theme, handleChangeTheme }: ChangeThemeProps) => {
       <div
         className="
           absolute
+          z-10
           top-16
-          right-14
+          right-20
           border
           rounded-xl
-          md:right-28
           dark:rounded-xl
-          shadow-xl
           dark:shadow-xl
           border-divideLight
           dark:border-divideDark
           bg-light
-          dark:bg-dark
-          shadow-backgroundLight
-          dark:shadow-backgroundDark"
+          dark:bg-dark"
       >
         <div
           className="

@@ -6,7 +6,13 @@ import { SiGnuprivacyguard } from "react-icons/si";
 import { AiOutlineUser, AiOutlineHistory } from "react-icons/ai";
 
 import { Avatar, MenuItem } from "../..";
-import { useDarkMode, useUserMenu } from "../../../hooks";
+import {
+  useDarkMode,
+  useLoginModal,
+  useRegisterModal,
+  useSidebarMenu,
+  useUserMenu,
+} from "../../../hooks";
 
 type UserMenuProps = {
   isLogin: boolean;
@@ -16,17 +22,24 @@ type UserMenuProps = {
 const UserMenu = ({ isLogin, imageUser }: UserMenuProps) => {
   const darkMode = useDarkMode();
   const userMenu = useUserMenu();
+  const sideBarMenu = useSidebarMenu();
+  const loginModal = useLoginModal();
+  const registerModal = useRegisterModal();
 
   const navigate = useNavigate();
 
   const toggleOpen = useCallback(() => {
     userMenu.isOpen ? userMenu.onClose() : userMenu.onOpen(),
-      darkMode.onClose();
-  }, [darkMode, userMenu]);
+      darkMode.onClose(),
+      sideBarMenu.onClose();
+  }, [darkMode, userMenu, sideBarMenu]);
 
   return (
     <>
-      <div className="relative">
+      <div
+        className="
+        relative"
+      >
         <div
           onClick={toggleOpen}
           className="
@@ -39,6 +52,7 @@ const UserMenu = ({ isLogin, imageUser }: UserMenuProps) => {
           <div
             className="
             absolute
+            z-10
             w-[200px]
             right-0
             top-10
@@ -46,14 +60,11 @@ const UserMenu = ({ isLogin, imageUser }: UserMenuProps) => {
             border
             rounded-xl
             dark:rounded-xl
-            shadow-xl
             dark:shadow-xl
             border-divideLight
             dark:border-divideDark
             bg-light
-            dark:bg-dark
-            shadow-backgroundLight
-            dark:shadow-backgroundDark"
+            dark:bg-dark"
           >
             {isLogin ? (
               <>
@@ -77,12 +88,12 @@ const UserMenu = ({ isLogin, imageUser }: UserMenuProps) => {
                 <MenuItem
                   label="Đăng nhập"
                   icon={CiLogin}
-                  onClick={() => navigate("/auth")}
+                  onClick={loginModal.onOpen}
                 />
                 <MenuItem
                   label="Đăng ký"
                   icon={SiGnuprivacyguard}
-                  onClick={() => navigate("/auth/register")}
+                  onClick={registerModal.onOpen}
                 />
               </>
             )}

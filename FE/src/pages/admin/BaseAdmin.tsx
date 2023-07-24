@@ -1,15 +1,36 @@
 import { Outlet } from "react-router-dom";
 
+import { NavBar, Sidebar } from "../../components";
+import { useTheme } from "../../hooks";
+
 const BaseAdmin = () => {
+  const { theme, handleChangeTheme } = useTheme();
+
   return (
     <>
       <div
         className="
-        h-screen
         bg-backgroundLight
         dark:bg-backgroundDark"
       >
-        <Outlet />
+        <NavBar
+          imageUser=""
+          isLogin={false}
+          theme={theme}
+          handleChangeTheme={handleChangeTheme}
+          admin
+        />
+
+        <div
+          className="
+          flex
+          gap-3
+          p-3"
+        >
+          <Sidebar />
+
+          <Outlet />
+        </div>
       </div>
     </>
   );

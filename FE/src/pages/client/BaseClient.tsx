@@ -1,10 +1,23 @@
 import { Outlet } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
-import { NavBar } from "../../components";
+import { Footer, LoginModal, NavBar, RegisterModal } from "../../components";
 import { useTheme } from "../../hooks";
+import { getCurrentUser } from "../../api";
+import { useEffect, useState } from "react";
 
 const BaseClient = () => {
   const { theme, handleChangeTheme } = useTheme();
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    async function fetchCurrentUser() {
+      const data = await getCurrentUser();
+      setCurrentUser(data);
+    }
+
+    fetchCurrentUser();
+  }, []);
 
   return (
     <>
@@ -14,13 +27,19 @@ const BaseClient = () => {
         dark:bg-backgroundDark"
       >
         <NavBar
-          imageUser=""
-          isLogin={true}
+          imageUser={currentUser?.image}
+          isLogin={currentUser !== null}
           theme={theme}
           handleChangeTheme={handleChangeTheme}
         />
 
+        <Toaster />
+        <LoginModal />
+        <RegisterModal />
+
         <Outlet />
+
+        <Footer />
       </div>
     </>
   );

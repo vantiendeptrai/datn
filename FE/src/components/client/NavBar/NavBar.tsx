@@ -5,10 +5,12 @@ type NavBarProps = {
   isLogin: boolean;
   imageUser: string;
   handleChangeTheme: (theme: string) => void;
+  admin?: boolean;
 };
 
 const NavBar = ({
   isLogin,
+  admin,
   theme,
   imageUser,
   handleChangeTheme,
@@ -19,7 +21,10 @@ const NavBar = ({
         className="
         w-full
         py-3
-        md:p-0
+        px-5
+        md:px-0
+        md:py-0
+        shadow
         bg-light
         dark:bg-dark"
       >
@@ -32,9 +37,9 @@ const NavBar = ({
             justify-between
             gap-5"
           >
-            <Logo />
+            <Logo hidden />
 
-            <Search />
+            <Search admin={admin} />
 
             <div
               className="
