@@ -1,4 +1,3 @@
-import React from "react";
 import { MenuItem } from "../../../../components";
 
 export default function Menu() {
