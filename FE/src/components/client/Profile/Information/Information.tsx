@@ -13,25 +13,25 @@ const Information = ({ imageUser, handleSubmit }: InformationProps) => {
 
         <div
           className="
-        flex
-        justify-between
-        p-35
-        h-24"
+          flex
+          justify-between
+          p-35
+          h-24"
         >
           <div
             className="
-          relative
-          -top-[4rem]
-          left-[3rem]"
+            relative
+            -top-[4rem]
+            left-[3rem]"
           >
             <Avatar imageUser={imageUser} large />
           </div>
 
           <div
             className="
-          hidden
-          md:block
-          p-3"
+            hidden
+            md:block
+            p-3"
           >
             <Button
               label="Hủy"
