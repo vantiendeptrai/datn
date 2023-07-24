@@ -1,16 +1,10 @@
+import Button from "../Button/Button";
 import { Input } from "../../../../components";
 import App from "../File/Upload";
 import { FieldValues, useForm } from "react-hook-form";
-
+import Banner from "../Banner/Banner";
+import ImgUser from "../ImgUser/User";
 export default function Form() {
-  const imgBanner = (
-    <img
-      src={"../../../../../public/Banner.png"}
-      alt="Avatar"
-      className="w-full relative "
-    />
-  );
-
   const {
     register,
     formState: { errors },
@@ -19,39 +13,11 @@ export default function Form() {
   });
 
   return (
-    <section className=" max-w-full dark:bg-[#1A1D1F] bg-[#FCFCFC] pb-[10px]  ">
-      {imgBanner}
-
-      <div className="flex justify-between relative">
-        <div>
-          <img
-            src={"user.jpg"}
-            alt=""
-            className="w-[200px] h-[200px] relative bottom-[70px] left-12 rounded-full border-[10px] 
-             nam:p-[35px] nam:border-0 nam:ml-[50px] "
-          />
-        </div>
-      </div>
-
-      {/* [] */}
-      <div className={"flex justify-between"}>
-        <div>
-          <h2 className="ml-[50px] text-base font-semibold mb-[20px] ">
-            Thông tin chi tiết
-          </h2>
-        </div>
-
-        <div className="nam:mb-[20px] top-[440px] right-9 max-w-lg">
-          <button className="max-w-lg mr-[20px] p-[10px] rounded-[8px] bg-[#fff] font-black border-2 dark:text-black">
-            Hủy
-          </button>
-          <button className="text-white bg-[#475BE8] max-w-lg p-[10px] mr-[30px] mt-[20px] rounded-[8px]">
-            Cập nhật
-          </button>
-        </div>
-      </div>
-
-      <form action="" className="px-10">
+    <section className=" max-w-full dark:bg-[#1A1D1F] bg-[#FCFCFC] pb-[10px]">
+      <Banner />
+      <ImgUser />
+      <Button />
+      <form action="" className="px-10 nam:relative">
         <div className="grid grid-cols-2 gap-5 nam:grid-flow-row nam: row-span-3 nam:grid-cols-[1fr 1fr] nam:flex flex-col">
           <Input
             id="name"
