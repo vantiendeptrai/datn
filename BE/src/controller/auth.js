@@ -86,11 +86,11 @@ const login = async (req, res) => {
     }
 
     const accessToken = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
-      expiresIn: "3m",
+      expiresIn: "1m",
     });
 
     const refreshToken = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
-      expiresIn: "1h",
+      expiresIn: "3m",
     });
 
     return res.status(200).json({
@@ -146,12 +146,12 @@ const refreshToken = (req, res) => {
       { id: decoded.id },
       process.env.SECRET_KEY,
       {
-        expiresIn: "3m",
+        expiresIn: "1m",
       }
     );
 
     return res.status(200).json({
-      message: "Access token refresh",
+      message: "New access token",
       newAccessToken: newAccessToken,
     });
   } catch (error) {
@@ -176,4 +176,30 @@ const refreshToken = (req, res) => {
   }
 };
 
-export { register, login, lockAccount, refreshToken };
+const getUser = (req, res) => {
+  try {
+    const user = req.user;
+
+    if (!user) {
+      return res.status(404).json({
+        message: "Không tìm thấy thông tin người dùng",
+      });
+    }
+
+    user.password = undefined;
+    user.isLockAccount = undefined;
+    user.role = undefined;
+
+    return res.status(200).json({
+      message: "Thông tin người dùng",
+      user: user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra khi lấy thông tin người dùng",
+    });
+  }
+};
+
+export { register, login, lockAccount, refreshToken, getUser };

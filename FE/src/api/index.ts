@@ -1,3 +1,4 @@
 import instance from "./instance";
+import { getCurrentUser } from "./auth";
 
-export { instance };
+export { instance, getCurrentUser };

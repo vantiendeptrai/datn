@@ -46,11 +46,8 @@ export const create = async (req, res) => {
                 message: "Số điện thoại không đúng định dạng",
             });
         }
-        const newHotel = {
-            ...req.body,
-            phone: isPhoneNumberValid
-        }
-        const data = await Hotel.create(newHotel)
+
+        const data = await Hotel.create(req.body)
         if (!data) {
             return res.status(404).json({ message: "Không thêm được khách sạn" })
         }
@@ -86,20 +83,9 @@ export const update = async (req, res) => {
                 message: "Số điện thoại không đúng định dạng",
             });
         }
-        const newHotel = {
-            name: req.body.name || data.name,
-            image: req.body.image || data.image,
-            status: req.body.status || data.status,
-            address: req.body.address || data.address,
-            phone: isPhoneNumberValid || data.phone,
-            email: req.body.email || data.email,
-            description: req.body.description || data.description,
-            amenities: req.body.amenities || data.amenities,
-            city: req.body.city || data.city,
 
-        }
         // console.log(newHotel);
-        const updateHotel = await Hotel.findByIdAndUpdate(data._id, newHotel, { new: true })
+        const updateHotel = await Hotel.findByIdAndUpdate(data._id, req.body, { new: true })
         return res.status(200).json({ message: "Cập nhật khách sạn thành công ", updateHotel })
     } catch (error) {
         return res.status(500).json({ message: "Lỗi server " + error.message })
