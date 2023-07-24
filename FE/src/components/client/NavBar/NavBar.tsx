@@ -3,7 +3,7 @@ import { Container, DarkMode, Logo, Search, UserMenu } from "../..";
 type NavBarProps = {
   theme: string | null;
   isLogin: boolean;
-  imageUser: string;
+  imageUser: string | undefined;
   handleChangeTheme: (theme: string) => void;
   admin?: boolean;
 };

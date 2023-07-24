@@ -1,24 +1,53 @@
 import { Route, Routes } from "react-router-dom";
+import { getCurrentUser } from "../../api";
+import { useEffect, useState } from "react";
 
 import {
   BaseClient,
+  FavoritePage,
   HomePage,
   HotelDetailPage,
-  HotelList,
+  HotelListPage,
   InformationPage,
   ReservationPage,
+  PaymentPage,
+  BaseProfile,
 } from "..";
+import { IUser } from "../../interface";
 
 const RouteClient = () => {
+  const [currentUser, setCurrentUser] = useState<IUser | null>(null);
+
+  useEffect(() => {
+    async function fetchCurrentUser() {
+      const data = await getCurrentUser();
+      setCurrentUser(data);
+    }
+
+    fetchCurrentUser();
+  }, []);
+
   return (
     <>
       <Routes>
-        <Route path="/" element={<BaseClient />}>
+        <Route
+          path="/"
+          element={
+            <BaseClient
+              imageUser={currentUser?.image}
+              isLogin={currentUser !== null}
+            />
+          }
+        >
           <Route index element={<HomePage />} />
-          <Route path="hotel-list" element={<HotelList />} />
+          <Route path="hotel-list" element={<HotelListPage />} />
           <Route path="hotel-detail/:id" element={<HotelDetailPage />} />
-          <Route path="profile" element={<InformationPage />} />
-          <Route path="profile/reservation" element={<ReservationPage />} />
+          <Route path="profile" element={<BaseProfile />}>
+            <Route index element={<InformationPage />} />
+            <Route path="reservation" element={<ReservationPage />} />
+            <Route path="favorite" element={<FavoritePage />} />
+            <Route path="payment" element={<PaymentPage />} />
+          </Route>
         </Route>
       </Routes>
     </>

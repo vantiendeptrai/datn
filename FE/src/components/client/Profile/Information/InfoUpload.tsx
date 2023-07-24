@@ -1,5 +1,6 @@
+import { Upload } from "antd";
 import type { UploadProps } from "antd";
-import { Upload, message } from "antd";
+import { toast } from "react-hot-toast";
 
 import { AiOutlineCloudUpload } from "react-icons/ai";
 
@@ -16,9 +17,9 @@ const InfoUpload = () => {
         console.log(info.file, info.fileList);
       }
       if (status === "done") {
-        message.success(`${info.file.name} file uploaded successfully.`);
+        toast.success(`${info.file.name} tải lên tập tin thành công.`);
       } else if (status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
+        toast.error(`${info.file.name} tải lên tập tin không thành công.`);
       }
     },
     onDrop(e) {
@@ -42,13 +43,21 @@ const InfoUpload = () => {
             items-center
             gap-1"
           >
-            <div className="bg-secondary dark:bg-backgroundDark rounded-full p-2">
+            <div
+              className="
+              bg-secondary
+              dark:bg-backgroundDark
+              rounded-full
+              p-2"
+            >
               <AiOutlineCloudUpload size={30} className="text-primary" />
             </div>
 
             <span
               className="
-              p-3 text-textLight2nd dark:text-textDark2nd"
+              p-3
+              text-textLight2nd
+              dark:text-textDark2nd"
             >
               Nhấp để tải lên hoặc kéo và thả SVG, PNG, JPG hoặc GIF (tối đa,
               800x400px)

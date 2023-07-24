@@ -1,6 +1,6 @@
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
-import { InfoDetail, Information, Sidebar } from "../../../../components";
+import { InfoDetail, Information } from "../../../../components";
 
 const InformationPage = () => {
   const {
@@ -24,29 +24,19 @@ const InformationPage = () => {
     <>
       <div
         className="
-        flex
-        gap-5
-        p-5"
+        bg-light
+        dark:bg-dark
+        rounded-xl
+        w-full
+        h-auto"
       >
-        <Sidebar />
+        <Information imageUser="" handleSubmit={handleSubmit(onSubmit)} />
 
-        <div
-          className="
-          bg-light
-          dark:bg-dark
-          rounded-xl
-          pb-3
-          min-h-screen
-          w-full"
-        >
-          <Information imageUser="" handleSubmit={handleSubmit(onSubmit)} />
-
-          <InfoDetail
-            register={register}
-            errors={errors}
-            handleSubmit={handleSubmit(onSubmit)}
-          />
-        </div>
+        <InfoDetail
+          register={register}
+          errors={errors}
+          handleSubmit={handleSubmit(onSubmit)}
+        />
       </div>
     </>
   );

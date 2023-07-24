@@ -27,10 +27,8 @@ const InfoDetail = ({ handleSubmit, register, errors }: InfoDetailProps) => {
             grid
             grid-cols-1
             md:grid-cols-2
-            gap-5
-            mx-5
-            md:mx-0
-            mt-5"
+            mt-5
+            gap-5"
         >
           <Input
             id="name"
@@ -67,9 +65,15 @@ const InfoDetail = ({ handleSubmit, register, errors }: InfoDetailProps) => {
 
           <div
             className="
+            col-span-1
             md:col-span-2"
           >
-            <InfoUpload />
+            <div
+              className="
+              py-3"
+            >
+              <InfoUpload />
+            </div>
           </div>
 
           <div

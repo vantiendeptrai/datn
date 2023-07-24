@@ -1,5 +1,5 @@
 type AvatarProps = {
-  imageUser: string | null;
+  imageUser: string | undefined;
   large?: boolean;
 };
 
