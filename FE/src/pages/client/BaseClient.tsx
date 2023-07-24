@@ -10,7 +10,6 @@ const BaseClient = () => {
     <>
       <div
         className="
-        h-screen
         bg-backgroundLight
         dark:bg-backgroundDark"
       >

@@ -1,4 +1,7 @@
 // Client
+import HotelPagination from "./client/Hotel/HotelPagination ";// số thứ tự trang
+import HotelFilter from "./client/Hotel/HotelFilter"; // lọc thông tin phòng
+import HotelCard from "./client/Hotel/HotelCard"; //phòng
 import ChangeTheme from "./client/NavBar/ChangeTheme";
 import DarkMode from "./client/NavBar/DarkMode";
 import NavBar from "./client/NavBar/NavBar";
@@ -15,6 +18,9 @@ import Sidebar from "./Sidebar";
 
 export {
   // Client
+  HotelPagination,
+  HotelFilter,
+  HotelCard,
   ChangeTheme,
   DarkMode,
   NavBar,
