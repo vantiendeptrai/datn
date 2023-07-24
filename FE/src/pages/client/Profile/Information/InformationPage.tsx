@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
 import Menu from "../Menu/Menu";
 import Form from "../Form/Form";
-
 import { useUserMenu } from "../../../../hooks";
-import { MenuOutlined } from "@ant-design/icons";
 
 const InformationPage = () => {
+  const Banner = "../../../../../public/Banner.png";
   const userMenu = useUserMenu();
   return (
     <>
@@ -40,20 +38,17 @@ const InformationPage = () => {
         <div className="flex max-w-full">
           <Menu />
 
-          <section className="ml-[30px]">
+          <section className="ml-[30px] w-full">
             <section className="nam:flex">
               <h1 className=" text-[25px] font-bold my-[17px] ">
                 Thông tin cá nhân
               </h1>
-              {/* <div className="item-center hidden nam:block" onClick={}>
-                <MenuOutlined />
-              </div> */}
             </section>
 
             <img
+              src={Banner || "/Danh sách khánh sạn "}
               alt="Avatar"
-              src={"/images/profile/Banner.png" || "/Danh sách khánh sạn "}
-              className="max-w-full"
+              className="w-full"
             />
 
             <Form />

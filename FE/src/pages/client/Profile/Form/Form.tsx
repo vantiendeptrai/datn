@@ -1,13 +1,10 @@
 import { Input } from "../../../../components";
 import App from "../File/Upload";
-import { useCallback, useState } from "react";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
+import { FieldValues, useForm } from "react-hook-form";
 
 export default function Form() {
   const {
     register,
-    handleSubmit,
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {},
@@ -20,7 +17,8 @@ export default function Form() {
           <img
             src={"user.jpg"}
             alt=""
-            className="w-[200px] h-[200px] relative bottom-[70px] left-12 rounded-full border-[10px] "
+            className="w-[200px] h-[200px] relative bottom-[70px] left-12 rounded-full border-[10px] 
+             nam:p-[20px] nam:border-0"
           />
         </div>
       </div>
@@ -78,12 +76,10 @@ export default function Form() {
             <select
               name=""
               id=""
-              className="w-full border rounded-xl outline-none border-divideLight dark:border-divideDark px-4 py-3 first-letter
+              className="w-full  rounded-xl outline-none border-divideLight dark:border-divideDark px-4 py-3 first-letter
               border-2
               disabled:opacity-70
               disabled:cursor-not-allowed
-              border-divideLight
-              dark:border-divideDark
               bg-light
               dark:bg-dark
               text-textLight2nd
@@ -115,7 +111,7 @@ export default function Form() {
 
         <App />
 
-        <div className="nam:mb-[20px] absolute top-[440px] right-9 max-w-lg">
+        <div className="nam:mb-[20px]  top-[440px] right-9 max-w-lg lg:absolute">
           <button className="max-w-lg mr-[20px] p-[10px] rounded-[8px] bg-[#fff] font-black border-2 dark:text-black">
             Hủy
           </button>
