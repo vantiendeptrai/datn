@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import { getCurrentUser } from "../../api";
 import { useEffect, useState } from "react";
 
 import {
@@ -14,6 +13,7 @@ import {
   BaseProfile,
 } from "..";
 import { IUser } from "../../interface";
+import { getCurrentUser } from "../../api";
 
 const RouteClient = () => {
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
