@@ -1,7 +1,9 @@
+import Button from "../Button/Button";
 import { Input } from "../../../../components";
 import App from "../File/Upload";
 import { FieldValues, useForm } from "react-hook-form";
-
+import Banner from "../Banner/Banner";
+import ImgUser from "../ImgUser/User";
 export default function Form() {
   const {
     register,
@@ -11,23 +13,11 @@ export default function Form() {
   });
 
   return (
-    <section className=" max-w-full dark:bg-[#1A1D1F] bg-[#FCFCFC] pb-[10px]  ">
-      <div className="flex justify-between">
-        <div>
-          <img
-            src={"user.jpg"}
-            alt=""
-            className="w-[200px] h-[200px] relative bottom-[70px] left-12 rounded-full border-[10px] 
-             nam:p-[20px] nam:border-0"
-          />
-        </div>
-      </div>
-
-      <h2 className="ml-[50px] text-base font-semibold mb-[20px]">
-        Thông tin chi tiết
-      </h2>
-
-      <form action="" className="px-10">
+    <section className=" max-w-full dark:bg-[#1A1D1F] bg-[#FCFCFC] pb-[10px]">
+      <Banner />
+      <ImgUser />
+      <Button />
+      <form action="" className="px-10 nam:relative">
         <div className="grid grid-cols-2 gap-5 nam:grid-flow-row nam: row-span-3 nam:grid-cols-[1fr 1fr] nam:flex flex-col">
           <Input
             id="name"
@@ -110,15 +100,6 @@ export default function Form() {
         </section>
 
         <App />
-
-        <div className="nam:mb-[20px]  top-[440px] right-9 max-w-lg lg:absolute">
-          <button className="max-w-lg mr-[20px] p-[10px] rounded-[8px] bg-[#fff] font-black border-2 dark:text-black">
-            Hủy
-          </button>
-          <button className=" max-w-lg p-[10px] mr-[30px] mt-[20px] rounded-[8px] text-[#fff] bg-[#475BE8]">
-            Cập nhật
-          </button>
-        </div>
       </form>
     </section>
   );
