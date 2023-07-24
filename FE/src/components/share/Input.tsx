@@ -3,12 +3,12 @@ import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 type InputProps = {
   id: string;
   label: string;
-  type?: string;
-  disabled?: boolean;
-  required?: boolean;
   placeholder: string;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
+  type?: string;
+  disabled?: boolean;
+  required?: boolean;
 };
 
 const Input = ({
