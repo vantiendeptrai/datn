@@ -3,7 +3,6 @@ import Form from "../Form/Form";
 import { useUserMenu } from "../../../../hooks";
 
 const InformationPage = () => {
-  const Banner = "../../../../../public/Banner.png";
   const userMenu = useUserMenu();
   return (
     <>
@@ -44,12 +43,6 @@ const InformationPage = () => {
                 Thông tin cá nhân
               </h1>
             </section>
-
-            <img
-              src={Banner || "/Danh sách khánh sạn "}
-              alt="Avatar"
-              className="w-full"
-            />
 
             <Form />
           </section>
