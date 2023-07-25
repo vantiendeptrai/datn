@@ -6,6 +6,7 @@ export default {
     extend: {
       colors: {
         primary: "#475BE8",
+        secondary: "#DADEFA",
 
         light: "#FCFCFC",
         textLight: "#11142D",
@@ -22,10 +23,6 @@ export default {
 
       fontFamily: {
         EzLasso: ["Ez Lasso", "sans-serif"],
-      },
-
-      screens: {
-        nam: { max: "900px" },
       },
     },
   },
