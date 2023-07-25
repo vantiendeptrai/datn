@@ -16,7 +16,7 @@ import {
 
 type UserMenuProps = {
   isLogin: boolean;
-  imageUser: string | null;
+  imageUser: string | undefined;
 };
 
 const UserMenu = ({ isLogin, imageUser }: UserMenuProps) => {

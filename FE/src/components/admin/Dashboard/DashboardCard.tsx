@@ -1,6 +1,6 @@
-import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
-
 import { IconType } from "react-icons";
+
+import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 
 type DashboardCardProps = {
   label: string;

@@ -1,4 +1,4 @@
-const HotelList = () => {
+const HotelListPage = () => {
   return (
     <>
       <div
@@ -12,4 +12,4 @@ const HotelList = () => {
   );
 };
 
-export default HotelList;
+export default HotelListPage;

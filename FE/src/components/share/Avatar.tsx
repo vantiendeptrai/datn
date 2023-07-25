@@ -1,19 +1,21 @@
 type AvatarProps = {
-  imageUser: string | null;
+  imageUser: string | undefined;
+  large?: boolean;
 };
 
-const Avatar = ({ imageUser }: AvatarProps) => {
+const Avatar = ({ imageUser, large }: AvatarProps) => {
   return (
     <>
       <img
-        width={100}
-        height={100}
+        width={large ? 130 : 50}
+        height={large ? 130 : 50}
         alt="Avatar"
         src={imageUser || "/user.jpg"}
         className="
         rounded-full
-        max-w-[2.5rem]
-        max-h-[2.5rem]"
+        p-2
+        bg-light
+        dark:bg-dark"
       />
     </>
   );

@@ -25,6 +25,11 @@ import NavBar from "./client/NavBar/NavBar";
 import Search from "./client/NavBar/Search";
 import UserMenu from "./client/NavBar/UserMenu";
 
+// Profile
+import InfoDetail from "./client/Profile/Information/InfoDetail";
+import Information from "./client/Profile/Information/Information";
+import InfoUpload from "./client/Profile/Information/InfoUpload";
+
 // Share
 import Avatar from "./share/Avatar";
 import Button from "./share/Button";
@@ -66,6 +71,11 @@ export {
   NavBar,
   Search,
   UserMenu,
+
+  // Profile
+  InfoDetail,
+  Information,
+  InfoUpload,
 
   // Share
   Avatar,
