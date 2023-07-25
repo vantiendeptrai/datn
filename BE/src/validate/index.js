@@ -2,4 +2,5 @@
 import registerValidate from "./register";
 import loginValidate from "./login";
 import hotelValidate from "./hotel";
-export { registerValidate, loginValidate, hotelValidate };
+import roomTypeValidate from "./roomType";
+export { registerValidate, loginValidate, hotelValidate, roomTypeValidate };
