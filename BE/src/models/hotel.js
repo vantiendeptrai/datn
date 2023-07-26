@@ -6,6 +6,38 @@ const hotelSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    address: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    amenities: [
+      {
+        name: {
+          type: String,
+          required: true,
+        },
+        surcharge: {
+          type: Boolean,
+          required: false,
+        },
+      },
+    ],
     images: [
       {
         status: {
@@ -26,39 +58,6 @@ const hotelSchema = new mongoose.Schema(
         },
       },
     ],
-    status: {
-      type: String,
-      required: true,
-    },
-    address: {
-      type: String,
-      required: true,
-    },
-    phone: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
-      required: true,
-    },
-    amenities: [
-      {
-        code: String,
-        value: Boolean,
-      },
-    ],
-    city: {
-      type: String,
-      required: true,
-    },
-    rating: {
-      type: Number,
-    },
   },
   { timestamps: true, versionKey: false }
 );
