@@ -1,5 +1,5 @@
 import Room from "../models/room";
-
+// làm lại đi
 import { roomValidate } from "../validate";
 
 export const getAll = async (req, res) => {
