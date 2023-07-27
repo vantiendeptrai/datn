@@ -5,6 +5,7 @@ import cors from "cors";
 
 import AuthRouter from "./router/auth";
 import HotelRouter from "./router/hotel";
+import RoomRouter from "./router/room";
 import RoomTypeRouter from "./router/roomType";
 
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(cors());
 
 app.use("/auth", AuthRouter);
 app.use("/hotel", HotelRouter);
+app.use("/room", RoomRouter);
 app.use("/roomType", RoomTypeRouter);
 
 mongoose.connect(process.env.DB_URL);

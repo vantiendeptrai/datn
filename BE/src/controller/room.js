@@ -1,4 +1,5 @@
 import Room from "../models/room";
+
 import { roomValidate } from "../validate";
 
 export const getAll = async (req, res) => {
@@ -7,7 +8,7 @@ export const getAll = async (req, res) => {
 
     if (!data || data.length === 0) {
       return res.status(404).json({
-        message: "Không có dữ liệu ",
+        message: "Không có danh sách phòng",
       });
     }
 
@@ -26,9 +27,9 @@ export const getOne = async (req, res) => {
   try {
     const data = await Room.findById(req.params.id);
 
-    if (!data) {
+    if (!data || data.length === 0) {
       return res.status(404).json({
-        message: "Không tìm thấy phòng",
+        message: "Không có thông tin phòng",
       });
     }
 
@@ -56,7 +57,7 @@ export const create = async (req, res) => {
 
     const data = await Room.create(req.body);
 
-    if (!data) {
+    if (!data || data.length === 0) {
       return res.status(404).json({
         message: "Thêm thất bại",
       });
@@ -72,27 +73,7 @@ export const create = async (req, res) => {
     });
   }
 };
-
-// export const remove = async (req, res) => {
-//   try {
-//     const data = await Room.findByIdAndDelete(req.params.id);
-
-//     if (!data) {
-//       return res.status(404).json({
-//         message: "Xóa thất bại",
-//       });
-//     }
-
-//     return res.status(200).json({
-//       message: "Xóa thành công ",
-//       data: data,
-//     });
-//   } catch (error) {
-//     return res.status(500).json({
-//       message: "Lỗi server: " + error.message,
-//     });
-//   }
-// };
+1;
 
 export const update = async (req, res) => {
   try {
@@ -104,11 +85,10 @@ export const update = async (req, res) => {
     //     message: errors,
     //   });
     // }
-    console.log(req.body);
+
     const data = await Room.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
-    console.log(data);
 
     if (!data) {
       return res.status(404).json({
