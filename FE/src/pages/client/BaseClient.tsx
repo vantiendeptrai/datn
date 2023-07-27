@@ -1,9 +1,15 @@
 import { Outlet } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 import { Footer, LoginModal, NavBar, RegisterModal } from "../../components";
 import { useTheme } from "../../hooks";
 
-const BaseClient = () => {
+type BaseClientProps = {
+  imageUser: string | undefined;
+  isLogin: boolean;
+};
+
+const BaseClient = ({ imageUser, isLogin }: BaseClientProps) => {
   const { theme, handleChangeTheme } = useTheme();
 
   return (
@@ -14,12 +20,13 @@ const BaseClient = () => {
         dark:bg-backgroundDark"
       >
         <NavBar
-          imageUser=""
-          isLogin={false}
+          imageUser={imageUser}
+          isLogin={isLogin}
           theme={theme}
           handleChangeTheme={handleChangeTheme}
         />
 
+        <Toaster />
         <LoginModal />
         <RegisterModal />
 

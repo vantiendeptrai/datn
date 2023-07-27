@@ -1,13 +1,14 @@
-import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { RxDashboard } from "react-icons/rx";
 import { LiaHotelSolid } from "react-icons/lia";
 import { HiOutlineUsers } from "react-icons/hi";
 import { TbBrandBooking } from "react-icons/tb";
+import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
 
 import { useDarkMode, useSidebarMenu, useUserMenu } from "../../../hooks";
 import { MenuItem } from "../..";
-import { useNavigate } from "react-router-dom";
-import { useCallback } from "react";
 
 type SearchProps = {
   admin?: boolean;

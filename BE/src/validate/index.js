@@ -1,5 +1,6 @@
+// Auth
 import registerValidate from "./register";
-import roomValidate from "./room";
-
-export { registerValidate,roomValidate };
-
+import loginValidate from "./login";
+import hotelValidate from "./hotel";
+import roomTypeValidate from "./roomType";
+export { registerValidate, loginValidate, hotelValidate, roomTypeValidate };
