@@ -16,8 +16,9 @@ export const getAll = async (req, res) => {
       data: data,
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
-      message: "Lỗi server: " + error.message,
+      message: "Đã có lỗi xảy ra khi lấy danh sách phòng",
     });
   }
 };
@@ -37,8 +38,9 @@ export const getOne = async (req, res) => {
       data: data,
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
-      message: "Lỗi server: " + error.message,
+      message: "Đã có lỗi xảy ra khi lấy thông tin phòng",
     });
   }
 };
@@ -51,7 +53,7 @@ export const create = async (req, res) => {
     if (error) {
       const errors = error.details.map((err) => err.message);
       return res.status(400).json({
-        message: errors,
+        errors: errors,
       });
     }
 
@@ -64,12 +66,13 @@ export const create = async (req, res) => {
     }
 
     return res.status(200).json({
-      message: "Thêm thành công",
+      message: "Thêm phòng thành công",
       data: data,
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
-      message: "Lỗi server: " + error.message,
+      message: "Đã có lỗi xảy ra khi thêm phòng",
     });
   }
 };
@@ -83,7 +86,7 @@ export const update = async (req, res) => {
     if (error) {
       const errors = error.details.map((err) => err.message);
       return res.status(400).json({
-        message: errors,
+        errors: errors,
       });
     }
 
@@ -102,8 +105,9 @@ export const update = async (req, res) => {
       data: data,
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
-      message: "Lỗi server: " + error.message,
+      message: "Đã có lỗi xảy ra khi sửa thông tin phòng",
     });
   }
 };
