@@ -1,6 +1,5 @@
 import Room from "../models/room";
-// làm lại đi
-import { roomValidate } from "../validate";
+import roomValidate from "../validate/room";
 
 export const getAll = async (req, res) => {
   try {
@@ -46,14 +45,15 @@ export const getOne = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
-    // const { error } = roomValidate.validate(req.body, { abortEarly: false });
-
-    // if (error) {
-    //   const errors = error.details.map((err) => err.message);
-    //   return res.status(400).json({
-    //     message: errors,
-    //   });
-    // }
+    const { error } = roomValidate.validate(req.body, {
+      abortEarly: false,
+    });
+    if (error) {
+      const errors = error.details.map((err) => err.message);
+      return res.status(400).json({
+        message: errors,
+      });
+    }
 
     const data = await Room.create(req.body);
 
@@ -77,14 +77,15 @@ export const create = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
-    // const { error } = roomValidate.validate(req.body, { abortEarly: false });
-
-    // if (error) {
-    //   const errors = error.details.map((err) => err.message);
-    //   return res.status(400).json({
-    //     message: errors,
-    //   });
-    // }
+    const { error } = roomValidate.validate(req.body, {
+      abortEarly: false,
+    });
+    if (error) {
+      const errors = error.details.map((err) => err.message);
+      return res.status(400).json({
+        message: errors,
+      });
+    }
 
     const data = await Room.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
