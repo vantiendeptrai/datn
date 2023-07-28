@@ -18,7 +18,7 @@ app.use(cors());
 app.use("/auth", AuthRouter);
 app.use("/hotel", HotelRouter);
 app.use("/room", RoomRouter);
-app.use("/roomType", RoomTypeRouter);
+app.use("/room-type", RoomTypeRouter);
 
 mongoose.connect(process.env.DB_URL);
 

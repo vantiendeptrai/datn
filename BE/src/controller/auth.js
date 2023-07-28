@@ -18,7 +18,7 @@ const register = async (req, res) => {
     if (error) {
       const errors = error.details.map((err) => err.message);
       return res.status(400).json({
-        message: errors,
+        errors: errors,
       });
     }
 
@@ -61,7 +61,7 @@ const login = async (req, res) => {
     if (error) {
       const errors = error.details.map((err) => err.message);
       return res.status(400).json({
-        message: errors,
+        errors: errors,
       });
     }
 
@@ -151,7 +151,7 @@ const refreshToken = (req, res) => {
     );
 
     return res.status(200).json({
-      message: "New access token",
+      message: "Access token mới",
       newAccessToken: newAccessToken,
     });
   } catch (error) {
@@ -168,7 +168,6 @@ const refreshToken = (req, res) => {
         message: "Token không hợp lệ!",
       });
     }
-
     console.log(error);
     return res.status(500).json({
       message: "Đã có lỗi xảy ra khi làm mới token",
