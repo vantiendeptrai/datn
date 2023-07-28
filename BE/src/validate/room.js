@@ -21,7 +21,9 @@ const roomValidate = joi.object({
   capacity: joi.number().min(0).required().messages(errorMessages("Sức chứa")),
   amenities: joi.string().required().messages(errorMessages("Tiện nghi")),
   description: joi.string().required().messages(errorMessages("Mô tả")),
-  seviceFree: joi.string().required().messages(errorMessages("Dịch vụ")),
+  floor: joi.string().required().messages(errorMessages("floor")),
+  view: joi.string().required().messages(errorMessages("View")),
+  serviceFree: joi.string().required().messages(errorMessages("Dịch vụ")),
 });
 
 export default roomValidate;
