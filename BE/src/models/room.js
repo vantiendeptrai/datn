@@ -2,11 +2,18 @@ import mongoose from "mongoose";
 
 const roomSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
+    roomNumber: {
+      // Số phòng
+      type: Number,
+      required: true,
+    },
+    roomFloor: {
+      // Số tầng
+      type: Number,
       required: true,
     },
     image: [
+      // Danh sách ảnh
       {
         status: {
           type: String,
@@ -26,48 +33,54 @@ const roomSchema = new mongoose.Schema(
         },
       },
     ],
+    capacity: {
+      // Sức chứa
+      type: Number,
+      required: true,
+    },
     price: {
+      // Giá phòng
       type: Number,
       min: 0,
       required: true,
     },
     status: {
       type: String,
-      required: true,
-    },
-    capacity: {
-      type: Number,
-      min: 0,
-      required: true,
-    },
-    amenities: {
-      type: String,
-      required: true,
+      enum: [
+        "Có sẵn", // Có thể đặt phòng
+        "Đã đặt", // Phòng đã được đặt
+        "Đang sử dụng", // Phòng đang được sử dụng
+        "Bảo trì", // Phòng đang được bảo trì
+        "Đang dọn dẹp", // Phòng đang dọn dẹp
+      ],
     },
     description: {
+      // Mô tả
       type: String,
       required: true,
     },
-    floor: {
-      type: String,
-      required: true,
+    id_serviceFree: {
+      // Dịch vụ miễn phí
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ServiceFree",
     },
-    view: {
-      type: String,
-      required: true,
+    id_amenities: [
+      {
+        // Tiện nghi
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Amenities",
+      },
+    ],
+    id_hotel: {
+      // Khách sạn
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Hotel",
     },
-    serviceFree: {
-      type: String,
-      required: true,
+    id_roomType: {
+      // Loại phòng
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "roomType",
     },
-    // id_hotel:{
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: "Hotel",
-    // },
-    // id_roomType:{
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: "roomType",
-    // },
   },
   { timestamps: true, versionKey: false }
 );
