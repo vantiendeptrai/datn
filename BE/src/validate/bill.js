@@ -2,9 +2,9 @@ import joi from "joi";
 import { errorMessages } from "./component/errorMessages";
 
 const billValidate = joi.object({
-  id_user: joi.string().required().messages(errorMessages("cần nhập id khách sạn")),
-  id_payment: joi.string().required().messages(errorMessages("id_payment")),
-  description: joi.string().required().messages(errorMessages("cần nhập description"))
+  id_user: joi.string().required().messages(errorMessages("Id người dùng")),
+  id_payment: joi.string().required().messages(errorMessages("Id thanh toán")),
+  description: joi.string().required().messages(errorMessages("Mô tả"))
 });
 
 export default billValidate;
