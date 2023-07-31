@@ -5,8 +5,8 @@ const amenitiesSchema = new mongoose.Schema({
         required: true,
     },
     surcharge: {
-        type: Number,
-        default: 0,
+        type: Boolean,
+        default: false,
     }
 }, { versionKey: false, timestamps: true })
 export default mongoose.model("Amenities", amenitiesSchema)
