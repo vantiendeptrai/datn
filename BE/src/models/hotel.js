@@ -26,16 +26,11 @@ const hotelSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    amenities: [
+    amenities_and_facilities: [
       {
-        name: {
-          type: String,
-          required: true,
-        },
-        surcharge: {
-          type: Boolean,
-          required: false,
-        },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ServiceAndFacilities",
+        required: true,
       },
     ],
     images: [
@@ -58,6 +53,10 @@ const hotelSchema = new mongoose.Schema(
         },
       },
     ],
+    review: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Review",
+    }
   },
   { timestamps: true, versionKey: false }
 );
