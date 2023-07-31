@@ -1,7 +1,7 @@
 import express from "express";
 
 import { create, getAll, getOne, update } from "../controller/room";
-
+import { isAdminMiddleware } from "../middleware";
 const router = express.Router();
 
 router.get("/", getAll);

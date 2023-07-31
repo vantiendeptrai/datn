@@ -2,8 +2,8 @@ import joi from "joi";
 import { errorMessages } from "./component/errorMessages";
 
 const roomValidate = joi.object({
-  roomNumber: joi.number().required().messages(errorMessages("Số phòng")),
-  roomFloor: joi.number().required().messages(errorMessages("Tầng")),
+  room_Number: joi.number().required().messages(errorMessages("Số phòng")),
+  room_Floor: joi.number().required().messages(errorMessages("Tầng")),
   image: joi
     .array()
     .min(1)
@@ -24,8 +24,6 @@ const roomValidate = joi.object({
   status: joi.string().required().messages(errorMessages("Trạng Thái")),
   capacity: joi.number().min(0).required().messages(errorMessages("Sức chứa")),
   description: joi.string().required().messages(errorMessages("Mô tả")),
-  view: joi.string().required().messages(errorMessages("Xem")),
-  serviceFree: joi.string().required().messages(errorMessages("Dịch vụ")),
 });
 
 export default roomValidate;
