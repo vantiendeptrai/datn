@@ -8,6 +8,7 @@ import HotelRouter from "./router/hotel";
 import RoomRouter from "./router/room";
 import RoomTypeRouter from "./router/roomType";
 import AmenitiesRouter from "./router/amenities";
+import ServicesRouter from "./router/service";
 
 
 dotenv.config();
@@ -22,6 +23,7 @@ app.use("/hotel", HotelRouter);
 app.use("/room", RoomRouter);
 app.use("/room-type", RoomTypeRouter);
 app.use("/amenities", AmenitiesRouter);
+app.use("/services", ServicesRouter);
 
 mongoose.connect(process.env.DB_URL);
 
