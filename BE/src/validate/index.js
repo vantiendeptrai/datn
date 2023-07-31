@@ -3,4 +3,13 @@ import registerValidate from "./register";
 import hotelValidate from "./hotel";
 import roomTypeValidate from "./roomType";
 import amenitiesValidate from "./amenities";
-export { registerValidate, loginValidate, hotelValidate, roomTypeValidate, amenitiesValidate };
+import billValidate from "./bill";
+
+export {
+  registerValidate,
+  loginValidate,
+  hotelValidate,
+  roomTypeValidate,
+  amenitiesValidate,
+  billValidate,
+};
