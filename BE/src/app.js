@@ -5,12 +5,11 @@ import cors from "cors";
 
 import AuthRouter from "./router/auth";
 import HotelRouter from "./router/hotel";
+import RoomRouter from "./router/room";
 import RoomTypeRouter from "./router/roomType";
-import BillRouter from './router/bill';
-<<<<<<< Updated upstream
-=======
+import AmenitiesRouter from "./router/amenities";
+import BillRouter from "./router/bill";
 
->>>>>>> Stashed changes
 dotenv.config();
 
 const app = express();
@@ -20,12 +19,11 @@ app.use(cors());
 
 app.use("/auth", AuthRouter);
 app.use("/hotel", HotelRouter);
+app.use("/room", RoomRouter);
 app.use("/room-type", RoomTypeRouter);
+app.use("/amenities", AmenitiesRouter);
 app.use("/bill", BillRouter);
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 mongoose.connect(process.env.DB_URL);
 
 export const viteNodeApp = app;
