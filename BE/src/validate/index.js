@@ -4,6 +4,7 @@ import hotelValidate from "./hotel";
 import roomTypeValidate from "./roomType";
 import amenitiesValidate from "./amenities";
 import billValidate from "./bill";
+import bookingValidate from "./booking";
 
 export {
   registerValidate,
@@ -12,4 +13,5 @@ export {
   roomTypeValidate,
   amenitiesValidate,
   billValidate,
+  bookingValidate,
 };

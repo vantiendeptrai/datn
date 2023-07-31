@@ -9,6 +9,7 @@ import RoomRouter from "./router/room";
 import RoomTypeRouter from "./router/roomType";
 import AmenitiesRouter from "./router/amenities";
 import BillRouter from "./router/bill";
+import BookingRouter from "./router/booking";
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use("/room", RoomRouter);
 app.use("/room-type", RoomTypeRouter);
 app.use("/amenities", AmenitiesRouter);
 app.use("/bill", BillRouter);
+app.use("/booking", BookingRouter);
 
 mongoose.connect(process.env.DB_URL);
 
