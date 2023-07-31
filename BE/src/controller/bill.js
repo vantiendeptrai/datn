@@ -65,6 +65,7 @@ export const create = async (req, res) => {
         message: "Không thêm được hóa đơn",
       });
     }
+
     return res.status(200).json({
       message: "Thêm hóa đơn thành công ",
       Bill,
@@ -90,6 +91,7 @@ export const update = async (req, res) => {
         message: errors,
       });
     }
+
     const bill = await Bill.findById(req.params.id);
     if (!bill) {
       return res
@@ -100,6 +102,7 @@ export const update = async (req, res) => {
     const updateBill = await Bill.findByIdAndUpdate(bill._id, req.body, {
       new: true,
     });
+
     return res.status(200).json({
       message: "Cập nhật hóa đơn thành công ",
       updateBill,
@@ -125,6 +128,7 @@ export const remove = async (req, res) => {
     const deleteBill = await Bill.findByIdAndDelete(bill._id, req.body, {
       new: true,
     });
+
     return res.status(200).json({
       message: "xóa hóa đơn thành công ",
       deleteBill,

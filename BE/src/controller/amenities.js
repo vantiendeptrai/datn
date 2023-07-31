@@ -4,13 +4,14 @@ import { amenitiesValidate } from "../validate";
 export const getAll = async (req, res) => {
   try {
     const data = await Amenities.find();
-    if (data.length === 0) {
+    if (!data || data.length === 0) {
       return res.status(404).json({
-        message: "Không tìm thấy danh sách  tiện nghi",
+        message: "Không có danh sách tiện nghi",
       });
     }
+
     return res.status(200).json({
-      message: "Tìm danh sách tiện nghi thành công ",
+      message: "Danh sách tiện nghi",
       data: data,
     });
   } catch (error) {
@@ -86,14 +87,17 @@ export const update = async (req, res) => {
         message: errors,
       });
     }
+
     const data = await Amenities.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
+
     if (!data) {
       return res.status(404).json({
         message: "Không cập nhật được tiện nghi",
       });
     }
+
     return res.status(200).json({
       message: "Cập nhật tiện nghi thành công ",
       data: data,
@@ -115,6 +119,7 @@ export const remove = async (req, res) => {
         message: "Không tìm thấy  tiện nghi muốn xóa",
       });
     }
+
     return res.status(200).json({
       message: "xóa tiện nghi thành công ",
       data: data,
