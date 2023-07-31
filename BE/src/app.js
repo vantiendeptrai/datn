@@ -5,6 +5,7 @@ import cors from "cors";
 
 import AuthRouter from "./router/auth";
 import HotelRouter from "./router/hotel";
+import RoomRouter from "./router/room";
 import RoomTypeRouter from "./router/roomType";
 import AmenitiesRouter from "./router/amenities";
 
@@ -18,6 +19,7 @@ app.use(cors());
 
 app.use("/auth", AuthRouter);
 app.use("/hotel", HotelRouter);
+app.use("/room", RoomRouter);
 app.use("/room-type", RoomTypeRouter);
 app.use("/amenities", AmenitiesRouter);
 
