@@ -1,18 +1,19 @@
-import Amenities from "../models/amenities";
-import { amenitiesValidate } from "../validate";
+import Bill from "../models/bill";
+
+import { billValidate } from "../validate";
 
 export const getAll = async (req, res) => {
   try {
-    const data = await Amenities.find();
-    if (!data || data.length === 0) {
+    const bill = await Bill.find();
+    if (bill.length === 0) {
       return res.status(404).json({
-        message: "Không có danh sách tiện nghi",
+        message: "Không có danh sách hóa đơn",
       });
     }
 
     return res.status(200).json({
-      message: "Danh sách tiện nghi",
-      data: data,
+      message: "Danh sách hóa đơn",
+      bill,
     });
   } catch (error) {
     console.log(error);
@@ -25,15 +26,16 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
-    const data = await Amenities.findById(req.params.id);
-    if (!data) {
+    const bill = await Bill.findById(req.params.id);
+    if (!bill) {
       return res.status(404).json({
-        message: "Không tìm thấy  tiện nghi",
+        message: "Không lấy được hóa đơn theo mã",
       });
     }
+
     return res.status(200).json({
-      message: "Tìm tiện nghi thành công ",
-      data: data,
+      message: "Thông tin hóa đơn",
+      bill,
     });
   } catch (error) {
     console.log(error);
@@ -46,7 +48,7 @@ export const getOne = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
-    const { error } = amenitiesValidate.validate(req.body, {
+    const { error } = billValidate.validate(req.body, {
       abortEarly: false,
     });
 
@@ -56,28 +58,30 @@ export const create = async (req, res) => {
         message: errors,
       });
     }
-    const data = await Amenities.create(req.body);
-    if (!data) {
+
+    const bill = await Bill.create(req.body);
+    if (!bill) {
       return res.status(404).json({
-        message: "Không thêm được tiện nghi",
+        message: "Không thêm được hóa đơn",
       });
     }
+
     return res.status(200).json({
-      message: "Thêm tiện nghi thành công ",
-      data: data,
+      message: "Thêm hóa đơn thành công ",
+      Bill,
     });
   } catch (error) {
     console.log(error);
 
     return res.status(500).json({
-      message: "Đã có lỗi xảy ra khi thêm mới",
+      message: "Đã có lỗi xảy ra",
     });
   }
 };
 
 export const update = async (req, res) => {
   try {
-    const { error } = amenitiesValidate.validate(req.body, {
+    const { error } = billValidate.validate(req.body, {
       abortEarly: false,
     });
 
@@ -88,47 +92,52 @@ export const update = async (req, res) => {
       });
     }
 
-    const data = await Amenities.findByIdAndUpdate(req.params.id, req.body, {
+    const bill = await Bill.findById(req.params.id);
+    if (!bill) {
+      return res
+        .status(404)
+        .json({ message: "Không tìm thấy hóa đơn muốn cập nhật" });
+    }
+
+    const updateBill = await Bill.findByIdAndUpdate(bill._id, req.body, {
       new: true,
     });
 
-    if (!data) {
-      return res.status(404).json({
-        message: "Không cập nhật được tiện nghi",
-      });
-    }
-
     return res.status(200).json({
-      message: "Cập nhật tiện nghi thành công ",
-      data: data,
+      message: "Cập nhật hóa đơn thành công ",
+      updateBill,
     });
   } catch (error) {
     console.log(error);
 
     return res.status(500).json({
-      message: "Đã có lỗi xảy ra khi cập nhật",
+      message: "Đã có lỗi xảy ra",
     });
   }
 };
 
 export const remove = async (req, res) => {
   try {
-    const data = await Amenities.findByIdAndDelete(req.params.id);
-    if (!data) {
-      return res.status(404).json({
-        message: "Không tìm thấy  tiện nghi muốn xóa",
-      });
+    const bill = await Bill.findById(req.params.id);
+    if (!bill) {
+      return res
+        .status(404)
+        .json({ message: "Không tìm thấy hóa đơn muốn xóa" });
     }
 
+    const deleteBill = await Bill.findByIdAndDelete(bill._id, req.body, {
+      new: true,
+    });
+
     return res.status(200).json({
-      message: "xóa tiện nghi thành công ",
-      data: data,
+      message: "xóa hóa đơn thành công ",
+      deleteBill,
     });
   } catch (error) {
     console.log(error);
 
     return res.status(500).json({
-      message: "Đã có lỗi xảy ra khi xóa",
+      message: "Đã có lỗi xảy ra",
     });
   }
 };
