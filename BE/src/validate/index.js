@@ -5,4 +5,11 @@ import roomTypeValidate from "./roomType";
 import amenitiesValidate from "./amenities";
 import billValidate from "./bill";
 
-export { registerValidate, loginValidate, hotelValidate, roomTypeValidate, amenitiesValidate, billValidate };
+export {
+  registerValidate,
+  loginValidate,
+  hotelValidate,
+  roomTypeValidate,
+  amenitiesValidate,
+  billValidate,
+};

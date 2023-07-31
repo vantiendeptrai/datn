@@ -59,7 +59,6 @@ export const create = async (req, res) => {
       });
     }
 
-
     const bill = await Bill.create(req.body);
     if (!bill) {
       return res.status(404).json({
@@ -116,7 +115,6 @@ export const update = async (req, res) => {
 
 export const remove = async (req, res) => {
   try {
-
     const bill = await Bill.findById(req.params.id);
     if (!bill) {
       return res

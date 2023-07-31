@@ -8,4 +8,3 @@ const billValidate = joi.object({
 });
 
 export default billValidate;
-
