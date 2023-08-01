@@ -6,7 +6,7 @@ import amenitiesValidate from "./amenities";
 import serviceValidate from "./service";
 import billValidate from "./bill";
 import bookingValidate from "./booking";
-
+import reviewValidate from './review'
 export {
   registerValidate,
   loginValidate,
@@ -16,4 +16,5 @@ export {
   serviceValidate,
   billValidate,
   bookingValidate,
+  reviewValidate
 };
