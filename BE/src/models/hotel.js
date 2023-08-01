@@ -64,7 +64,7 @@ const hotelSchema = new mongoose.Schema(
         ref: "Review",
       },
     ],
-    amenities_and_facilities: [
+    amenities: [
       {
         // Tiện nghi
         type: mongoose.Schema.Types.ObjectId,

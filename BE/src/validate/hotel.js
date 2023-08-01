@@ -18,7 +18,7 @@ const hotelValidate = joi.object({
     .string()
     .required()
     .messages(errorMessages("Mô tả khách sạn")),
-  amenities_and_facilities: joi.string().required().messages(errorMessages("Tên dịch vụ")),
+  amenities: joi.string().required().messages(errorMessages("Tên dịch vụ")),
   images: joi
     .array()
     .min(1)
