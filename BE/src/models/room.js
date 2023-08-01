@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 
 const roomSchema = new mongoose.Schema(
   {
-    roomNumber: {
+    room_Number: {
       // Số phòng
       type: Number,
       required: true,
     },
-    roomFloor: {
+    room_Floor: {
       // Số tầng
       type: Number,
       required: true,
@@ -59,28 +59,28 @@ const roomSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    id_serviceFree: {
-      // Dịch vụ miễn phí
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "ServiceFree",
-    },
-    id_amenities: [
-      {
-        // Tiện nghi
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Amenities",
-      },
-    ],
-    id_hotel: {
-      // Khách sạn
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Hotel",
-    },
-    id_roomType: {
-      // Loại phòng
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "roomType",
-    },
+    // id_serviceFree: {
+    //   // Dịch vụ miễn phí
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "ServiceFree",
+    // },
+    // id_amenities_and_facilities: [
+    //   {
+    //     // Tiện nghi
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Amenities",
+    //   },
+    // ],
+    // id_hotel: {
+    //   // Khách sạn
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "Hotel",
+    // },
+    // id_roomType: {
+    //   // Loại phòng
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "roomType",
+    // },
   },
   { timestamps: true, versionKey: false }
 );
