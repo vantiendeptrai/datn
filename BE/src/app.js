@@ -12,7 +12,7 @@ import ServicesRouter from "./router/service";
 
 import BillRouter from "./router/bill";
 import BookingRouter from "./router/booking";
-
+import ReviewRouter from "./router/review";
 dotenv.config();
 
 const app = express();
@@ -28,7 +28,7 @@ app.use("/amenities", AmenitiesRouter);
 app.use("/services", ServicesRouter);
 app.use("/bill", BillRouter);
 app.use("/booking", BookingRouter);
-
+app.use("/review", ReviewRouter);
 mongoose.connect(process.env.DB_URL);
 
 export const viteNodeApp = app;
