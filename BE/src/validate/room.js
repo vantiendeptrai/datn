@@ -2,8 +2,8 @@ import joi from "joi";
 import { errorMessages } from "./component/errorMessages";
 
 const roomValidate = joi.object({
-  room_Number: joi.number().required().messages(errorMessages("Số phòng")),
-  room_Floor: joi.number().required().messages(errorMessages("Tầng")),
+  roomNumber: joi.number().required().messages(errorMessages("Số phòng")),
+  roomFloor: joi.number().required().messages(errorMessages("Tầng")),
   image: joi
     .array()
     .min(1)
