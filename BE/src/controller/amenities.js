@@ -28,7 +28,7 @@ export const getOne = async (req, res) => {
     const data = await Amenities.findById(req.params.id);
     if (!data) {
       return res.status(404).json({
-        message: "Không tìm thấy  tiện nghi",
+        message: "Không tìm thấy tiện nghi",
       });
     }
     return res.status(200).json({

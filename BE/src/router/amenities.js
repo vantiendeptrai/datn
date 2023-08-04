@@ -7,7 +7,7 @@ import {
   remove,
   update,
 } from "../controller/amenities";
-import { isAdminMiddleware } from "../middleware/index";
+import { isAdminMiddleware } from "../middleware";
 
 const router = express.Router();
 
