@@ -5,7 +5,7 @@ import {
   login,
   lockAccount,
   refreshToken,
-  getUser,
+  getUserByToken,
 } from "../controller/auth";
 import { isAdminMiddleware, loginMiddleware } from "../middleware";
 
@@ -14,7 +14,7 @@ const router = express.Router();
 router.post("/register", register);
 router.post("/login", login);
 router.post("/lock-account/:id", isAdminMiddleware, lockAccount);
-router.post("/refresh-token", refreshToken);
-router.get("/get-user", loginMiddleware, getUser);
+router.post("/refresh-token", loginMiddleware, refreshToken);
+router.get("/get-user", loginMiddleware, getUserByToken);
 
 export default router;

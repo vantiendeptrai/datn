@@ -2,16 +2,17 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
-import UserModel from "../models/user";
-
-import { registerValidate, loginValidate } from "../validate";
+import { UserModel } from "../models";
+import { RegisterValidate, LoginValidate } from "../validate";
 import { sendMailRegister } from "../utils/sendMail";
 
 dotenv.config();
 
-const register = async (req, res) => {
+export const register = async (req, res) => {
+  const { email, password } = req.body;
+
   try {
-    const { error } = registerValidate.validate(req.body, {
+    const { error } = RegisterValidate.validate(req.body, {
       abortEarly: false,
     });
 
@@ -22,14 +23,14 @@ const register = async (req, res) => {
       });
     }
 
-    const existingUser = await UserModel.findOne({ email: req.body.email });
+    const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
       return res.status(409).json({
         message: "Email đã tồn tại",
       });
     }
 
-    const hashedPassword = await bcrypt.hash(req.body.password, 12);
+    const hashedPassword = await bcrypt.hash(password, 12);
 
     const user = await UserModel.create({
       ...req.body,
@@ -50,11 +51,11 @@ const register = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {
+export const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const { error } = loginValidate.validate(req.body, {
+    const { error } = LoginValidate.validate(req.body, {
       abortEarly: false,
     });
 
@@ -86,11 +87,11 @@ const login = async (req, res) => {
     }
 
     const accessToken = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
-      expiresIn: "1m",
+      expiresIn: "1h",
     });
 
     const refreshToken = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
-      expiresIn: "3m",
+      expiresIn: "3d",
     });
 
     return res.status(200).json({
@@ -107,7 +108,7 @@ const login = async (req, res) => {
   }
 };
 
-const lockAccount = async (req, res) => {
+export const lockAccount = async (req, res) => {
   try {
     const user = await UserModel.findById(req.params.id);
     if (!user) {
@@ -137,7 +138,7 @@ const lockAccount = async (req, res) => {
   }
 };
 
-const refreshToken = (req, res) => {
+export const refreshToken = (req, res) => {
   try {
     const refreshToken = req.headers.authorization.split(" ")[1];
     const decoded = jwt.verify(refreshToken, process.env.SECRET_KEY);
@@ -146,12 +147,12 @@ const refreshToken = (req, res) => {
       { id: decoded.id },
       process.env.SECRET_KEY,
       {
-        expiresIn: "1m",
+        expiresIn: "1h",
       }
     );
 
     return res.status(200).json({
-      message: "Access token mới",
+      message: "Làm mới token thành công",
       newAccessToken: newAccessToken,
     });
   } catch (error) {
@@ -168,6 +169,7 @@ const refreshToken = (req, res) => {
         message: "Token không hợp lệ!",
       });
     }
+
     console.log(error);
     return res.status(500).json({
       message: "Đã có lỗi xảy ra khi làm mới token",
@@ -175,7 +177,7 @@ const refreshToken = (req, res) => {
   }
 };
 
-const getUser = (req, res) => {
+export const getUserByToken = (req, res) => {
   try {
     const user = req.user;
 
@@ -191,14 +193,13 @@ const getUser = (req, res) => {
 
     return res.status(200).json({
       message: "Thông tin người dùng",
-      user: user,
+      data: user,
     });
   } catch (error) {
     console.log(error);
+
     return res.status(500).json({
       message: "Đã có lỗi xảy ra khi lấy thông tin người dùng",
     });
   }
 };
-
-export { register, login, lockAccount, refreshToken, getUser };

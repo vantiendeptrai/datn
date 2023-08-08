@@ -1,10 +1,9 @@
-import Review from "../models/review";
-
-import { reviewValidate } from "../validate";
+import { ReviewModel } from "../models";
+import { ReviewValidate } from "../validate";
 
 export const getAll = async (req, res) => {
   try {
-    const review = await Review.find();
+    const review = await ReviewModel.find();
     if (review.length === 0) {
       return res.status(404).json({
         message: "Không có danh sách hóa đơn",
@@ -26,7 +25,7 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
-    const review = await Review.findById(req.params.id);
+    const review = await ReviewModel.findById(req.params.id);
     if (!review) {
       return res.status(404).json({
         message: "Không lấy được hóa đơn theo mã",
@@ -48,7 +47,7 @@ export const getOne = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
-    const { error } = reviewValidate.validate(req.body, {
+    const { error } = ReviewValidate.validate(req.body, {
       abortEarly: false,
     });
 
@@ -59,7 +58,7 @@ export const create = async (req, res) => {
       });
     }
 
-    const review = await Review.create(req.body);
+    const review = await ReviewModel.create(req.body);
     if (!review) {
       return res.status(404).json({
         message: "Không thêm được hóa đơn",
@@ -81,7 +80,7 @@ export const create = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
-    const { error } = reviewValidate.validate(req.body, {
+    const { error } = ReviewValidate.validate(req.body, {
       abortEarly: false,
     });
 
@@ -92,16 +91,20 @@ export const update = async (req, res) => {
       });
     }
 
-    const review = await Review.findById(req.params.id);
+    const review = await ReviewModel.findById(req.params.id);
     if (!review) {
       return res
         .status(404)
         .json({ message: "Không tìm thấy hóa đơn muốn cập nhật" });
     }
 
-    const updateReview = await Review.findByIdAndUpdate(review._id, req.body, {
-      new: true,
-    });
+    const updateReview = await ReviewModel.findByIdAndUpdate(
+      review._id,
+      req.body,
+      {
+        new: true,
+      }
+    );
 
     return res.status(200).json({
       message: "Cập nhật hóa đơn thành công ",
@@ -118,16 +121,20 @@ export const update = async (req, res) => {
 
 export const remove = async (req, res) => {
   try {
-    const review = await Review.findById(req.params.id);
+    const review = await ReviewModel.findById(req.params.id);
     if (!review) {
       return res
         .status(404)
         .json({ message: "Không tìm thấy hóa đơn muốn xóa" });
     }
 
-    const deleteReview = await Review.findByIdAndDelete(review._id, req.body, {
-      new: true,
-    });
+    const deleteReview = await ReviewModel.findByIdAndDelete(
+      review._id,
+      req.body,
+      {
+        new: true,
+      }
+    );
 
     return res.status(200).json({
       message: "xóa hóa đơn thành công ",

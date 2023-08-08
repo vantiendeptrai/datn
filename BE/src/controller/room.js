@@ -1,9 +1,9 @@
-import Room from "../models/room";
-import roomValidate from "../validate/room";
+import { RoomModel } from "../models";
+import { RoomValidate } from "../validate";
 
 export const getAll = async (req, res) => {
   try {
-    const data = await Room.find();
+    const data = await RoomModel.find();
 
     if (!data || data.length === 0) {
       return res.status(404).json({
@@ -25,7 +25,7 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
-    const data = await Room.findById(req.params.id);
+    const data = await RoomModel.findById(req.params.id);
 
     if (!data || data.length === 0) {
       return res.status(404).json({
@@ -47,7 +47,7 @@ export const getOne = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
-    const { error } = roomValidate.validate(req.body, {
+    const { error } = RoomValidate.validate(req.body, {
       abortEarly: false,
     });
     if (error) {
@@ -57,7 +57,7 @@ export const create = async (req, res) => {
       });
     }
 
-    const data = await Room.create(req.body);
+    const data = await RoomModel.create(req.body);
 
     if (!data || data.length === 0) {
       return res.status(404).json({
@@ -80,7 +80,7 @@ export const create = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
-    const { error } = roomValidate.validate(req.body, {
+    const { error } = RoomValidate.validate(req.body, {
       abortEarly: false,
     });
     if (error) {
@@ -90,7 +90,7 @@ export const update = async (req, res) => {
       });
     }
 
-    const data = await Room.findByIdAndUpdate(req.params.id, req.body, {
+    const data = await RoomModel.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
 

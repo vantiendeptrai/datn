@@ -1,10 +1,9 @@
-import Hotel from "../models/hotel";
-
-import { hotelValidate } from "../validate";
+import { HotelModel } from "../models";
+import { HotelValidate } from "../validate";
 
 export const getAll = async (req, res) => {
   try {
-    const data = await Hotel.find();
+    const data = await HotelModel.find();
     if (data.length === 0) {
       return res.status(404).json({
         message: "Không có danh sách khách sạn",
@@ -26,7 +25,7 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
-    const data = await Hotel.findById(req.params.id);
+    const data = await HotelModel.findById(req.params.id);
     if (!data) {
       return res.status(404).json({
         message: "Không lấy được khách sạn theo mã",
@@ -48,7 +47,7 @@ export const getOne = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
-    const { error } = hotelValidate.validate(req.body, {
+    const { error } = HotelValidate.validate(req.body, {
       abortEarly: false,
     });
 
@@ -67,7 +66,7 @@ export const create = async (req, res) => {
       });
     }
 
-    const data = await Hotel.create(req.body);
+    const data = await HotelModel.create(req.body);
     if (!data) {
       return res.status(404).json({
         message: "Không thêm được khách sạn",
@@ -88,7 +87,7 @@ export const create = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
-    const { error } = hotelValidate.validate(req.body, {
+    const { error } = HotelValidate.validate(req.body, {
       abortEarly: false,
     });
 
@@ -98,7 +97,7 @@ export const update = async (req, res) => {
         message: errors,
       });
     }
-    const data = await Hotel.findById(req.params.id);
+    const data = await HotelModel.findById(req.params.id);
     if (!data) {
       return res
         .status(404)
@@ -113,7 +112,7 @@ export const update = async (req, res) => {
       });
     }
 
-    const updateHotel = await Hotel.findByIdAndUpdate(data._id, req.body, {
+    const updateHotel = await HotelModel.findByIdAndUpdate(data._id, req.body, {
       new: true,
     });
     return res.status(200).json({
