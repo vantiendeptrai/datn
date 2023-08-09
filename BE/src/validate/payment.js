@@ -2,7 +2,7 @@ import joi from "joi";
 
 import { errorMessages } from "./component/function";
 
-export const paymentSchema = joi.object({
+const paymentValidate = joi.object({
   userID: joi.string().optional(),
   serviceId: joi.string().messages(),
   totalPrice: joi.number().required().messages(errorMessages("Tổng giá")),
@@ -15,3 +15,5 @@ export const paymentSchema = joi.object({
     .required()
     .messages(errorMessages("Trạng thái thanh toán")),
 });
+
+export default paymentValidate;
