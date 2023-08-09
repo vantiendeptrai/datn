@@ -76,7 +76,7 @@ export const create = async (req, res) => {
     console.log(error);
 
     return res.status(500).json({
-      message: "Đã có lỗi xảy ra khi thanh toán",
+      message: "Đã có lỗi xảy ra khi thêm mới",
     });
   }
 };
@@ -123,18 +123,18 @@ export const remove = async (req, res) => {
 
     if (!data) {
       return res.status(404).json({
-        message: "Xóa phiếu thanh toán thất bại",
+        message: "Xóa thanh toán thất bại",
       });
     }
 
     return res.status(200).json({
-      message: "Xóa phiếu thanh toán thành công",
+      message: "Xóa thanh toán thành công",
     });
   } catch (error) {
     console.log(error);
 
     return res.status(500).json({
-      message: "Đã có lỗi xảy ra khi xóa tiện nghi",
+      message: "Đã có lỗi xảy ra khi xóa thanh toán",
     });
   }
 };
