@@ -37,7 +37,7 @@ const BookingSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    cccd: {
+    passport: {
       type: String,
       required: true,
     },
