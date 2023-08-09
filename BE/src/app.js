@@ -4,15 +4,16 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 import {
-    AmenitiesRouter,
-    AuthRouter,
-    BillRouter,
-    BookingRouter,
-    HotelRouter,
-    ReviewRouter,
-    RoomRouter,
-    RoomTypeRouter,
-    ServicesRouter,
+  AmenitiesRouter,
+  AuthRouter,
+  BillRouter,
+  BookingRouter,
+  HotelRouter,
+  PaymentRouter,
+  ReviewRouter,
+  RoomRouter,
+  RoomTypeRouter,
+  ServicesRouter,
 } from "./router";
 
 dotenv.config();
@@ -27,6 +28,7 @@ app.use("/auth", AuthRouter);
 app.use("/bill", BillRouter);
 app.use("/booking", BookingRouter);
 app.use("/hotel", HotelRouter);
+app.use("/payment", PaymentRouter);
 app.use("/review", ReviewRouter);
 app.use("/room", RoomRouter);
 app.use("/room-type", RoomTypeRouter);
