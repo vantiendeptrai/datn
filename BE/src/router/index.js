@@ -8,7 +8,6 @@ import ReviewRouter from "./review";
 import RoomRouter from "./room";
 import RoomTypeRouter from "./roomType";
 import ServicesRouter from "./service";
-import PaymentRouter from "./payment";
 
 export {
   AmenitiesRouter,
@@ -21,5 +20,4 @@ export {
   RoomRouter,
   RoomTypeRouter,
   ServicesRouter,
-  PaymentRouter,
 };
