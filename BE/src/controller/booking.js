@@ -1,11 +1,11 @@
 import bcrypt from 'bcrypt';
 import Booking from '../models/Booking';
-import { bookingValidate } from '../validate';
+import BookingValidate from '../validate';
 import nodemailer from 'nodemailer';
 
 export const create = async (req, res) => {
     try {
-        const { error } = bookingValidate.validate(req.body, {
+        const { error } = BookingValidate.validate(req.body, {
             abortEarly: false,
         });
 
