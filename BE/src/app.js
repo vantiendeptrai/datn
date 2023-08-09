@@ -4,15 +4,15 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 import {
-  AmenitiesRouter,
-  AuthRouter,
-  BillRouter,
-  BookingRouter,
-  HotelRouter,
-  ReviewRouter,
-  RoomRouter,
-  RoomTypeRouter,
-  ServicesRouter,
+    AmenitiesRouter,
+    AuthRouter,
+    BillRouter,
+    BookingRouter,
+    HotelRouter,
+    ReviewRouter,
+    RoomRouter,
+    RoomTypeRouter,
+    ServicesRouter,
 } from "./router";
 
 dotenv.config();
