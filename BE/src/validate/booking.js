@@ -32,7 +32,7 @@ const bookingValidate = joi.object({
     .string()
     .required()
     .messages(errorValidateMessages("Nhận dạng phòng")),
-  cccd: joi
+  passport: joi
     .number()
     .required()
     .messages(errorValidateMessages("NHập số căn cước công dân của bạn")),

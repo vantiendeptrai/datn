@@ -4,6 +4,8 @@ import nodemailer from 'nodemailer';
 import { BookingModel } from '../models';
 import { BookingValidate } from '../validate';
 
+
+// Thêm phòng
 export const create = async (req, res) => {
     try {
         const { error } = BookingValidate.validate(req.body, {
@@ -17,10 +19,10 @@ export const create = async (req, res) => {
             });
         }
 
-        const cccd = req.body.cccd.toString();
-        const hashedCCCD = await bcrypt.hash(cccd, 10);
+        const passport = req.body.passport.toString();
+        const hashedPassport = await bcrypt.hash(passport, 10);
 
-        req.body.cccd = hashedCCCD;
+        req.body.passport = hashedPassport;
 
         const newBooking = await BookingModel.create(req.body);
         if (!newBooking) {
@@ -63,6 +65,52 @@ export const create = async (req, res) => {
         });
     }
 };
+// lấy ra tất cả số phòng 
+export const getAllProducts = async (req, res) => {
+    try {
+        const allProducts = await BookingModel.find(); // Lấy tất cả sản phẩm từ cơ sở dữ liệu
+
+        if (allProducts.length === 0) {
+            return res.status(404).json({
+                message: 'Hiện tại không có phòng nào',
+            });
+        }
+
+        return res.status(200).json({
+            message: 'Lấy danh sách phòng thành công',
+            products: allProducts,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message,
+        });
+    }
+};
+
+// Lấy ra từng phòng
+export const getProductDetails = async (req, res) => {
+    try {
+        const productId = req.params.id;
+
+        const productDetails = await BookingModel.findById(productId);
+
+        if (!productDetails) {
+            return res.status(404).json({
+                message: 'Không tìm thấy phòng bạn cần tìm',
+            });
+        }
+
+        return res.status(200).json({
+            message: 'Đã lấy được phòng bạn cần',
+            product: productDetails,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message,
+        });
+    }
+};
+
 
 export const remove = async (req, res) => {
     try {
