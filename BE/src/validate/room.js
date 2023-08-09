@@ -29,14 +29,37 @@ const roomValidate = joi.object({
       })
     )
     .messages(errorValidateMessages("Ảnh")),
-  price: joi.number().min(0).required().messages(errorValidateMessages("Giá")),
-  status: joi.string().required().messages(errorValidateMessages("Trạng Thái")),
   capacity: joi
+    .number()
+    .min(1)
+    .required()
+    .messages(errorValidateMessages("Sức chứa")),
+  price: joi
     .number()
     .min(0)
     .required()
-    .messages(errorValidateMessages("Sức chứa")),
-  description: joi.string().required().messages(errorValidateMessages("Mô tả")),
+    .messages(errorValidateMessages("Giá phòng")),
+  status: joi
+    .string()
+    .required()
+    .messages(errorValidateMessages("Trạng Thái phòng")),
+  description: joi
+    .string()
+    .required()
+    .messages(errorValidateMessages("Mô tả phòng")),
+  id_amenities: joi
+    .array()
+    .min(1)
+    .required()
+    .messages(errorValidateMessages("Tiện nghi phòng")),
+  id_hotel: joi
+    .string()
+    .required()
+    .messages(errorValidateMessages("Id khách sạn")),
+  id_roomType: joi
+    .string()
+    .required()
+    .messages(errorValidateMessages("Id loại phòng")),
 });
 
 export default roomValidate;
