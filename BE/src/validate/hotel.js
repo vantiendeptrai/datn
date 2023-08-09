@@ -1,37 +1,61 @@
 import joi from "joi";
 
-import { errorMessages } from "./component/errorMessages";
+import { errorValidateMessages } from "../component";
 
 const hotelValidate = joi.object({
-  name: joi.string().required().messages(errorMessages("Tên khách sạn")),
-  status: joi
+  name: joi
     .string()
     .required()
-    .messages(errorMessages("Trạng thái khách sạn")),
-  address: joi.string().required().messages(errorMessages("Địa chỉ khách sạn")),
-  phone: joi
-    .string()
-    .required()
-    .messages(errorMessages("Số điện thoại khách sạn")),
-  email: joi.string().required().messages(errorMessages("Email khách sạn")),
-  description: joi
-    .string()
-    .required()
-    .messages(errorMessages("Mô tả khách sạn")),
-  city: joi.string().required().messages(errorMessages("Tên thành phố")),
+    .messages(errorValidateMessages("Tên khách sạn")),
   images: joi
     .array()
     .min(1)
     .required()
     .items(
       joi.object({
-        status: joi.string().required().messages(errorMessages("Trạng thái")),
-        name: joi.string().required().messages(errorMessages("Tên")),
-        uid: joi.string().required().messages(errorMessages("Uid")),
-        url: joi.string().required().messages(errorMessages("Đường dẫn")),
+        status: joi
+          .string()
+          .required()
+          .messages(errorValidateMessages("Trạng thái")),
+        name: joi.string().required().messages(errorValidateMessages("Tên")),
+        uid: joi.string().required().messages(errorValidateMessages("Uid")),
+        url: joi
+          .string()
+          .required()
+          .messages(errorValidateMessages("Đường dẫn")),
       })
     )
-    .messages(errorMessages("Ảnh")),
+    .messages(errorValidateMessages("Ảnh khách sạn")),
+  address: joi
+    .string()
+    .required()
+    .messages(errorValidateMessages("Địa chỉ khách sạn")),
+  phone: joi
+    .string()
+    .required()
+    .pattern(/^(0|\+84)[3|5|7|8|9][0-9]{8}$/)
+    .messages(errorValidateMessages("Số điện thoại khách sạn")),
+  status: joi
+    .string()
+    .required()
+    .messages(errorValidateMessages("Trạng thái khách sạn")),
+  email: joi
+    .string()
+    .required()
+    .messages(errorValidateMessages("Email khách sạn")),
+  description: joi
+    .string()
+    .required()
+    .messages(errorValidateMessages("Mô tả khách sạn")),
+  city: joi
+    .string()
+    .required()
+    .messages(errorValidateMessages("Tên thành phố")),
+  id_amenities: joi
+    .array()
+    .min(1)
+    .required()
+    .messages(errorValidateMessages("Tiện nghi khách sạn")),
 });
 
 export default hotelValidate;

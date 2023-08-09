@@ -4,14 +4,15 @@ import DashboardCard from "./admin/Dashboard/DashboardCard";
 //Footer
 import Footer from "./client/Footer/Footer";
 import FooterBottom from "./client/Footer/FooterBottom";
+import FooterCard from "./client/Footer/FooterCard";
 import FooterCenter from "./client/Footer/FooterCenter";
+import FooterLink from "./client/Footer/FooterLink";
+import FooterTop from "./client/Footer/FooterTop";
 
 // Home
 import Attractive from "./client/Home/Attractive";
 import AttractiveCard from "./client/Home/AttractiveCard";
 import Carousel from "./client/Home/Carousel";
-import Detail from "./client/Home/Detail";
-import DetailCard from "./client/Home/DetailCard";
 
 // Modal
 import LoginModal from "./client/Modal/LoginModal";
@@ -46,14 +47,15 @@ export {
   //Footer
   Footer,
   FooterBottom,
+  FooterCard,
   FooterCenter,
+  FooterLink,
+  FooterTop,
 
   // Home
   Attractive,
   AttractiveCard,
   Carousel,
-  Detail,
-  DetailCard,
 
   // Modal
   LoginModal,

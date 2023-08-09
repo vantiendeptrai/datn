@@ -1,19 +1,19 @@
-import { RoomModel } from "../models";
-import { RoomValidate } from "../validate";
+import { ServiceModel } from "../models";
+import { ServiceValidate } from "../validate";
 
 export const getAll = async (req, res) => {
   try {
-    const roomList = await RoomModel.find();
+    const serviceList = await ServiceModel.find();
 
-    if (!roomList || roomList.length === 0) {
+    if (!serviceList || serviceList.length === 0) {
       return res.status(404).json({
-        message: "Không có danh sách phòng",
+        message: "Không có danh sách dịch vụ",
       });
     }
 
     return res.status(200).json({
-      message: "Danh sách phòng",
-      data: roomList,
+      message: "Danh sách dịch vụ",
+      data: serviceList,
     });
   } catch (error) {
     console.error(error);
@@ -26,17 +26,17 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
-    const room = await RoomModel.findById(req.params.id);
+    const service = await ServiceModel.findById(req.params.id);
 
-    if (!room || room.length === 0) {
+    if (!service || service.length === 0) {
       return res.status(404).json({
-        message: "Không có thông tin phòng",
+        message: "Không có thông tin dịch vụ",
       });
     }
 
     return res.status(200).json({
-      message: "Thông tin phòng",
-      data: room,
+      message: "Thông tin dịch vụ",
+      data: service,
     });
   } catch (error) {
     console.error(error);
@@ -49,7 +49,7 @@ export const getOne = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
-    const { error } = RoomValidate.validate(req.body, {
+    const { error } = ServiceValidate.validate(req.body, {
       abortEarly: false,
     });
 
@@ -60,16 +60,16 @@ export const create = async (req, res) => {
       });
     }
 
-    const data = await RoomModel.create(req.body);
+    const data = await ServiceModel.create(req.body);
 
-    if (!data || data.length === 0) {
+    if (!data) {
       return res.status(404).json({
-        message: "Thêm phòng thất bại",
+        message: "Thêm dịch vụ thất bại",
       });
     }
 
     return res.status(200).json({
-      message: "Thêm phòng thành công",
+      message: "Thêm dịch vụ thành công",
       data: data,
     });
   } catch (error) {
@@ -80,11 +80,10 @@ export const create = async (req, res) => {
     });
   }
 };
-1;
 
 export const update = async (req, res) => {
   try {
-    const { error } = RoomValidate.validate(req.body, {
+    const { error } = ServiceValidate.validate(req.body, {
       abortEarly: false,
     });
 
@@ -95,25 +94,47 @@ export const update = async (req, res) => {
       });
     }
 
-    const data = await RoomModel.findByIdAndUpdate(req.params.id, req.body, {
+    const data = await ServiceModel.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
 
     if (!data) {
       return res.status(404).json({
-        message: "Cập nhật phòng thất bại",
+        message: "Cập nhật dịch vụ thất bại",
       });
     }
 
     return res.status(200).json({
-      message: "Cập nhật phòng thành công",
-      data: data,
+      message: "Cập nhật dịch vụ thành công",
+      data,
     });
   } catch (error) {
     console.log(error);
 
     return res.status(500).json({
       message: "Đã có lỗi xảy ra khi cập nhật",
+    });
+  }
+};
+
+export const remove = async (req, res) => {
+  try {
+    const data = await ServiceModel.findByIdAndDelete(req.params.id);
+
+    if (!data) {
+      return res.status(404).json({
+        message: "Xóa dịch vụ thất bại",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Xóa dịch vụ thành công",
+    });
+  } catch (error) {
+    console.log(error);
+
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra khi xóa tiện nghi",
     });
   }
 };

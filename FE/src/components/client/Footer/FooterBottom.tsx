@@ -26,6 +26,7 @@ const FooterBottom = () => {
           >
             <div
               className="
+              text-center
               text-textLight2nd
               dark:text-textDark2nd"
             >

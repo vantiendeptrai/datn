@@ -1,10 +1,9 @@
-import Bill from "../models/bill";
-
-import { billValidate } from "../validate";
+import { BillModel } from "../models";
+import { BillValidate } from "../validate";
 
 export const getAll = async (req, res) => {
   try {
-    const bill = await Bill.find();
+    const bill = await BillModel.find();
     if (bill.length === 0) {
       return res.status(404).json({
         message: "Không có danh sách hóa đơn",
@@ -26,7 +25,7 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
-    const bill = await Bill.findById(req.params.id);
+    const bill = await BillModel.findById(req.params.id);
     if (!bill) {
       return res.status(404).json({
         message: "Không lấy được hóa đơn theo mã",
@@ -48,7 +47,7 @@ export const getOne = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
-    const { error } = billValidate.validate(req.body, {
+    const { error } = BillValidate.validate(req.body, {
       abortEarly: false,
     });
 
@@ -59,7 +58,7 @@ export const create = async (req, res) => {
       });
     }
 
-    const bill = await Bill.create(req.body);
+    const bill = await BillModel.create(req.body);
     if (!bill) {
       return res.status(404).json({
         message: "Không thêm được hóa đơn",
@@ -81,7 +80,7 @@ export const create = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
-    const { error } = billValidate.validate(req.body, {
+    const { error } = BillValidate.validate(req.body, {
       abortEarly: false,
     });
 
@@ -92,7 +91,7 @@ export const update = async (req, res) => {
       });
     }
 
-    const bill = await Bill.findById(req.params.id);
+    const bill = await BillModel.findById(req.params.id);
     if (!bill) {
       return res
         .status(404)
@@ -118,14 +117,14 @@ export const update = async (req, res) => {
 
 export const remove = async (req, res) => {
   try {
-    const bill = await Bill.findById(req.params.id);
+    const bill = await BillModel.findById(req.params.id);
     if (!bill) {
-      return res
-        .status(404)
-        .json({ message: "Không tìm thấy hóa đơn muốn xóa" });
+      return res.status(404).json({
+        message: "Không tìm thấy hóa đơn muốn xóa",
+      });
     }
 
-    const deleteBill = await Bill.findByIdAndDelete(bill._id, req.body, {
+    const deleteBill = await BillModel.findByIdAndDelete(bill._id, req.body, {
       new: true,
     });
 
