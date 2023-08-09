@@ -3,16 +3,18 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 
-import AuthRouter from "./router/auth";
-import HotelRouter from "./router/hotel";
-import RoomRouter from "./router/room";
-import RoomTypeRouter from "./router/roomType";
-import AmenitiesRouter from "./router/amenities";
-import ServicesRouter from "./router/service";
+import {
+  AmenitiesRouter,
+  AuthRouter,
+  BillRouter,
+  BookingRouter,
+  HotelRouter,
+  ReviewRouter,
+  RoomRouter,
+  RoomTypeRouter,
+  ServicesRouter,
+} from "./router";
 
-import BillRouter from "./router/bill";
-import BookingRouter from "./router/booking";
-import ReviewRouter from "./router/review";
 dotenv.config();
 
 const app = express();
@@ -20,15 +22,16 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use("/auth", AuthRouter);
-app.use("/hotel", HotelRouter);
-app.use("/room", RoomRouter);
-app.use("/room-type", RoomTypeRouter);
 app.use("/amenities", AmenitiesRouter);
-app.use("/services", ServicesRouter);
+app.use("/auth", AuthRouter);
 app.use("/bill", BillRouter);
 app.use("/booking", BookingRouter);
+app.use("/hotel", HotelRouter);
 app.use("/review", ReviewRouter);
+app.use("/room", RoomRouter);
+app.use("/room-type", RoomTypeRouter);
+app.use("/services", ServicesRouter);
+
 mongoose.connect(process.env.DB_URL);
 
 export const viteNodeApp = app;

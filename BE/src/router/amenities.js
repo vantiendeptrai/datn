@@ -1,11 +1,11 @@
 import express from "express";
 
 import {
-  create,
   getAll,
   getOne,
-  remove,
+  create,
   update,
+  remove,
 } from "../controller/amenities";
 import { isAdminMiddleware } from "../middleware";
 

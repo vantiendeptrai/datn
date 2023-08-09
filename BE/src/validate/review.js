@@ -1,13 +1,13 @@
 import joi from "joi";
-import { errorMessages } from "./component/errorMessages";
+import { errorValidateMessages } from "../component";
 
 const reviewValidate = joi.object({
-  id_user: joi.string().required().messages(errorMessages("Id người dùng")),
-  rating: joi.string().required().messages(errorMessages("Id thanh toán")),
-  comment: joi.string().required().messages(errorMessages("comment")),
-  like_count: joi.string().required().messages(errorMessages("like_count")),
-  like_customers: joi.string().required().messages(errorMessages("like_customers")),
-  
+  id_user: joi
+    .string()
+    .required()
+    .messages(errorValidateMessages("Id người dùng")),
+  rating: joi.string().required().messages(errorValidateMessages("Đánh giá")),
+  comment: joi.string().required().messages(errorValidateMessages("BÌnh luận")),
 });
 
 export default reviewValidate;

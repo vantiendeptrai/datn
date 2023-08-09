@@ -1,10 +1,10 @@
 import joi from "joi";
 
-import { errorMessages } from "./component/errorMessages";
+import { errorValidateMessages } from "../component";
 
 const serviceValidate = joi.object({
-    name: joi.string().required().messages(errorMessages("Tên dịch vụ")),
-    price: joi.number().required().messages(errorMessages("Giá dịch vụ"))
+  name: joi.string().required().messages(errorValidateMessages("Tên dịch vụ")),
+  price: joi.number().required().messages(errorValidateMessages("Giá dịch vụ")),
 });
 
 export default serviceValidate;

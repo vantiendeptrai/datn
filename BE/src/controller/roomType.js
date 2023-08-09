@@ -1,78 +1,55 @@
-import RoomType from "../models/roomType";
-import { roomTypeValidate } from "../validate";
-
-export const create = async (req, res) => {
-  try {
-    const { error } = roomTypeValidate.validate(req.body, {
-      abortEarly: false,
-    });
-
-    if (error) {
-      const errors = error.details.map((err) => err.message);
-      return res.status(400).json({
-        errors: errors,
-      });
-    }
-
-    const data = await RoomType.create(req.body);
-
-    return res.status(200).json({
-      message: "Thêm loại phòng thành công ",
-      data: data,
-    });
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      message: "Đã có lỗi xảy ra khi thêm loại phòng",
-    });
-  }
-};
+import { RoomTypeModel } from "../models";
+import { RoomTypeValidate } from "../validate";
 
 export const getAll = async (req, res) => {
   try {
-    const data = await RoomType.find();
-    if (!data || data.length === 0) {
+    const roomTypeList = await RoomTypeModel.find();
+
+    if (!roomTypeList || roomTypeList.length === 0) {
       return res.status(404).json({
-        message: "Không lấy được danh sách loại phòng",
+        message: "Không có danh sách loại phòng",
       });
     }
 
     return res.status(200).json({
       message: "Danh sách loại phòng",
-      data: data,
+      data: roomTypeList,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
+
     return res.status(500).json({
-      message: "Đã có lỗi xảy ra khi lấy danh sách loại phòng",
+      message: "Đã có lỗi xảy ra khi truy vấn cơ sở dữ liệu",
     });
   }
 };
 
 export const getOne = async (req, res) => {
   try {
-    const data = await RoomType.findById(req.params.id);
-    if (!data || data.length === 0) {
+    const roomType = await RoomTypeModel.findById(req.params.id);
+
+    if (!roomType || roomType.length === 0) {
       return res.status(404).json({
-        message: "Không lấy được thông tin loại phòng",
+        message: "Không có thông tin loại phòng",
       });
     }
 
     return res.status(200).json({
       message: "Thông tin loại phòng",
-      data: data,
+      data: roomType,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
+
     return res.status(500).json({
-      message: "Đã có lỗi xảy ra khi lấy thông tin loại phòng",
+      message: "Đã có lỗi xảy ra khi truy vấn cơ sở dữ liệu",
     });
   }
 };
 
-export const update = async (req, res) => {
+export const create = async (req, res) => {
   try {
-    const { error } = roomTypeValidate.validate(req.body, {
+    const { error } = RoomTypeValidate.validate(req.body, {
       abortEarly: false,
     });
 
@@ -83,25 +60,85 @@ export const update = async (req, res) => {
       });
     }
 
-    const data = await RoomType.findById(req.params.id);
+    const data = await RoomTypeModel.create(req.body);
+
     if (!data) {
       return res.status(404).json({
-        message: "Không tìm thấy thông tin loại phòng",
+        message: "Thêm loại phòng thất bại",
       });
     }
 
-    const newRoomType = await RoomType.findByIdAndUpdate(data._id, req.body, {
-      new: true,
-    });
-
     return res.status(200).json({
-      message: "Cập nhật thông tin loại phòng thành công",
-      data: newRoomType,
+      message: "Thêm loại phòng thành công",
+      data: data,
     });
   } catch (error) {
     console.log(error);
+
     return res.status(500).json({
-      message: "Đã có lỗi xảy ra khi cập nhật thông tin loại phòng",
+      message: "Đã có lỗi xảy ra khi thêm mới",
+    });
+  }
+};
+
+export const update = async (req, res) => {
+  try {
+    const { error } = RoomTypeValidate.validate(req.body, {
+      abortEarly: false,
+    });
+
+    if (error) {
+      const errors = error.details.map((err) => err.message);
+      return res.status(400).json({
+        errors: errors,
+      });
+    }
+
+    const data = await RoomTypeModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+      }
+    );
+
+    if (!data) {
+      return res.status(404).json({
+        message: "Cập nhật loại phòng thất bại",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Cập nhật loại phòng thành công",
+      data,
+    });
+  } catch (error) {
+    console.log(error);
+
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra khi cập nhật",
+    });
+  }
+};
+
+export const remove = async (req, res) => {
+  try {
+    const data = await RoomTypeModel.findByIdAndDelete(req.params.id);
+
+    if (!data) {
+      return res.status(404).json({
+        message: "Xóa loại phòng thất bại",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Xóa loại phòng thành công",
+    });
+  } catch (error) {
+    console.log(error);
+
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra xóa loại phòng",
     });
   }
 };

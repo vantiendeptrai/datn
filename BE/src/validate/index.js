@@ -1,20 +1,23 @@
-import loginValidate from "./login";
-import registerValidate from "./register";
-import hotelValidate from "./hotel";
-import roomTypeValidate from "./roomType";
-import amenitiesValidate from "./amenities";
-import serviceValidate from "./service";
-import billValidate from "./bill";
-import bookingValidate from "./booking";
-import reviewValidate from './review'
+import AmenitiesValidate from "./amenities";
+import BillValidate from "./bill";
+import BookingValidate from "./booking";
+import HotelValidate from "./hotel";
+import LoginValidate from "./login";
+import RegisterValidate from "./register";
+import ReviewValidate from "./review";
+import RoomValidate from "./room";
+import RoomTypeValidate from "./roomType";
+import ServiceValidate from "./service";
+
 export {
-  registerValidate,
-  loginValidate,
-  hotelValidate,
-  roomTypeValidate,
-  amenitiesValidate,
-  serviceValidate,
-  billValidate,
-  bookingValidate,
-  reviewValidate
+  AmenitiesValidate,
+  BillValidate,
+  BookingValidate,
+  HotelValidate,
+  LoginValidate,
+  RegisterValidate,
+  ReviewValidate,
+  RoomValidate,
+  RoomTypeValidate,
+  ServiceValidate,
 };
