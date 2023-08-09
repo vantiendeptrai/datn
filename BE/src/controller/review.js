@@ -1,5 +1,8 @@
 import { ReviewModel } from "../models";
+import { HotelModel } from "../models";
 import { ReviewValidate } from "../validate";
+
+
 
 export const getAll = async (req, res) => {
   try {
@@ -67,11 +70,20 @@ export const create = async (req, res) => {
         message: "Thêm bình luận thất bại",
       });
     }
-
+     await HotelModel.findByIdAndUpdate(
+      req.body.id_user,
+      { $push: { id_amenities
+: data._id } },
+      { new: true }
+    );
+    
     return res.status(200).json({
       message: "Thêm bình luận thành công",
       data,
     });
+
+    
+
   } catch (error) {
     console.log(error);
 
