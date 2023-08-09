@@ -70,7 +70,7 @@ export const create = async (req, res) => {
 
     return res.status(200).json({
       message: "Thêm tiện nghi thành công",
-      data: data,
+      data,
     });
   } catch (error) {
     console.log(error);

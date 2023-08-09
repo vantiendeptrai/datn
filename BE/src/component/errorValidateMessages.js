@@ -4,6 +4,7 @@ const errorValidateMessages = (fieldName) => {
     "string.empty": `${fieldName} không được để trống`,
     "string.email": `${fieldName} không đúng định dạng`,
     "string.min": `${fieldName} phải dài hơn 12 ký tự`,
+    "string.pattern.base": `${fieldName} không hợp lệ`,
 
     "number.base": `${fieldName} phải là số`,
     "number.empty": `${fieldName} không được để trống`,
