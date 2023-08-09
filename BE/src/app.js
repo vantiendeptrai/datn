@@ -9,11 +9,11 @@ import {
   BillRouter,
   BookingRouter,
   HotelRouter,
+  PaymentRouter,
   ReviewRouter,
   RoomRouter,
   RoomTypeRouter,
   ServicesRouter,
-  PaymentRouter,
 } from "./router";
 
 dotenv.config();

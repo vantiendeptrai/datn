@@ -26,4 +26,4 @@ const paymentSchema = new mongoose.Schema(
   { versionKey: false, timestamps: true }
 );
 
-export default mongoose.model("Amenities", paymentSchema);
+export default mongoose.model("Payment", paymentSchema);
