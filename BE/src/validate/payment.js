@@ -1,19 +1,22 @@
 import joi from "joi";
 
-import { errorMessages } from "./component/function";
+import { errorValidateMessages } from "../component";
 
 const paymentValidate = joi.object({
   userID: joi.string().optional(),
   serviceId: joi.string().messages(),
-  totalPrice: joi.number().required().messages(errorMessages("Tổng giá")),
+  totalPrice: joi
+    .number()
+    .required()
+    .messages(errorValidateMessages("Tổng giá")),
   method: joi
     .string()
     .required()
-    .messages(errorMessages("Phương thức thanh toán")),
+    .messages(errorValidateMessages("Phương thức thanh toán")),
   status: joi
     .number()
     .required()
-    .messages(errorMessages("Trạng thái thanh toán")),
+    .messages(errorValidateMessages("Trạng thái thanh toán")),
 });
 
 export default paymentValidate;

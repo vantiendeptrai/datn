@@ -1,11 +1,12 @@
 import bcrypt from 'bcrypt';
-import Booking from '../models/Booking';
-import { bookingValidate } from '../validate';
 import nodemailer from 'nodemailer';
+
+import { BookingModel } from '../models';
+import { BookingValidate } from '../validate';
 
 export const create = async (req, res) => {
     try {
-        const { error } = bookingValidate.validate(req.body, {
+        const { error } = BookingValidate.validate(req.body, {
             abortEarly: false,
         });
 
@@ -21,7 +22,7 @@ export const create = async (req, res) => {
 
         req.body.cccd = hashedCCCD;
 
-        const newBooking = await Booking.create(req.body);
+        const newBooking = await BookingModel.create(req.body);
         if (!newBooking) {
             return res.status(404).json({
                 message: 'Không thêm được đặt phòng',
@@ -67,7 +68,7 @@ export const remove = async (req, res) => {
     try {
         const bookingId = req.params.id;
 
-        const deletedBooking = await Booking.findByIdAndDelete(bookingId);
+        const deletedBooking = await BookingModel.findByIdAndDelete(bookingId);
 
         if (!deletedBooking) {
             return res.status(404).json({
@@ -90,7 +91,7 @@ export const update = async (req, res) => {
     try {
         const bookingId = req.params.id;
 
-        const updatedBooking = await Booking.findByIdAndUpdate(
+        const updatedBooking = await BookingModel.findByIdAndUpdate(
             bookingId,
             req.body,
             { new: true }
