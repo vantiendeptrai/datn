@@ -1,6 +1,6 @@
 import express from "express";
 
-import { create, getAll, getOne, update, remove } from "../controller/review";
+import { getAll, getOne, create, update, remove } from "../controller/review";
 import { loginMiddleware } from "../middleware";
 
 const router = express.Router();

@@ -6,7 +6,6 @@ const reviewSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-
     rating: {
       type: String,
       required: true,
@@ -15,16 +14,6 @@ const reviewSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    like_count: {
-      type: String,
-      required: true,
-    },
-    like_customers: {
-      type: String,
-      required: true,
-    },
-    
-
   },
   { timestamps: true, versionKey: false }
 );

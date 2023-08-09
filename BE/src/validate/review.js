@@ -6,19 +6,8 @@ const reviewValidate = joi.object({
     .string()
     .required()
     .messages(errorValidateMessages("Id người dùng")),
-  rating: joi
-    .string()
-    .required()
-    .messages(errorValidateMessages("Id thanh toán")),
-  comment: joi.string().required().messages(errorValidateMessages("comment")),
-  like_count: joi
-    .string()
-    .required()
-    .messages(errorValidateMessages("like_count")),
-  like_customers: joi
-    .string()
-    .required()
-    .messages(errorValidateMessages("like_customers")),
+  rating: joi.string().required().messages(errorValidateMessages("Đánh giá")),
+  comment: joi.string().required().messages(errorValidateMessages("BÌnh luận")),
 });
 
 export default reviewValidate;

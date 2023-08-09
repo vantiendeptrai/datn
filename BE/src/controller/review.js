@@ -3,22 +3,23 @@ import { ReviewValidate } from "../validate";
 
 export const getAll = async (req, res) => {
   try {
-    const review = await ReviewModel.find();
-    if (review.length === 0) {
+    const reviewList = await ReviewModel.find();
+
+    if (!reviewList || reviewList.length === 0) {
       return res.status(404).json({
-        message: "Không có danh sách hóa đơn",
+        message: "Không có danh sách bình luận",
       });
     }
 
     return res.status(200).json({
-      message: "Danh sách hóa đơn",
-      review,
+      message: "Danh sách bình luận",
+      data: reviewList,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
+      message: "Đã có lỗi xảy ra khi truy vấn cơ sở dữ liệu",
     });
   }
 };
@@ -26,21 +27,22 @@ export const getAll = async (req, res) => {
 export const getOne = async (req, res) => {
   try {
     const review = await ReviewModel.findById(req.params.id);
-    if (!review) {
+
+    if (!review || review.length === 0) {
       return res.status(404).json({
-        message: "Không lấy được hóa đơn theo mã",
+        message: "Không có thông tin bình luận",
       });
     }
 
     return res.status(200).json({
-      message: "Thông tin hóa đơn",
-      review,
+      message: "Thông tin bình luận",
+      data: review,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
+      message: "Đã có lỗi xảy ra khi truy vấn cơ sở dữ liệu",
     });
   }
 };
@@ -54,26 +56,27 @@ export const create = async (req, res) => {
     if (error) {
       const errors = error.details.map((err) => err.message);
       return res.status(400).json({
-        message: errors,
+        errors: errors,
       });
     }
 
-    const review = await ReviewModel.create(req.body);
-    if (!review) {
+    const data = await ReviewModel.create(req.body);
+
+    if (!data) {
       return res.status(404).json({
-        message: "Không thêm được hóa đơn",
+        message: "Thêm bình luận thất bại",
       });
     }
 
     return res.status(200).json({
-      message: "Thêm hóa đơn thành công ",
-      review,
+      message: "Thêm bình luận thành công",
+      data,
     });
   } catch (error) {
     console.log(error);
 
     return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
+      message: "Đã có lỗi xảy ra khi thêm mới",
     });
   }
 };
@@ -87,64 +90,51 @@ export const update = async (req, res) => {
     if (error) {
       const errors = error.details.map((err) => err.message);
       return res.status(400).json({
-        message: errors,
+        errors: errors,
       });
     }
 
-    const review = await ReviewModel.findById(req.params.id);
-    if (!review) {
-      return res
-        .status(404)
-        .json({ message: "Không tìm thấy hóa đơn muốn cập nhật" });
+    const data = await ReviewModel.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+
+    if (!data) {
+      return res.status(404).json({
+        message: "Cập nhật bình luận thất bại",
+      });
     }
 
-    const updateReview = await ReviewModel.findByIdAndUpdate(
-      review._id,
-      req.body,
-      {
-        new: true,
-      }
-    );
-
     return res.status(200).json({
-      message: "Cập nhật hóa đơn thành công ",
-      updateReview,
+      message: "Cập nhật bình luận thành công",
+      data,
     });
   } catch (error) {
     console.log(error);
 
     return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
+      message: "Đã có lỗi xảy ra khi cập nhật",
     });
   }
 };
 
 export const remove = async (req, res) => {
   try {
-    const review = await ReviewModel.findById(req.params.id);
-    if (!review) {
-      return res
-        .status(404)
-        .json({ message: "Không tìm thấy hóa đơn muốn xóa" });
+    const data = await ReviewModel.findByIdAndDelete(req.params.id);
+
+    if (!data) {
+      return res.status(404).json({
+        message: "Xóa bình luận thất bại",
+      });
     }
 
-    const deleteReview = await ReviewModel.findByIdAndDelete(
-      review._id,
-      req.body,
-      {
-        new: true,
-      }
-    );
-
     return res.status(200).json({
-      message: "xóa hóa đơn thành công ",
-      deleteReview,
+      message: "Xóa bình luận thành công",
     });
   } catch (error) {
     console.log(error);
 
     return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
+      message: "Đã có lỗi xảy ra khi xóa tiện nghi",
     });
   }
 };
