@@ -1,7 +1,7 @@
-
 import bcrypt from 'bcrypt';
 import Booking from '../models/Booking';
 import { bookingValidate } from '../validate';
+import nodemailer from 'nodemailer';
 
 export const create = async (req, res) => {
     try {
@@ -16,14 +16,10 @@ export const create = async (req, res) => {
             });
         }
 
-
         const cccd = req.body.cccd.toString();
         const hashedCCCD = await bcrypt.hash(cccd, 10);
 
-
         req.body.cccd = hashedCCCD;
-
-
 
         const newBooking = await Booking.create(req.body);
         if (!newBooking) {
@@ -31,6 +27,30 @@ export const create = async (req, res) => {
                 message: 'Không thêm được đặt phòng',
             });
         }
+
+        // Gửi email thông báo đặt phòng thành công
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'your_gmail_username@gmail.com',
+                pass: 'your_gmail_password',
+            },
+        });
+
+        const emailContent = {
+            from: 'your_gmail_username@gmail.com',
+            to: req.body.email,
+            subject: 'Xác nhận đặt phòng thành công',
+            text: `Chúng tôi xác nhận đặt phòng của bạn từ ${req.body.checkIn} đến ${req.body.checkOut}. Cảm ơn quý khách!`,
+        };
+
+        transporter.sendMail(emailContent, (error, info) => {
+            if (error) {
+                console.log('Gửi email thất bại:', error);
+            } else {
+                console.log('Email đã được gửi thành công:', info.response);
+            }
+        });
 
         return res.status(201).json({
             message: 'Thêm đặt phòng thành công',
@@ -93,3 +113,5 @@ export const update = async (req, res) => {
         });
     }
 };
+
+

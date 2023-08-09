@@ -8,7 +8,7 @@ import HotelRouter from "./router/hotel";
 import RoomRouter from "./router/room";
 import RoomTypeRouter from "./router/roomType";
 import AmenitiesRouter from "./router/amenities";
-import BookingRouter from "./router/booking";
+import BookingRouter from './router/Booking'
 
 
 dotenv.config();

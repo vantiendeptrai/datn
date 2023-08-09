@@ -4,8 +4,6 @@ import { create, remove, update } from '../controller/Booking';
 
 
 
-
-
 const router = express.Router();
 
 router.post('/', create);
