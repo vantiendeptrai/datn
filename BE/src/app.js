@@ -4,15 +4,16 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 import {
-    AmenitiesRouter,
-    AuthRouter,
-    BillRouter,
-    BookingRouter,
-    HotelRouter,
-    ReviewRouter,
-    RoomRouter,
-    RoomTypeRouter,
-    ServicesRouter,
+  AmenitiesRouter,
+  AuthRouter,
+  BillRouter,
+  BookingRouter,
+  HotelRouter,
+  ReviewRouter,
+  RoomRouter,
+  RoomTypeRouter,
+  ServicesRouter,
+  PaymentRouter,
 } from "./router";
 
 dotenv.config();
@@ -31,6 +32,7 @@ app.use("/review", ReviewRouter);
 app.use("/room", RoomRouter);
 app.use("/room-type", RoomTypeRouter);
 app.use("/services", ServicesRouter);
+app.use("/payment", PaymentRouter);
 
 mongoose.connect(process.env.DB_URL);
 
