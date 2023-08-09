@@ -63,7 +63,6 @@ export const create = async (req, res) => {
     }
 };
 
-
 export const remove = async (req, res) => {
     try {
         const bookingId = req.params.id;
