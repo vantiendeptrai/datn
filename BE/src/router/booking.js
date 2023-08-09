@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.post("/", create);
 router.patch("/:id", update);
+
 router.delete("/:id", isAdminMiddleware, remove);
 
 export default router;
