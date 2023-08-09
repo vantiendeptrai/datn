@@ -2,7 +2,7 @@ import joi from "joi";
 
 import { errorValidateMessages } from "../component";
 
-const BookingValidate = joi.object({
+const bookingValidate = joi.object({
   id_user: joi
     .string()
     .required()
@@ -38,4 +38,4 @@ const BookingValidate = joi.object({
     .messages(errorValidateMessages("NHập số căn cước công dân của bạn")),
 });
 
-export default BookingValidate;
+export default bookingValidate;

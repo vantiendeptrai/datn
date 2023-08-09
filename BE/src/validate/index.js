@@ -1,7 +1,7 @@
 import AmenitiesValidate from "./amenities";
 import BillValidate from "./bill";
+import BookingValidate from "./booking";
 import HotelValidate from "./hotel";
-import BookingValidate from './booking'
 import LoginValidate from "./login";
 import PaymentValidate from "./payment";
 import RegisterValidate from "./register";
@@ -12,8 +12,8 @@ import ServiceValidate from "./service";
 
 export {
   AmenitiesValidate,
-  BookingValidate,
   BillValidate,
+  BookingValidate,
   HotelValidate,
   LoginValidate,
   PaymentValidate,
