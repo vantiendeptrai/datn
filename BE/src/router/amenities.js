@@ -1,7 +1,13 @@
 import express from "express";
 
+import {
+  create,
+  getAll,
+  getOne,
+  remove,
+  update,
+} from "../controller/amenities";
 import { isAdminMiddleware } from "../middleware/index";
-import { create, getAll, getOne, remove, update } from "../controller/amenities";
 
 const router = express.Router();
 
