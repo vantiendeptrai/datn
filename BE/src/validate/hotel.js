@@ -52,6 +52,10 @@ const hotelValidate = joi.object({
     .min(1)
     .required()
     .messages(errorValidateMessages("Tiện nghi khách sạn")),
+  city: joi
+    .string()
+    .required()
+    .messages(errorValidateMessages("Tên thành phố khách sạn")),
 });
 
 export default hotelValidate;

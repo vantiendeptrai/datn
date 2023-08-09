@@ -54,6 +54,10 @@ const hotelSchema = new mongoose.Schema(
         required: true,
       },
     ],
+    city: {
+      type: String,
+      required: true,
+    },
     id_review: [
       {
         type: mongoose.Schema.Types.ObjectId,
