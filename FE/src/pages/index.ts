@@ -1,49 +1,47 @@
-// Base
-import BaseAdmin from "./admin/BaseAdmin";
-import BaseClient from "./client/BaseClient";
-import BaseProfile from "./client/Profile/BaseProfile";
-
-// Route
-import RouteAdmin from "./admin/RouteAdmin";
-import RouteClient from "./client/RouteClient";
-
-// Admin
-import DashboardPage from "./admin/Dashboard/DashboardPage";
-import HotelManagerPage from "./admin/HotelManager/HotelManagerPage";
-import ReservationManagerPage from "./admin/ReservationManager/ReservationManagerPage";
-import UserManagerPage from "./admin/UserManager/UserManagerPage";
-
 // Client
+import RouteClient from "./client/RouteClient";
+import BaseClient from "./client/BaseClient";
 import HomePage from "./client/Home/HomePage";
 import HotelDetailPage from "./client/HotelDetail/HotelDetailPage";
 import HotelListPage from "./client/HotelList/HotelListPage";
-import FavoritePage from "./client/Profile/Favorite/FavoritePage";
-import InformationPage from "./client/Profile/Information/InformationPage";
-import PaymentPage from "./client/Profile/Payment/PaymentPage";
-import ReservationPage from "./client/Profile/Reservation/ReservationPage";
+import PaymentPage from "./client/Payment/PaymentPage";
+
+// Auth
+import RouteAuth from "./auth/RouteAuth";
+import BaseAuth from "./auth/BaseAuth";
+import ProfilePage from "./auth/Profile/ProfilePage";
+
+// Admin
+import RouteAdmin from "./admin/RouteAdmin";
+import BaseAdmin from "./admin/BaseAdmin";
+import AmenitiesManager from "./admin/Amenities/AmenitiesManager";
+import BookingManager from "./admin/Booking/BookingManager";
+import DashboardManage from "./admin/Dashboard/DashboardManage";
+import HotelManager from "./admin/Hotel/HotelManager";
+import RoomTypeManage from "./admin/RoomType/RoomTypeManage";
+import UserManager from "./admin/User/UserManager";
 
 export {
-  // Base
-  BaseAdmin,
-  BaseClient,
-  BaseProfile,
-
-  // Route
-  RouteAdmin,
+  // Client
   RouteClient,
+  BaseClient,
+  HomePage,
+  HotelDetailPage,
+  HotelListPage,
+  PaymentPage,
+
+  // Auth
+  RouteAuth,
+  BaseAuth,
+  ProfilePage,
 
   // Admin
-  DashboardPage,
-  HotelManagerPage,
-  ReservationManagerPage,
-  UserManagerPage,
-
-  // Client
-  HomePage,
-  HotelListPage,
-  HotelDetailPage,
-  FavoritePage,
-  InformationPage,
-  PaymentPage,
-  ReservationPage,
+  RouteAdmin,
+  BaseAdmin,
+  AmenitiesManager,
+  BookingManager,
+  DashboardManage,
+  HotelManager,
+  RoomTypeManage,
+  UserManager,
 };
