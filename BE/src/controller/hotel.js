@@ -1,4 +1,5 @@
 import { HotelModel } from "../models";
+import { uploadImageToCloudinary } from "../utils/upImages";
 import { HotelValidate } from "../validate";
 
 export const getAll = async (req, res) => {
@@ -48,20 +49,39 @@ export const getOne = async (req, res) => {
 };
 
 export const create = async (req, res) => {
-  try {
-    const { error } = HotelValidate.validate(req.body, {
-      abortEarly: false,
-    });
+  // console.log(req.files);
 
-    if (error) {
-      const errors = error.details.map((err) => err.message);
-      return res.status(400).json({
-        errors: errors,
-      });
+  try {
+    // const { error } = HotelValidate.validate(req.fields, req.files, {
+    //   abortEarly: false,
+    // });
+
+    // if (error) {
+    //   const errors = error.details.map((err) => err.message);
+    //   return res.status(400).json({
+    //     errors: errors,
+    //   });
+    // }
+    // console.log(req.files?.images);
+    const imagePath = req.files.images.path;
+    // console.log(imagePath);
+    const imageUrl = await uploadImageToCloudinary(imagePath);
+    const imagePromises = {
+      status: 'done',
+      name: req.files?.images.name,
+      uid: req.files?.images.name,
+      url: imageUrl,
     }
 
-    const data = await HotelModel.create(req.body);
+    // console.log(imagePromises);
+    const images = await Promise.all([imagePromises]);
 
+
+    // console.log(images);
+    const data = await HotelModel.create({
+      ...req.fields,
+      images: images, // Liên kết thông tin ảnh với dữ liệu khách sạn
+    });
     if (!data) {
       return res.status(404).json({
         message: "Thêm khách sạn thất bại",

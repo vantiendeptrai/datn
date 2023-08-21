@@ -3,6 +3,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 
+import expressFormidable from 'express-formidable';
+
 import {
   AmenitiesRouter,
   AuthRouter,
@@ -21,7 +23,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-
+app.use(expressFormidable());
 app.use("/amenities", AmenitiesRouter);
 app.use("/auth", AuthRouter);
 app.use("/bill", BillRouter);
