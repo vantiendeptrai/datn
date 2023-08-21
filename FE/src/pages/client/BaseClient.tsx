@@ -1,17 +1,8 @@
 import { Outlet } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
 
-import { Footer, LoginModal, NavBar, RegisterModal } from "../../components";
-import { useTheme } from "../../hooks";
+import { Footer, NavBar } from "../../components";
 
-type BaseClientProps = {
-  imageUser: string | undefined;
-  isLogin: boolean;
-};
-
-const BaseClient = ({ imageUser, isLogin }: BaseClientProps) => {
-  const { theme, handleChangeTheme } = useTheme();
-
+const BaseClient = () => {
   return (
     <>
       <div
@@ -19,16 +10,7 @@ const BaseClient = ({ imageUser, isLogin }: BaseClientProps) => {
         bg-backgroundLight
         dark:bg-backgroundDark"
       >
-        <NavBar
-          imageUser={imageUser}
-          isLogin={isLogin}
-          theme={theme}
-          handleChangeTheme={handleChangeTheme}
-        />
-
-        <Toaster />
-        <LoginModal />
-        <RegisterModal />
+        <NavBar />
 
         <Outlet />
 

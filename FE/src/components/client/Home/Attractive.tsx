@@ -42,49 +42,49 @@ const Attractive = () => {
             grid-flow-row
             auto-rows-auto
             grid-cols-3
-            gap-2
-            lg:gap-5"
+            lg:gap-5
+            gap-2"
           >
             <AttractiveCard
-              imageUrl="/images/attractive/ha-noi.jpg"
+              imageUrl="/images/client/home/ha-noi.jpg"
               label="Hà Nội"
             />
 
             <AttractiveCard
-              imageUrl="/images/attractive/ho-chi-minh.jpg"
+              imageUrl="/images/client/home/ho-chi-minh.jpg"
               label="Hồ Chí Minh"
             />
 
             <AttractiveCard
-              imageUrl="/images/attractive/da-lat.jpeg"
+              imageUrl="/images/client/home/da-lat.jpeg"
               label="Đà Lạt"
               row
             />
 
             <AttractiveCard
-              imageUrl="/images/attractive/sapa.jpg"
+              imageUrl="/images/client/home/sapa.jpg"
               label="Sapa"
               col
             />
 
             <AttractiveCard
-              imageUrl="/images/attractive/nha-trang.jpg"
+              imageUrl="/images/client/home/nha-trang.jpg"
               label="Nha Trang"
               row
             />
 
             <AttractiveCard
-              imageUrl="/images/attractive/hai-phong.jpg"
+              imageUrl="/images/client/home/hai-phong.jpg"
               label="Hải Phòng"
             />
 
             <AttractiveCard
-              imageUrl="/images/attractive/da-nang.jpg"
+              imageUrl="/images/client/home/da-nang.jpg"
               label="Đà Nẵng"
             />
 
             <AttractiveCard
-              imageUrl="/images/attractive/vung-tau.jpg"
+              imageUrl="/images/client/home/vung-tau.jpg"
               label="Vũng Tàu"
               col
             />

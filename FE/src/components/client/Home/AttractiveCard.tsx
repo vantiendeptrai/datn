@@ -18,8 +18,6 @@ const AttractiveCard = ({
       <a
         title="Hà Nội"
         className={`
-        z-1
-        before:z-1
         group
         relative
         w-full
@@ -62,7 +60,7 @@ const AttractiveCard = ({
             alt={label}
             src={imageUrl}
             decoding="async"
-            data-nimg="fill"
+            data-img="fill"
             className="
             duration-700
             ease-in-out
@@ -89,7 +87,6 @@ const AttractiveCard = ({
           absolute
           bottom-0
           left-0
-          z-10
           w-full
           p-2
           text-white

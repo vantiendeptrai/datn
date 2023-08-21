@@ -1,22 +1,19 @@
-import { ReviewModel } from "../models";
-import { HotelModel } from "../models";
-import { ReviewValidate } from "../validate";
-
-
+import { PaymentModel } from "../models";
+import { PaymentValidate } from "../validate";
 
 export const getAll = async (req, res) => {
   try {
-    const reviewList = await ReviewModel.find();
+    const paymentList = await PaymentModel.find();
 
-    if (!reviewList || reviewList.length === 0) {
+    if (!paymentList || paymentList.length === 0) {
       return res.status(404).json({
-        message: "Không có danh sách bình luận",
+        message: "Không có danh sách thanh toán",
       });
     }
 
     return res.status(200).json({
-      message: "Danh sách bình luận",
-      data: reviewList,
+      message: "Danh sách thanh toán",
+      data: paymentList,
     });
   } catch (error) {
     console.error(error);
@@ -29,17 +26,17 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
-    const review = await ReviewModel.findById(req.params.id);
+    const payment = await PaymentModel.findById(req.params.id);
 
-    if (!review || review.length === 0) {
+    if (!payment || payment.length === 0) {
       return res.status(404).json({
-        message: "Không có thông tin bình luận",
+        message: "Không có thông tin thanh toán",
       });
     }
 
     return res.status(200).json({
-      message: "Thông tin bình luận",
-      data: review,
+      message: "Thông tin thanh toán",
+      data: payment,
     });
   } catch (error) {
     console.error(error);
@@ -52,7 +49,7 @@ export const getOne = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
-    const { error } = ReviewValidate.validate(req.body, {
+    const { error } = PaymentValidate.validate(req.body, {
       abortEarly: false,
     });
 
@@ -63,27 +60,18 @@ export const create = async (req, res) => {
       });
     }
 
-    const data = await ReviewModel.create(req.body);
+    const data = await PaymentModel.create(req.body);
 
     if (!data) {
       return res.status(404).json({
-        message: "Thêm bình luận thất bại",
+        message: "Thanh toán thất bại",
       });
     }
-     await HotelModel.findByIdAndUpdate(
-      req.body.id_user,
-      { $push: { id_amenities
-: data._id } },
-      { new: true }
-    );
-    
+
     return res.status(200).json({
-      message: "Thêm bình luận thành công",
+      message: "Thanh toán thành công",
       data,
     });
-
-    
-
   } catch (error) {
     console.log(error);
 
@@ -95,7 +83,7 @@ export const create = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
-    const { error } = ReviewValidate.validate(req.body, {
+    const { error } = PaymentValidate.validate(req.body, {
       abortEarly: false,
     });
 
@@ -106,18 +94,18 @@ export const update = async (req, res) => {
       });
     }
 
-    const data = await ReviewModel.findByIdAndUpdate(req.params.id, req.body, {
+    const data = await PaymentModel.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
 
     if (!data) {
       return res.status(404).json({
-        message: "Cập nhật bình luận thất bại",
+        message: "Cập nhật thanh toán thất bại",
       });
     }
 
     return res.status(200).json({
-      message: "Cập nhật bình luận thành công",
+      message: "Cập nhật thanh toán thành công",
       data,
     });
   } catch (error) {
@@ -131,22 +119,22 @@ export const update = async (req, res) => {
 
 export const remove = async (req, res) => {
   try {
-    const data = await ReviewModel.findByIdAndDelete(req.params.id);
+    const data = await PaymentModel.findByIdAndDelete(req.params.id);
 
     if (!data) {
       return res.status(404).json({
-        message: "Xóa bình luận thất bại",
+        message: "Xóa thanh toán thất bại",
       });
     }
 
     return res.status(200).json({
-      message: "Xóa bình luận thành công",
+      message: "Xóa thanh toán thành công",
     });
   } catch (error) {
     console.log(error);
 
     return res.status(500).json({
-      message: "Đã có lỗi xảy ra khi xóa tiện nghi",
+      message: "Đã có lỗi xảy ra khi xóa thanh toán",
     });
   }
 };

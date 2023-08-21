@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-const BaseAdmin = () => {
+const BaseAuth = () => {
   return (
     <>
       <Outlet />
@@ -8,4 +8,4 @@ const BaseAdmin = () => {
   );
 };
 
-export default BaseAdmin;
+export default BaseAuth;

@@ -11,6 +11,7 @@ import {
   BillRouter,
   BookingRouter,
   HotelRouter,
+  PaymentRouter,
   ReviewRouter,
   RoomRouter,
   RoomTypeRouter,
@@ -29,6 +30,7 @@ app.use("/auth", AuthRouter);
 app.use("/bill", BillRouter);
 app.use("/booking", BookingRouter);
 app.use("/hotel", HotelRouter);
+app.use("/payment", PaymentRouter);
 app.use("/review", ReviewRouter);
 app.use("/room", RoomRouter);
 app.use("/room-type", RoomTypeRouter);

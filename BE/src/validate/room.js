@@ -1,4 +1,5 @@
 import joi from "joi";
+
 import { errorValidateMessages } from "../component";
 
 const roomValidate = joi.object({

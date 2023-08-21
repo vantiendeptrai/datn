@@ -1,15 +1,5 @@
 const HotelDetailPage = () => {
-  return (
-    <>
-      <div
-        className="
-        text-textLight
-        dark:text-textDark"
-      >
-        Thông tin khách sạn
-      </div>
-    </>
-  );
+  return <div>HotelDetailPage</div>;
 };
 
 export default HotelDetailPage;
