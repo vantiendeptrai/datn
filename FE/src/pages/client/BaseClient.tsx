@@ -11,9 +11,7 @@ const BaseClient = () => {
         dark:bg-backgroundDark"
       >
         <NavBar />
-
         <Outlet />
-
         <Footer />
       </div>
     </>
