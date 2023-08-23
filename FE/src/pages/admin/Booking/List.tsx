@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { Table, Button, Modal } from 'antd';
+import React, { useState } from "react";
+import { Table, Button, Modal } from "antd";
 
 const ListProduct = () => {
   const [data, setData] = useState([]); // Dữ liệu danh sách đặt phòng
   const [visible, setVisible] = useState(false); // Hiển thị modal xác nhận
 
-  // Xử lý mở modal xác nhận
   const handleConfirm = (record: any) => {
     // Hiển thị modal xác nhận ở đây và xử lý khi người dùng xác nhận hoặc hủy
     // Sử dụng record để truy cập thông tin của đặt phòng cụ thể
@@ -19,28 +18,28 @@ const ListProduct = () => {
 
   const columns = [
     {
-      title: 'Tên Khách Hàng',
-      dataIndex: 'customerName',
-      key: 'customerName',
+      title: "Tên Khách Hàng",
+      dataIndex: "customerName",
+      key: "customerName",
     },
     {
-      title: 'Phòng Đặt',
-      dataIndex: 'room',
-      key: 'room',
+      title: "Phòng Đặt",
+      dataIndex: "room",
+      key: "room",
     },
     {
-      title: 'Thời Gian Đặt',
-      dataIndex: 'bookingTime',
-      key: 'bookingTime',
+      title: "Thời Gian Đặt",
+      dataIndex: "bookingTime",
+      key: "bookingTime",
     },
     {
-      title: 'Hành Động',
-      key: 'action',
-    //   render: (text, record) => (
-    //     <Button type="primary" onClick={() => handleConfirm(record)}>
-    //       Xác Nhận
-    //     </Button>
-    //   ),
+      title: "Hành Động",
+      key: "action",
+      //   render: (text, record) => (
+      //     <Button type="primary" onClick={() => handleConfirm(record)}>
+      //       Xác Nhận
+      //     </Button>
+      //   ),
     },
   ];
 
