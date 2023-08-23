@@ -14,7 +14,7 @@ const BookingManager = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-
+  
   return (
     <Layout className="h-screen">
       <Sider trigger={null} collapsible collapsed={collapsed}>
