@@ -7,25 +7,25 @@ const hotelValidate = joi.object({
     .string()
     .required()
     .messages(errorValidateMessages("Tên khách sạn")),
-  // images: joi
-  //   .array()
-  //   .min(1)
-  //   .required()
-  //   .items(
-  //     joi.object({
-  //       status: joi
-  //         .string()
-  //         .required()
-  //         .messages(errorValidateMessages("Trạng thái")),
-  //       name: joi.string().required().messages(errorValidateMessages("Tên")),
-  //       uid: joi.string().required().messages(errorValidateMessages("Uid")),
-  //       url: joi
-  //         .string()
-  //         .required()
-  //         .messages(errorValidateMessages("Đường dẫn")),
-  //     })
-  //   )
-  //   .messages(errorValidateMessages("Ảnh khách sạn")),
+  images: joi
+    .array()
+    .min(1)
+    // .required()
+    .items(
+      joi.object({
+        status: joi
+          .string()
+          .required()
+          .messages(errorValidateMessages("Trạng thái")),
+        name: joi.string().required().messages(errorValidateMessages("Tên")),
+        uid: joi.string().required().messages(errorValidateMessages("Uid")),
+        url: joi
+          .string()
+          .required()
+          .messages(errorValidateMessages("Đường dẫn")),
+      })
+    )
+    .messages(errorValidateMessages("Ảnh khách sạn")),
   address: joi
     .string()
     .required()

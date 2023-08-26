@@ -5,16 +5,19 @@ cloudinary.config({
     api_key: '955456974318886',
     api_secret: 'kwR9qPDtibAUGmswrJD05yNpJZs'
 });
-const uploadImageToCloudinary = async (imagePath) => {
+export const uploadImageToCloudinary = async (image) => {
     try {
-        // console.log(imagePath);
-        const result = await cloudinary.uploader.upload(imagePath);
-        // console.log(result);
-        return result.secure_url;
+        // Kiểm tra xem `image` có phải là một đối tượng không
+        if (typeof image === 'object' && image.path) {
+            const result = await cloudinary.uploader.upload(image.path);
+            return result.secure_url; // Trả về URL của ảnh đã tải lên Cloudinary
+        } else {
+            throw new Error("Invalid image object or path.");
+        }
     } catch (error) {
-        console.error('Error uploading image:', error);
-        throw new Error('Error uploading image to Cloudinary');
+        console.error("Error uploading image to Cloudinary", error);
+        throw error;
     }
 };
 
-export { uploadImageToCloudinary };
+
