@@ -8,10 +8,10 @@ const roomValidate = joi.object({
     .required()
     .messages(errorValidateMessages("Số phòng")),
   roomFloor: joi.number().required().messages(errorValidateMessages("Tầng")),
-  image: joi
+  images: joi
     .array()
     .min(1)
-    .required()
+    // .required()
     .items(
       joi.object({
         status: joi

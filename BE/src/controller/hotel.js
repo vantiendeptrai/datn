@@ -69,7 +69,6 @@ export const create = async (req, res) => {
       });
     }
   }
-
   // Hiển thị mảng các tệp ảnh
   req.files.images = imagesArray;
   // tao mang id_amenities
@@ -108,7 +107,6 @@ export const create = async (req, res) => {
         message: "Thêm khách sạn thất bại",
       });
     }
-
     return res.status(200).json({
       message: "Thêm khách sạn thành công",
       data,
@@ -145,11 +143,21 @@ export const update = async (req, res) => {
 
   // Hiển thị mảng các tệp ảnh
   req.files.images = imagesArray;
+
   // tao mang id_amenities
   const id_amenities = req.fields.id_amenities.split(',');
   const amenities = id_amenities.map((item, index) => (new ObjectId(item)))
   req.fields.id_amenities = amenities
   try {
+    const { error } = HotelValidate.validate(req.fields, req.files, {
+      abortEarly: false,
+    });
+    if (error) {
+      const errors = error.details.map((err) => err.message);
+      return res.status(400).json({
+        errors: errors,
+      });
+    }
     // Lấy dữ liệu khách sạn hiện tại từ database
     const existingData = await HotelModel.findById(req.params.id);
     // Lấy mảng ảnh hiện tại từ dữ liệu khách sạn hiện tại
