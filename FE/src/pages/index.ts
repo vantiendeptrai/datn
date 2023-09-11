@@ -20,6 +20,7 @@ import DashboardManage from "./admin/Dashboard/DashboardManage";
 import HotelManager from "./admin/Hotel/HotelManager";
 import RoomTypeManage from "./admin/RoomType/RoomTypeManage";
 import UserManager from "./admin/User/UserManager";
+import ProfileBookingManage from "./admin/ProfileBooking/ProfileBookingManage";
 
 export {
   // Client
@@ -44,4 +45,5 @@ export {
   HotelManager,
   RoomTypeManage,
   UserManager,
+  ProfileBookingManage,
 };
