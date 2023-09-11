@@ -8,6 +8,8 @@ import {
   HotelManager,
   RoomTypeManage,
   UserManager,
+  ProfileBookingManage,
+
 } from "..";
 
 const RouteAdmin = () => {
@@ -21,6 +23,7 @@ const RouteAdmin = () => {
           <Route path="/hotel-manager" element={<HotelManager />} />
           <Route path="/user-manager" element={<UserManager />} />
           <Route path="/roomType-manager" element={<RoomTypeManage />} />
+          <Route path="/profilebooking-manager" element={<ProfileBookingManage />} />
         </Route>
       </Routes>
     </>
