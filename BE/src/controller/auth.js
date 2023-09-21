@@ -193,7 +193,7 @@ export const getUserByToken = (req, res) => {
 
     return res.status(200).json({
       message: "Thông tin người dùng",
-      data: user,
+      user,
     });
   } catch (error) {
     console.log(error);

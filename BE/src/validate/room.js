@@ -3,12 +3,12 @@ import joi from "joi";
 import { errorValidateMessages } from "../component";
 
 const roomValidate = joi.object({
-  roomNumber: joi
+  room_number: joi
     .number()
     .required()
     .messages(errorValidateMessages("Số phòng")),
-  roomFloor: joi.number().required().messages(errorValidateMessages("Tầng")),
-  image: joi
+  room_floor: joi.number().required().messages(errorValidateMessages("Tầng")),
+  images: joi
     .array()
     .min(1)
     .required()

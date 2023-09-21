@@ -3,9 +3,9 @@ import joi from "joi";
 import { errorValidateMessages } from "../component";
 
 const paymentValidate = joi.object({
-  userID: joi.string().optional(),
-  serviceId: joi.string().messages(),
-  totalPrice: joi
+  id_user: joi.string().optional(),
+  id_service: joi.string().messages(),
+  total_price: joi
     .number()
     .required()
     .messages(errorValidateMessages("Tổng giá")),

@@ -7,35 +7,32 @@ const bookingValidate = joi.object({
     .string()
     .required()
     .messages(errorValidateMessages("ID khách hàng")),
-  Check_in_Date: joi
+  check_in: joi
     .date()
     .required()
     .messages(errorValidateMessages("Ngày nhận phòng")),
-  Check_our_Date: joi
+  check_out: joi
     .date()
     .required()
-    .messages(errorValidateMessages("Kiểm tra ngày")),
-  total_Price: joi
+    .messages(errorValidateMessages("Ngày trả phòng")),
+  total_price: joi
     .number()
     .required()
     .messages(errorValidateMessages("Tổng giá")),
   status: joi
     .string()
-    .valid("đang chờ xử lý", "đã xác nhận", "đã hủy bỏ")
-    .default("đang chờ xử lý")
+    .valid("Đang chờ xử lý", "Đã xác nhận", "Đã hủy bỏ")
+    .default("Đang chờ xử lý")
     .messages(errorValidateMessages("Trạng thái")),
   id_bill: joi
     .string()
     .required()
-    .messages(errorValidateMessages("NHận dạng phương thức thanh toán")),
-  id_room: joi
-    .string()
-    .required()
-    .messages(errorValidateMessages("Nhận dạng phòng")),
+    .messages(errorValidateMessages("Nhận dạng phương thức thanh toán")),
+  id_room: joi.string().required().messages(errorValidateMessages("ID phòng")),
   passport: joi
     .number()
     .required()
-    .messages(errorValidateMessages("NHập số căn cước công dân của bạn")),
+    .messages(errorValidateMessages("Nhập số căn cước công dân của bạn")),
 });
 
 export default bookingValidate;

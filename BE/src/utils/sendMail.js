@@ -19,7 +19,7 @@ const sendMailRegister = async (name, email) => {
     from: process.env.MAIL,
     to: email,
     subject: "Đăng ký tài khoản thành công",
-    text: "Chào bạn, " + name,
+    text: `Chào bạn, ${name}`,
     html: emailRegister(name),
   });
 };
