@@ -26,7 +26,7 @@ const ProfileBookingManage = () => {
 
   const columns: ColumnsType<any> = [
     {
-      title: "Tên Khách Hàng",
+      title: "Khách Hàng",
       dataIndex: "customerName",
       key: "customerName",
       render: () => (
@@ -38,7 +38,7 @@ const ProfileBookingManage = () => {
       ),
     },
     {
-      title: "Phòng Đặt",
+      title: "Phòng",
       dataIndex: "room",
       key: "room",
       render: () => (
@@ -49,7 +49,7 @@ const ProfileBookingManage = () => {
       ),
     },
     {
-      title: "Chi tiết phòng đặt",
+      title: "Chi Tiết Phòng Đặt",
       dataIndex: "bookingTime",
       key: "bookingTime",
       render: () => (
@@ -62,7 +62,7 @@ const ProfileBookingManage = () => {
       ),
     },
     {
-      title: "Trạng thái",
+      title: "Trạng Thái",
       dataIndex: "bookingTime",
       key: "bookingTime",
       render: (_, { tags }) => (
