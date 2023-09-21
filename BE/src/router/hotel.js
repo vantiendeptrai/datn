@@ -2,13 +2,14 @@ import express from "express";
 
 import { getAll, getOne, create, update } from "../controller/hotel";
 import { isAdminMiddleware } from "../middleware";
-import upload from "../middleware/uploadImage";
+import expressFormidable from 'express-formidable';
 
 const router = express.Router();
 
+
 router.get("/", getAll);
 router.get("/:id", getOne);
-router.post("/", create);
-router.patch("/:id", update);
+router.post("/", expressFormidable(), create);
+router.patch("/:id", expressFormidable(), update);
 
 export default router;
