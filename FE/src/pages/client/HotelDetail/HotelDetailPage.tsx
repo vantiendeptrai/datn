@@ -8,7 +8,7 @@ import {
 const HotelDetailPage = () => {
   return (
     <>
-      <div className="bg-cover bg-center bg-fixed bg-[url(https://booking.muongthanh.com/images/hotels/hotels/original/_hkt6859_1679810462_1691467982.jpg)] w-full h-[530px]">
+      <div className="bg-cover bg-center bg-fixed bg-[url(https://booking.muongthanh.com/images/hotels/hotels/original/_hkt6859_1679810462_1691467982.jpg)] w-full h-[500px]">
         <InfoHotel />
       </div>
 

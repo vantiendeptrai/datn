@@ -6,8 +6,8 @@ import { Button } from "../..";
 const InfoHotel = () => {
   return (
     <>
-      <div className="h-auto md:h-36 w-[75%] relative top-[450px] left-1/2 transform -translate-x-1/2 rounded-lg shadow-md p-0 md:p-5 bg-light dark:bg-dark">
-        <div className="flex flex-col md:flex-row p-5 lg:p-0 md:p-0">
+      <div className="h-auto md:h-36 relative top-[50%] md:top-[80%] left-1/2 transform translate-x-[-50%] rounded-lg shadow-lg p-5 bg-light dark:bg-dark w-[75%]">
+        <div className="flex flex-col md:flex-row">
           <div className="w-full flex flex-col gap-3">
             <h1 className="text-xl lg:text-3xl font-semibold text-textLight dark:text-textDark">
               Mường Thanh Grand Sài Gòn Centre
