@@ -7,14 +7,15 @@ dotenv.config();
 
 const isAdminMiddleware = async (req, res, next) => {
   try {
-    if (!req.headers.authorization) {
+    const accessToken = req.cookies.accessToken;
+
+    if (!accessToken) {
       return res.status(401).json({
         message: "Bạn chưa đăng nhập",
       });
     }
 
-    const token = req.headers.authorization.split(" ")[1];
-    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const decoded = jwt.verify(accessToken, process.env.SECRET_KEY);
     const user = await UserModel.findById(decoded.id);
 
     if (!user || user.role !== "Admin") {

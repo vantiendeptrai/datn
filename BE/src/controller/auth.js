@@ -94,10 +94,11 @@ export const login = async (req, res) => {
       expiresIn: "3d",
     });
 
+    res.cookie("accessToken", accessToken, { httpOnly: true });
+    res.cookie("refreshToken", refreshToken, { httpOnly: true });
+
     return res.status(200).json({
       message: "Đăng nhập tài khoản thành công",
-      accessToken: accessToken,
-      refreshToken: refreshToken,
     });
   } catch (error) {
     console.log(error);
@@ -140,7 +141,7 @@ export const lockAccount = async (req, res) => {
 
 export const refreshToken = (req, res) => {
   try {
-    const refreshToken = req.headers.authorization.split(" ")[1];
+    const refreshToken = req.cookies.refreshToken;
     const decoded = jwt.verify(refreshToken, process.env.SECRET_KEY);
 
     const newAccessToken = jwt.sign(
@@ -151,9 +152,10 @@ export const refreshToken = (req, res) => {
       }
     );
 
+    res.cookie("accessToken", newAccessToken, { httpOnly: true });
+
     return res.status(200).json({
       message: "Làm mới token thành công",
-      newAccessToken: newAccessToken,
     });
   } catch (error) {
     if (error instanceof jwt.TokenExpiredError) {

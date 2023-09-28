@@ -1,19 +1,18 @@
-import Information from "./Information";
-import Menu from "./Menu";
-import Rooms from "./Rooms";
-import Form from "./Form";
+import { Container, Filter, ListHotel } from "../../../components";
 
 const HotelListPage = () => {
   return (
-    <div>
-      <Menu />
+    <>
+      <div className="p-0 md:p-5">
+        <Container>
+          <div className="flex gap-5">
+            <Filter />
 
-      <Information />
-
-      <Rooms />
-
-      <Form />
-    </div>
+            <ListHotel />
+          </div>
+        </Container>
+      </div>
+    </>
   );
 };
 
