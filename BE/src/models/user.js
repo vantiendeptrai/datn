@@ -2,9 +2,10 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    name: {
+    id_google: {
       type: String,
-      required: true,
+      required: false,
+      unique: true,
     },
     email: {
       type: String,
@@ -23,6 +24,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ["User", "Admin"],
       default: "User",
+    },
+    id_information: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Information",
     },
   },
   { timestamps: true, versionKey: false }

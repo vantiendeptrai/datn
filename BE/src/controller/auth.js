@@ -2,9 +2,14 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
-import { UserModel } from "../models";
+import { InformationModel, UserModel } from "../models";
 import { RegisterValidate, LoginValidate } from "../validate";
-import { sendMailRegister } from "../utils/sendMail";
+import {
+  getGoogleOauthToken,
+  getGoogleUser,
+  loginToken,
+  sendMailRegister,
+} from "../utils";
 
 dotenv.config();
 
@@ -32,9 +37,12 @@ export const register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
+    const information = await InformationModel.create({ ...req.body });
+
     const user = await UserModel.create({
       ...req.body,
       password: hashedPassword,
+      id_information: information._id,
     });
 
     sendMailRegister(user.name, user.email);
@@ -43,7 +51,7 @@ export const register = async (req, res) => {
       message: "Đăng ký thành công",
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return res.status(500).json({
       message: "Đã có lỗi xảy ra khi đăng ký",
@@ -86,22 +94,13 @@ export const login = async (req, res) => {
       });
     }
 
-    const accessToken = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
-      expiresIn: "1h",
-    });
-
-    const refreshToken = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
-      expiresIn: "3d",
-    });
-
-    res.cookie("accessToken", accessToken, { httpOnly: true });
-    res.cookie("refreshToken", refreshToken, { httpOnly: true });
+    await loginToken(res, user);
 
     return res.status(200).json({
       message: "Đăng nhập thành công",
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return res.status(500).json({
       message: "Đã có lỗi xảy ra khi đăng nhập",
@@ -131,7 +130,7 @@ export const lockAccount = async (req, res) => {
       message: "Khóa tài khoản thành công",
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return res.status(500).json({
       message: "Đã có lỗi xảy ra khi khóa tài khoản",
@@ -172,14 +171,14 @@ export const refreshToken = (req, res) => {
       });
     }
 
-    console.log(error);
+    console.error(error);
     return res.status(500).json({
       message: "Đã có lỗi xảy ra khi làm mới token",
     });
   }
 };
 
-export const getUserByToken = (req, res) => {
+export const getUserByToken = async (req, res) => {
   try {
     const user = req.user;
 
@@ -189,19 +188,89 @@ export const getUserByToken = (req, res) => {
       });
     }
 
-    user.password = undefined;
-    user.isLockAccount = undefined;
-    user.role = undefined;
+    const information = await InformationModel.findById(user.id_information);
 
     return res.status(200).json({
       message: "Thông tin người dùng",
-      user,
+      information,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return res.status(500).json({
       message: "Đã có lỗi xảy ra khi lấy thông tin người dùng",
+    });
+  }
+};
+
+export const googleOauth = async (req, res) => {
+  const code = req.query.code;
+  const pathUrl = req.query.state || "/";
+
+  if (!code) {
+    return res.redirect(`${process.env.PUBLIC_URL}error`);
+  }
+
+  try {
+    const { id_token, access_token } = await getGoogleOauthToken(code);
+    const { id, name, email, picture } = await getGoogleUser(
+      id_token,
+      access_token
+    );
+
+    const user = await UserModel.findOne({ email });
+
+    if (user) {
+      const user = await UserModel.findOneAndUpdate(
+        { email },
+        { $set: { id_google: id } },
+        { new: true, upsert: true }
+      );
+
+      await InformationModel.findOneAndUpdate(
+        { _id: user.id_information },
+        { $set: { image: picture } },
+        { new: true, upsert: true }
+      );
+
+      await loginToken(res, user);
+    } else {
+      const information = await InformationModel.create({
+        name,
+        image: picture,
+      });
+
+      const user = await UserModel.create({
+        id_google: id,
+        email,
+        password: email,
+        id_information: information._id,
+      });
+
+      await loginToken(user);
+    }
+
+    return res.redirect(`${process.env.PUBLIC_URL}${pathUrl}`);
+  } catch (error) {
+    console.error(error);
+
+    return res.redirect(`${process.env.PUBLIC_URL}error`);
+  }
+};
+
+export const logout = (req, res) => {
+  try {
+    res.cookie("accessToken", "", { maxAge: 1 });
+    res.cookie("refreshToken", "", { maxAge: 1 });
+
+    return res.status(200).json({
+      message: "Đăng xuất thành công",
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra khi đăng xuất",
     });
   }
 };

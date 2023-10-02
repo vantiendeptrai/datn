@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const sendMailRegister = async (name, email) => {
+export const sendMailRegister = async (name, email) => {
   await transporter.sendMail({
     from: process.env.MAIL,
     to: email,
@@ -23,5 +23,3 @@ const sendMailRegister = async (name, email) => {
     html: emailRegister(name),
   });
 };
-
-export { sendMailRegister };

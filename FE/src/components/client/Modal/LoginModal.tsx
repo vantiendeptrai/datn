@@ -1,16 +1,26 @@
+import toast from "react-hot-toast";
 import { useCallback } from "react";
+import { useLocation } from "react-router-dom";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 import { FcGoogle } from "react-icons/fc";
 
 import { Button, Input, Modal } from "../..";
+import { getGoogleUrl } from "../../../utils";
 import { useLoginMutation } from "../../../api/auth";
 import { useLoginModal, useRegisterModal } from "../../../hooks";
 
 const LoginModal = () => {
+  const location = useLocation();
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const [loginUser, resultLogin] = useLoginMutation();
+
+  const url = location.pathname || "/";
+
+  const loginGoogle = () => {
+    window.location.href = getGoogleUrl(url);
+  };
 
   const {
     register,
@@ -34,7 +44,7 @@ const LoginModal = () => {
     loginUser(data)
       .unwrap()
       .then((response) => {
-        console.log(response.message);
+        toast.success(response.message);
         loginModal.onClose();
       })
       .catch((error) => {
@@ -74,7 +84,7 @@ const LoginModal = () => {
         outline
         label="Đăng nhập bằng Google"
         icon={FcGoogle}
-        onClick={() => alert("Google")}
+        onClick={loginGoogle}
       />
 
       <div className="mt-4 text-center font-light text-textDark2nd dark:text-textDark2nd">

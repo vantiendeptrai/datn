@@ -6,6 +6,8 @@ import {
   lockAccount,
   refreshToken,
   getUserByToken,
+  googleOauth,
+  logout,
 } from "../controller/auth";
 import { isAdminMiddleware, loginMiddleware } from "../middleware";
 
@@ -16,5 +18,7 @@ router.post("/login", login);
 router.post("/lock-account/:id", isAdminMiddleware, lockAccount);
 router.get("/refresh-token", refreshToken);
 router.get("/get-user", loginMiddleware, getUserByToken);
+router.get("/google", googleOauth);
+router.post("/logout", logout);
 
 export default router;
