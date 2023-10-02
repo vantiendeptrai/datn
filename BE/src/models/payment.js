@@ -2,15 +2,15 @@ import mongoose from "mongoose";
 
 const paymentSchema = new mongoose.Schema(
   {
-    userID: {
+    id_user: {
       type: String,
       required: true,
     },
-    serviceId: {
+    id_service: {
       type: String,
       required: true,
     },
-    totalPrice: {
+    total_price: {
       type: Number,
       required: true,
     },

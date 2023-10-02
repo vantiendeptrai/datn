@@ -40,7 +40,7 @@ export const register = async (req, res) => {
     sendMailRegister(user.name, user.email);
 
     return res.status(201).json({
-      message: "Đăng ký tài khoản thành công",
+      message: "Đăng ký thành công",
     });
   } catch (error) {
     console.log(error);
@@ -94,10 +94,11 @@ export const login = async (req, res) => {
       expiresIn: "3d",
     });
 
+    res.cookie("accessToken", accessToken, { httpOnly: true });
+    res.cookie("refreshToken", refreshToken, { httpOnly: true });
+
     return res.status(200).json({
-      message: "Đăng nhập tài khoản thành công",
-      accessToken: accessToken,
-      refreshToken: refreshToken,
+      message: "Đăng nhập thành công",
     });
   } catch (error) {
     console.log(error);
@@ -140,7 +141,7 @@ export const lockAccount = async (req, res) => {
 
 export const refreshToken = (req, res) => {
   try {
-    const refreshToken = req.headers.authorization.split(" ")[1];
+    const refreshToken = req.cookies.refreshToken;
     const decoded = jwt.verify(refreshToken, process.env.SECRET_KEY);
 
     const newAccessToken = jwt.sign(
@@ -151,9 +152,10 @@ export const refreshToken = (req, res) => {
       }
     );
 
+    res.cookie("accessToken", newAccessToken, { httpOnly: true });
+
     return res.status(200).json({
       message: "Làm mới token thành công",
-      newAccessToken: newAccessToken,
     });
   } catch (error) {
     if (error instanceof jwt.TokenExpiredError) {
@@ -193,7 +195,7 @@ export const getUserByToken = (req, res) => {
 
     return res.status(200).json({
       message: "Thông tin người dùng",
-      data: user,
+      user,
     });
   } catch (error) {
     console.log(error);

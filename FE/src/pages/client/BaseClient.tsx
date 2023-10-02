@@ -1,16 +1,14 @@
 import { Outlet } from "react-router-dom";
 
-import { Footer, NavBar } from "../../components";
+import { Footer, LoginModal, NavBar, RegisterModal } from "../../components";
 
 const BaseClient = () => {
   return (
     <>
-      <div
-        className="
-        bg-backgroundLight
-        dark:bg-backgroundDark"
-      >
+      <div className="bg-backgroundLight dark:bg-backgroundDark">
         <NavBar />
+        <LoginModal />
+        <RegisterModal />
         <Outlet />
         <Footer />
       </div>

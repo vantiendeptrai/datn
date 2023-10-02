@@ -1,20 +1,20 @@
 import mongoose from "mongoose";
+
 const BookingSchema = new mongoose.Schema(
   {
     id_user: {
       type: String,
       required: true,
     },
-    Check_in_Date: {
+    check_in: {
       type: Date,
       required: true,
     },
-    Check_our_Date: {
+    check_out: {
       type: Date,
       required: true,
     },
-
-    total_Price: {
+    total_price: {
       type: Number,
       required: true,
     },
@@ -25,9 +25,9 @@ const BookingSchema = new mongoose.Schema(
         "Đã xác nhận",
         "Đã hủy bỏ",
         "Vắng mặt",
-        "Thành công",
+        "Hoàn thành",
       ],
-      default: "Thành công",
+      default: "Đang chờ xử lý",
     },
     id_bill: {
       type: String,
@@ -44,4 +44,5 @@ const BookingSchema = new mongoose.Schema(
   },
   { timestamps: true, versionKey: false }
 );
-export default mongoose.model("Book", BookingSchema);
+
+export default mongoose.model("Booking", BookingSchema);

@@ -1,3 +1,4 @@
+import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import express from "express";
 import dotenv from "dotenv";
@@ -24,6 +25,9 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
+app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+
 app.use("/amenities", AmenitiesRouter);
 app.use("/auth", AuthRouter);
 app.use("/bill", BillRouter);

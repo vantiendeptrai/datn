@@ -22,7 +22,7 @@ export const getAll = async (req, res) => {
     console.error(error);
 
     return res.status(500).json({
-      message: "Đã có lỗi xảy ra khi truy vấn cơ sở dữ liệu",
+      message: "Đã có lỗi xảy ra",
     });
   }
 };
@@ -45,30 +45,12 @@ export const getOne = async (req, res) => {
     console.error(error);
 
     return res.status(500).json({
-      message: "Đã có lỗi xảy ra khi truy vấn cơ sở dữ liệu",
+      message: "Đã có lỗi xảy ra",
     });
   }
 };
 
 export const create = async (req, res) => {
-  // Tạo một mảng để lưu trữ thông tin tệp ảnh
-  const imagesArray = [];
-  // Duyệt qua các thuộc tính trong req.files
-  for (const field in req.files) {
-    if (req.files.hasOwnProperty(field)) {
-      const file = req.files[field];
-      // Thêm thông tin của tệp vào mảng
-      imagesArray.push({
-        fieldName: field,
-        size: file.size,
-        path: file.path,
-        name: file.name,
-        type: file.type,
-        lastModifiedDate: file.lastModifiedDate
-        // Thêm các thuộc tính khác tùy theo nhu cầu
-      });
-    }
-  }
   // Hiển thị mảng các tệp ảnh
   req.files.images = imagesArray;
   // tao mang id_amenities
@@ -83,7 +65,7 @@ export const create = async (req, res) => {
     if (error) {
       const errors = error.details.map((err) => err.message);
       return res.status(400).json({
-        errors: errors,
+        errors,
       });
     }
     // Upload tất cả ảnh lên Cloudinary và lấy các đường dẫn URL
@@ -106,9 +88,10 @@ export const create = async (req, res) => {
       });
     }
     return res.status(200).json({
-      message: "Thêm khách sạn thành công",
+      message: "Cập nhật phòng thành công",
       data,
     });
+
   } catch (error) {
     console.log(error);
 

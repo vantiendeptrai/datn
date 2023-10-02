@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 const roomSchema = new mongoose.Schema(
   {
-    roomNumber: {
+    room_number: {
       type: Number,
       required: true,
     },
-    roomFloor: {
+    room_floor: {
       type: Number,
       required: true,
     },

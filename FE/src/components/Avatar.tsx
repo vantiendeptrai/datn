@@ -9,9 +9,7 @@ const Avatar = ({ imageUser }: AvatarProps) => {
         width={50}
         alt="Avatar"
         src={imageUser || "/user.jpg"}
-        className="
-        p-1
-        rounded-full"
+        className="p-1 rounded-full"
       />
     </>
   );
