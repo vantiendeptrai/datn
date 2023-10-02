@@ -40,7 +40,7 @@ export const register = async (req, res) => {
     sendMailRegister(user.name, user.email);
 
     return res.status(201).json({
-      message: "Đăng ký tài khoản thành công",
+      message: "Đăng ký thành công",
     });
   } catch (error) {
     console.log(error);
@@ -98,7 +98,7 @@ export const login = async (req, res) => {
     res.cookie("refreshToken", refreshToken, { httpOnly: true });
 
     return res.status(200).json({
-      message: "Đăng nhập tài khoản thành công",
+      message: "Đăng nhập thành công",
     });
   } catch (error) {
     console.log(error);
