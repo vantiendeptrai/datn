@@ -46,11 +46,15 @@ const RegisterModal = () => {
     registerUser(data)
       .unwrap()
       .then((response) => {
-        toast.success(response);
+        toast.success(response.message);
         onToggle();
       })
       .catch((error) => {
-        console.log(error);
+        if (error?.data.errors) {
+          toast.error(error?.data.errors[0]);
+        } else {
+          toast.error(error?.data.message);
+        }
       });
   };
 
