@@ -1,12 +1,9 @@
 import joi from "joi";
 
-import { errorValidateMessages } from "../component";
+import { validationErrors } from "../utils";
 
 const roomTypeValidate = joi.object({
-  name: joi
-    .string()
-    .required()
-    .messages(errorValidateMessages("Tên loại phòng")),
+  name: joi.string().required().messages(validationErrors("Tên loại phòng")),
 });
 
 export default roomTypeValidate;

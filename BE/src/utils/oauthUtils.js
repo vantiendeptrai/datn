@@ -5,7 +5,7 @@ import qs from "qs";
 dotenv.config();
 
 export const getGoogleOauthToken = async (code) => {
-  const rootURl = "https://oauth2.googleapis.com/token";
+  const ROOT_URL = "https://oauth2.googleapis.com/token";
 
   const options = {
     code,
@@ -16,7 +16,7 @@ export const getGoogleOauthToken = async (code) => {
   };
 
   try {
-    const { data } = await axios.post(rootURl, qs.stringify(options), {
+    const { data } = await axios.post(ROOT_URL, qs.stringify(options), {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
@@ -32,14 +32,14 @@ export const getGoogleOauthToken = async (code) => {
 
 export const getGoogleUser = async (id_token, access_token) => {
   try {
-    const { data } = await axios.get(
-      `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${access_token}`,
-      {
-        headers: {
-          Authorization: `Bearer ${id_token}`,
-        },
-      }
-    );
+    const ROOT_URL =
+      "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=";
+
+    const { data } = await axios.get(`${ROOT_URL}${access_token}`, {
+      headers: {
+        Authorization: `Bearer ${id_token}`,
+      },
+    });
 
     return data;
   } catch (error) {

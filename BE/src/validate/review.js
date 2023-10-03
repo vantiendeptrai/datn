@@ -1,14 +1,11 @@
 import joi from "joi";
 
-import { errorValidateMessages } from "../component";
+import { validationErrors } from "../utils";
 
 const reviewValidate = joi.object({
-  id_user: joi
-    .string()
-    .required()
-    .messages(errorValidateMessages("Id người dùng")),
-  rating: joi.string().required().messages(errorValidateMessages("Đánh giá")),
-  comment: joi.string().required().messages(errorValidateMessages("BÌnh luận")),
+  id_user: joi.string().required().messages(validationErrors("Id người dùng")),
+  rating: joi.string().required().messages(validationErrors("Đánh giá")),
+  comment: joi.string().required().messages(validationErrors("BÌnh luận")),
 });
 
 export default reviewValidate;

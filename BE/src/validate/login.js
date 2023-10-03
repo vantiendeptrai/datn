@@ -1,18 +1,18 @@
 import joi from "joi";
 
-import { errorValidateMessages } from "../component";
+import { validationErrors } from "../utils";
 
 const loginValidate = joi.object({
   email: joi
     .string()
     .email()
     .required()
-    .messages(errorValidateMessages("Tài khoản")),
+    .messages(validationErrors("Tài khoản")),
   password: joi
     .string()
     .required()
     .min(12)
-    .messages(errorValidateMessages("Mật khẩu")),
+    .messages(validationErrors("Mật khẩu")),
 });
 
 export default loginValidate;
