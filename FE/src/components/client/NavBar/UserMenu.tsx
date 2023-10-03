@@ -39,7 +39,7 @@ const UserMenu = () => {
     <>
       <div className="relative z-10">
         <div onClick={onToggle} className="hidden md:block cursor-pointer">
-          <Avatar key={data} imageUser={data?.information.image} />
+          <Avatar key={data} imageUser={data?.data.image} />
         </div>
 
         <div onClick={onToggle} className="block md:hidden cursor-pointer">
