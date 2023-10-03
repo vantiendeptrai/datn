@@ -1,6 +1,7 @@
 // Auth
 import InfoUser from "./auth/Profile/InfoUser";
 import Sidebar from "./auth/Sidebar";
+import UserInfor from "./auth/UserInfor";
 
 // Client
 import Footer from "./client/Footer/Footer";
@@ -36,6 +37,7 @@ export {
   // Auth
   InfoUser,
   Sidebar,
+  UserInfor,
 
   // Client
   Footer,
