@@ -51,8 +51,28 @@ export const getOne = async (req, res) => {
 };
 
 export const create = async (req, res) => {
+  // Tạo một mảng để lưu trữ thông tin tệp ảnh
+  const imagesArray = [];
+  // Duyệt qua các thuộc tính trong req.files
+  for (const field in req.files) {
+    if (req.files.hasOwnProperty(field)) {
+      const file = req.files[field];
+      // Thêm thông tin của tệp vào mảng
+      imagesArray.push({
+        fieldName: field,
+        size: file.size,
+        path: file.path,
+        name: file.name,
+        type: file.type,
+        lastModifiedDate: file.lastModifiedDate
+        // Thêm các thuộc tính khác tùy theo nhu cầu
+      });
+    }
+  }
+
   // Hiển thị mảng các tệp ảnh
   req.files.images = imagesArray;
+
   // tao mang id_amenities
   const id_amenities = req.fields.id_amenities.split(',');
   const amenities = id_amenities.map((item, index) => (new ObjectId(item)))
