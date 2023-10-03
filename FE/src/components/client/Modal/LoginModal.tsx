@@ -48,7 +48,11 @@ const LoginModal = () => {
         loginModal.onClose();
       })
       .catch((error) => {
-        console.log(error);
+        if (error?.data.errors) {
+          toast.error(error?.data.errors[0]);
+        } else {
+          toast.error(error?.data.message);
+        }
       });
   };
 
