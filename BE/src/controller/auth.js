@@ -198,8 +198,9 @@ export const googleOauth = async (req, res) => {
         password: hashedPassword,
         id_information: information._id,
       });
+      console.log(user);
 
-      await loginToken(user);
+      await loginToken(res, user);
     }
 
     return res.redirect(`${process.env.PUBLIC_URL}${pathUrl}`);
