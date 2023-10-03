@@ -190,10 +190,12 @@ export const googleOauth = async (req, res) => {
         image: picture,
       });
 
+      const hashedPassword = await bcrypt.hash(email, 12);
+
       const user = await UserModel.create({
         id_google: id,
         email,
-        password: email,
+        password: hashedPassword,
         id_information: information._id,
       });
 
