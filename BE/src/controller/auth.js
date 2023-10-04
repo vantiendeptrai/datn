@@ -12,6 +12,7 @@ import {
   getGoogleUser,
   sendResponse,
   handleJWTError,
+  sendMailOauthRegister,
 } from "../utils";
 
 dotenv.config();
@@ -141,7 +142,11 @@ export const getUserByToken = async (req, res) => {
 
     const information = await InformationModel.findById(user.id_information);
 
-    return sendResponse(res, 200, "Thông tin người dùng", information);
+    return res.status(200).json({
+      message: "Thông tin người dùng",
+      data: information,
+      role: user.role,
+    });
   } catch (error) {
     console.error(error);
 
@@ -158,7 +163,7 @@ export const googleOauth = async (req, res) => {
   const pathUrl = req.query.state || "/";
 
   if (!code) {
-    return res.redirect(`${process.env.PUBLIC_URL}error`);
+    return res.redirect(`${process.env.PUBLIC_URL}/oauth-error`);
   }
 
   try {
@@ -190,21 +195,25 @@ export const googleOauth = async (req, res) => {
         image: picture,
       });
 
+      const hashedPassword = await bcrypt.hash(email, 12);
+
       const user = await UserModel.create({
         id_google: id,
         email,
-        password: email,
+        password: hashedPassword,
         id_information: information._id,
       });
 
-      await loginToken(user);
+      sendMailOauthRegister(name, email, email);
+
+      await loginToken(res, user);
     }
 
     return res.redirect(`${process.env.PUBLIC_URL}${pathUrl}`);
   } catch (error) {
     console.error(error);
 
-    return res.redirect(`${process.env.PUBLIC_URL}error`);
+    return res.redirect(`${process.env.PUBLIC_URL}/oauth-error`);
   }
 };
 

@@ -9,6 +9,7 @@ import {
   HomePage,
   HotelDetailPage,
   HotelListPage,
+  Page404,
   PaymentPage,
   PrivacyPolicy,
 } from "..";
@@ -31,6 +32,8 @@ const RouteClient = () => {
           <Route path="/general-terms" element={<GeneralTerms />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         </Route>
+
+        <Route path="/*" element={<Page404 />} />
       </Routes>
     </>
   );
