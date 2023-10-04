@@ -1,4 +1,4 @@
-const errorValidateMessages = (fieldName) => {
+export const validationErrors = (fieldName) => {
   return {
     "string.base": `${fieldName} phải là chuỗi`,
     "string.empty": `${fieldName} không được để trống`,
@@ -23,5 +23,3 @@ const errorValidateMessages = (fieldName) => {
     "any.only": `${fieldName} không khớp`,
   };
 };
-
-export default errorValidateMessages;

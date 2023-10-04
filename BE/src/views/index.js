@@ -1,3 +1,3 @@
-import emailRegister from "./emailRegister";
+import { emailRegister } from "./emailRegister";
 
 export { emailRegister };

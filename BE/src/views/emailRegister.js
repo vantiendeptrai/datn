@@ -1,4 +1,4 @@
-const emailRegister = (name) => {
+export const emailRegister = (name) => {
   return /*html*/ `
     <div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 10px;">
       <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); text-align: center; margin-top: 30px; margin-bottom: 30px;">
@@ -21,5 +21,3 @@ const emailRegister = (name) => {
     </div>
   `;
 };
-
-export default emailRegister;

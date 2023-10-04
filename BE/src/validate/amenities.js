@@ -1,12 +1,9 @@
 import joi from "joi";
 
-import { errorValidateMessages } from "../component";
+import { validationErrors } from "../utils";
 
 const amenitiesValidate = joi.object({
-  name: joi
-    .string()
-    .required()
-    .messages(errorValidateMessages("Tên tiện nghi")),
+  name: joi.string().required().messages(validationErrors("Tên tiện nghi")),
   surcharge: joi.boolean().optional(),
 });
 

@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import {
   BaseQueryFn,
   FetchArgs,
@@ -20,7 +21,7 @@ const customFetchBase: BaseQueryFn<
   await mutex.waitForUnlock();
   let result = await baseQuery(args, api, extraOptions);
 
-  if ((result.error?.data as any)?.message === "Bạn chưa đăng nhập") {
+  if ((result.error?.data as any)?.message === "Token đã hết hạn!") {
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
 
@@ -38,7 +39,7 @@ const customFetchBase: BaseQueryFn<
         if (refreshResult.data) {
           result = await baseQuery(args, api, extraOptions);
         } else {
-          console.log("Phiên đăng nhập đã hết hạn");
+          toast.error("Phiên đăng nhập đã hết hạn");
         }
       } finally {
         release();
