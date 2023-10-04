@@ -4,10 +4,9 @@
   "homepage": "https://github.com/tranluong460/datn/tree/main/BE",
   "description": "",
   "type": "module",
-  "main": "./src/app.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build"
+    "dev": "vite"
   },
   "author": "",
   "license": "ISC",
