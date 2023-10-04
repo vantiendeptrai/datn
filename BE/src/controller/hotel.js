@@ -73,31 +73,33 @@ export const create = async (req, res) => {
   req.fields.id_amenities = amenities
 
   try {
+    console.log(req.fields.name);
+    validateMiddleware(req, res, HotelValidate, async () => {
 
-    // Upload tất cả ảnh lên Cloudinary và lấy các đường dẫn URL
-    const imagesUrls = await Promise.all(req.files.images.map(uploadImageToCloudinary));
-    // Tạo mảng chứa thông tin ảnh với các đường dẫn URL
-    const images = imagesUrls.map((imageUrl, index) => ({
-      status: 'done',
-      name: req.files.images[index].name,
-      uid: req.files.images[index].name,
-      url: imageUrl,
-    }));
-    // Tạo dữ liệu mới với thông tin ảnh đã tải lên
-    const data = await HotelModel.create({
-      ...req.fields,
-      images: images, // Liên kết thông tin ảnh với dữ liệu khách sạn
-    });
-    if (!data) {
-      return res.status(404).json({
-        message: "Thêm khách sạn thất bại",
+      // Upload tất cả ảnh lên Cloudinary và lấy các đường dẫn URL
+      const imagesUrls = await Promise.all(req.files.images.map(uploadImageToCloudinary));
+      // Tạo mảng chứa thông tin ảnh với các đường dẫn URL
+      const images = imagesUrls.map((imageUrl, index) => ({
+        status: 'done',
+        name: req.files.images[index].name,
+        uid: req.files.images[index].name,
+        url: imageUrl,
+      }));
+      // Tạo dữ liệu mới với thông tin ảnh đã tải lên
+      const data = await HotelModel.create({
+        ...req.fields,
+        images: images, // Liên kết thông tin ảnh với dữ liệu khách sạn
       });
-    }
-    return res.status(200).json({
-      message: "Thêm khách sạn thành công",
-      data,
+      if (!data) {
+        return res.status(404).json({
+          message: "Thêm khách sạn thất bại",
+        });
+      }
+      return res.status(200).json({
+        message: "Thêm khách sạn thành công",
+        data,
+      })
     })
-
   } catch (error) {
     console.log(error)
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi thêm khách sạn");
