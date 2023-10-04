@@ -1,3 +1,22 @@
+// Admin
+import RouteAdmin from "./admin/RouteAdmin";
+import BaseAdmin from "./admin/BaseAdmin";
+import AmenitiesManager from "./admin/Amenities/AmenitiesManager";
+import BookingManager from "./admin/Booking/BookingManager";
+import DashboardManage from "./admin/Dashboard/DashboardManage";
+import HotelManager from "./admin/Hotel/HotelManager";
+import RoomTypeManage from "./admin/RoomType/RoomTypeManage";
+import UserManager from "./admin/User/UserManager";
+
+// Auth
+import RouteAuth from "./auth/RouteAuth";
+import BaseAuth from "./auth/BaseAuth";
+import BillingInformationPage from "./auth/BillingInformation/BillingInformationPage";
+import NotificationsPage from "./auth/Notifications/NotificationsPage";
+import PrivacyPage from "./auth/Privacy/PrivacyPage";
+import ProfilePage from "./auth/Profile/ProfilePage";
+import SecurityPage from "./auth/Security/SecurityPage";
+
 // Client
 import RouteClient from "./client/RouteClient";
 import BaseClient from "./client/BaseClient";
@@ -11,25 +30,6 @@ import GeneralRules from "./client/Policy/GeneralRules";
 import GeneralTerms from "./client/Policy/GeneralTerms";
 import PrivacyPolicy from "./client/Policy/PrivacyPolicy";
 
-// Auth
-import RouteAuth from "./auth/RouteAuth";
-import BaseAuth from "./auth/BaseAuth";
-import BillingInformationPage from "./auth/BillingInformation/BillingInformationPage";
-import NotificationsPage from "./auth/Notifications/NotificationsPage";
-import PrivacyPage from "./auth/Privacy/PrivacyPage";
-import ProfilePage from "./auth/Profile/ProfilePage";
-import SecurityPage from "./auth/Security/SecurityPage";
-
-// Admin
-import RouteAdmin from "./admin/RouteAdmin";
-import BaseAdmin from "./admin/BaseAdmin";
-import AmenitiesManager from "./admin/Amenities/AmenitiesManager";
-import BookingManager from "./admin/Booking/BookingManager";
-import DashboardManage from "./admin/Dashboard/DashboardManage";
-import HotelManager from "./admin/Hotel/HotelManager";
-import RoomTypeManage from "./admin/RoomType/RoomTypeManage";
-import UserManager from "./admin/User/UserManager";
-
 // Error
 import Loading from "./error/Loading";
 import Page403 from "./error/Page403";
@@ -37,6 +37,25 @@ import Page404 from "./error/Page404";
 import Page500 from "./error/Page500";
 
 export {
+  // Admin
+  RouteAdmin,
+  BaseAdmin,
+  AmenitiesManager,
+  BookingManager,
+  DashboardManage,
+  HotelManager,
+  RoomTypeManage,
+  UserManager,
+
+  // Auth
+  RouteAuth,
+  BaseAuth,
+  BillingInformationPage,
+  NotificationsPage,
+  PrivacyPage,
+  ProfilePage,
+  SecurityPage,
+
   // Client
   RouteClient,
   BaseClient,
@@ -49,25 +68,6 @@ export {
   GeneralRules,
   GeneralTerms,
   PrivacyPolicy,
-
-  // Auth
-  RouteAuth,
-  BaseAuth,
-  BillingInformationPage,
-  NotificationsPage,
-  PrivacyPage,
-  ProfilePage,
-  SecurityPage,
-
-  // Admin
-  RouteAdmin,
-  BaseAdmin,
-  AmenitiesManager,
-  BookingManager,
-  DashboardManage,
-  HotelManager,
-  RoomTypeManage,
-  UserManager,
 
   // Error
   Loading,
