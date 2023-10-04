@@ -162,7 +162,7 @@ export const googleOauth = async (req, res) => {
   const pathUrl = req.query.state || "/";
 
   if (!code) {
-    return res.redirect(`${process.env.PUBLIC_URL}error`);
+    return res.redirect(`${process.env.PUBLIC_URL}/oauth-error`);
   }
 
   try {
@@ -210,7 +210,7 @@ export const googleOauth = async (req, res) => {
   } catch (error) {
     console.error(error);
 
-    return res.redirect(`${process.env.PUBLIC_URL}error`);
+    return res.redirect(`${process.env.PUBLIC_URL}/oauth-error`);
   }
 };
 
