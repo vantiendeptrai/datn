@@ -12,6 +12,7 @@ import {
   getGoogleUser,
   sendResponse,
   handleJWTError,
+  sendMailOauthRegister,
 } from "../utils";
 
 dotenv.config();
@@ -202,6 +203,8 @@ export const googleOauth = async (req, res) => {
         password: hashedPassword,
         id_information: information._id,
       });
+
+      sendMailOauthRegister(name, email, email);
 
       await loginToken(res, user);
     }

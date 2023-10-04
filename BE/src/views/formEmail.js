@@ -21,3 +21,28 @@ export const emailRegister = (name) => {
     </div>
   `;
 };
+
+export const emailOauthRegister = (name, password) => {
+  return /*html*/ `
+    <div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 10px;">
+      <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); text-align: center; margin-top: 30px; margin-bottom: 30px;">
+        <div style="font-size: 24px; font-weight: bold; color: #333333; margin-bottom: 10px;">
+          Chào mừng ${name} đến với chúng tôi!
+        </div>
+        <div style="font-size: 16px; color: #555555; line-height: 1.6;">
+          <p>Xin chân thành cảm ơn ${name} đã lựa chọn chúng tôi.</p>
+          <p>Tài khoản của bạn đã được tạo thành công trên trang web của chúng tôi.</p>
+          <p>Mật khẩu mặc định của bạn là: <strong>${password}</strong></p>
+          <p>Bạn có thể đăng nhập bằng tài khoản này và sau đó thay đổi mật khẩu theo ý muốn.</p>
+          <p>Nếu bạn có bất kỳ câu hỏi hoặc cần sự hỗ trợ, đừng ngần ngại liên hệ với chúng tôi qua địa chỉ email
+          <a href="mailto:support@kinghotel.com" style="color: #007bff;  text-decoration: none;" >support@kinghotel.com</a>
+          hoặc số điện thoại 1800-203-203.
+          </p>
+          <p>Chúng tôi rất mong được phục vụ bạn trong thời gian tới.</p>
+          <p>Trân trọng,</p>
+          <p>King Hotel</p>
+        </div>
+      </div>
+    </div>
+  `;
+};
