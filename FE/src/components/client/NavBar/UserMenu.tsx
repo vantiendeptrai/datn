@@ -54,10 +54,9 @@ const UserMenu = () => {
                   label="Thông tin cá nhân"
                   onClick={() => navigate("/auth")}
                 />
-                <MenuItem
-                  label="Thông tin đặt phòng"
-                  onClick={() => alert("Thông tin cá nhân")}
-                />
+                {data?.role === "Admin" && (
+                  <MenuItem label="Admin" onClick={() => navigate("/admin")} />
+                )}
 
                 <hr className="border border-divideLight dark:border-divideDark" />
 
