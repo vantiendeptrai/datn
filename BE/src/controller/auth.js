@@ -141,7 +141,11 @@ export const getUserByToken = async (req, res) => {
 
     const information = await InformationModel.findById(user.id_information);
 
-    return sendResponse(res, 200, "Thông tin người dùng", information);
+    return res.status(200).json({
+      message: "Thông tin người dùng",
+      data: information,
+      role: user.role,
+    });
   } catch (error) {
     console.error(error);
 

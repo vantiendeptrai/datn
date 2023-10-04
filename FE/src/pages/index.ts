@@ -30,6 +30,12 @@ import HotelManager from "./admin/Hotel/HotelManager";
 import RoomTypeManage from "./admin/RoomType/RoomTypeManage";
 import UserManager from "./admin/User/UserManager";
 
+// Error
+import Loading from "./error/Loading";
+import Page403 from "./error/Page403";
+import Page404 from "./error/Page404";
+import Page500 from "./error/Page500";
+
 export {
   // Client
   RouteClient,
@@ -62,4 +68,10 @@ export {
   HotelManager,
   RoomTypeManage,
   UserManager,
+
+  // Error
+  Loading,
+  Page403,
+  Page404,
+  Page500,
 };

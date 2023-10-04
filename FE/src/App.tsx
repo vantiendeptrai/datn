@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { RouteAdmin, RouteAuth, RouteClient } from "./pages";
+import { PrivateRoute } from "./utils";
+import { Page403, RouteAdmin, RouteAuth, RouteClient } from "./pages";
 
 function App() {
   return (
@@ -8,8 +9,13 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/*" element={<RouteClient />} />
-          <Route path="/auth/*" element={<RouteAuth />} />
-          <Route path="/admin/*" element={<RouteAdmin />} />
+          <Route element={<PrivateRoute allowedRoles={["User", "Admin"]} />}>
+            <Route path="/auth/*" element={<RouteAuth />} />
+          </Route>
+          <Route element={<PrivateRoute allowedRoles={["Admin"]} />}>
+            <Route path="/admin/*" element={<RouteAdmin />} />
+          </Route>
+          <Route path="/unauthorized" element={<Page403 />} />
         </Routes>
       </BrowserRouter>
     </>
