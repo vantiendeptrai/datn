@@ -3,12 +3,13 @@ import { Container } from "../../../components";
 const PrivacyPolicy = () => {
   return (
     <div className="text-justify mb-5">
-      <div className="text-2xl font-medium my-5 text-center">
-        CHÍNH SÁCH QUYỀN RIÊNG TƯ
-      </div>
+      <h1 className="text-2xl font-medium my-5 text-center uppercase">
+        Chính sách quyền riêng tư
+      </h1>
+
+      <hr className="border border-divideLight dark:border-divideDark" />
 
       <Container>
-        <hr className="border border-divideLight dark:border-divideDark" />
         <p className="mt-4">
           Chính sách quyền riêng tư này mô tả chung cách thức mà Seven Teen thu
           thập và sử dụng các thông tin cá nhân của Khách hàng trong quá trình
