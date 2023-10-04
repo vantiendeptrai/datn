@@ -1,9 +1,5 @@
 const SecurityPage = () => {
-  return (
-    <>
-      <div>SecurityPage</div>
-    </>
-  );
+  return <div>SecurityPage</div>;
 };
 
 export default SecurityPage;

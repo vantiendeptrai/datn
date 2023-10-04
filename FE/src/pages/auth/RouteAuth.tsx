@@ -4,6 +4,7 @@ import {
   BaseAuth,
   BillingInformationPage,
   NotificationsPage,
+  Page404,
   PrivacyPage,
   ProfilePage,
   SecurityPage,
@@ -23,6 +24,8 @@ const RouteClient = () => {
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/notifications" element={<NotificationsPage />} />
         </Route>
+
+        <Route path="/*" element={<Page404 />} />
       </Routes>
     </>
   );

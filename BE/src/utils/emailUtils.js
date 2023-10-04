@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 
-import { emailRegister } from "../views";
+import { emailOauthRegister, emailRegister } from "../views";
 
 dotenv.config();
 
@@ -21,5 +21,15 @@ export const sendMailRegister = async (name, email) => {
     subject: "Đăng ký tài khoản thành công",
     text: `Chào bạn, ${name}`,
     html: emailRegister(name),
+  });
+};
+
+export const sendMailOauthRegister = async (name, email, password) => {
+  await transporter.sendMail({
+    from: process.env.MAIL,
+    to: email,
+    subject: "Đăng ký tài khoản thành công",
+    text: `Chào bạn, ${name}`,
+    html: emailOauthRegister(name, password),
   });
 };

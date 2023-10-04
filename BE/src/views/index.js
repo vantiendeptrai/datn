@@ -1,3 +1,3 @@
-import { emailRegister } from "./emailRegister";
+import { emailRegister, emailOauthRegister } from "./formEmail";
 
-export { emailRegister };
+export { emailRegister, emailOauthRegister };
