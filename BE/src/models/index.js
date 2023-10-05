@@ -1,6 +1,6 @@
 import AmenitiesModel from "./amenities";
 import BillModel from "./bill";
-import BookingModel from "./Booking";
+import BookingModel from "./booking";
 import HotelModel from "./hotel";
 import InformationModel from "./information";
 import PaymentModel from "./payment";

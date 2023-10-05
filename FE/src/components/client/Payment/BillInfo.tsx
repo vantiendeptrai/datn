@@ -1,12 +1,16 @@
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import {
+  FieldValues,
+  // SubmitHandler,
+  useForm,
+} from "react-hook-form";
 
 import { Input } from "../..";
 
 const BillInfo = () => {
   const {
     register,
-    handleSubmit,
-    reset,
+    // handleSubmit,
+    // reset,
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
