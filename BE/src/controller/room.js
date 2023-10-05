@@ -39,6 +39,13 @@ export const getOne = async (req, res) => {
 };
 
 export const create = async (req, res) => {
+  // Lọc ra các tệp ảnh có kích thước lớn hơn 0
+  const validImages = Object.values(req.files).filter((file) => file.size > 0);
+
+  // Kiểm tra xem có file ảnh hợp lệ để tiếp tục xử lý
+  if (!validImages.length) {
+    return res.status(400).json({ message: 'Vui lòng tải lên ít nhất một file ảnh.' });
+  }
   // Tạo một mảng để lưu trữ thông tin tệp ảnh
   const imagesArray = [];
   // Duyệt qua các thuộc tính trong req.files
@@ -56,12 +63,17 @@ export const create = async (req, res) => {
         // Thêm các thuộc tính khác tùy theo nhu cầu
       });
     }
+
+    // Hiển thị mảng các tệp ảnh
+    req.files.images = imagesArray;
   }
-  req.files.images = imagesArray;
+
   // tao mang id_amenities
-  const id_amenities = req.fields.id_amenities.split(',');
-  const amenities = id_amenities.map((item, index) => (new ObjectId(item)))
-  req.fields.id_amenities = amenities
+  if (req.fields.id_amenities) {
+    const id_amenities = req.fields.id_amenities.split(',');
+    const amenities = id_amenities.map((item, index) => (new ObjectId(item)))
+    req.fields.id_amenities = amenities
+  }
   try {
     validateMiddleware(req, res, RoomValidate, async () => {
       // Upload tất cả ảnh lên Cloudinary và lấy các đường dẫn URL
@@ -93,6 +105,13 @@ export const create = async (req, res) => {
 
 
 export const update = async (req, res) => {
+  // Lọc ra các tệp ảnh có kích thước lớn hơn 0
+  const validImages = Object.values(req.files).filter((file) => file.size > 0);
+
+  // Kiểm tra xem có file ảnh hợp lệ để tiếp tục xử lý
+  if (!validImages.length) {
+    return res.status(400).json({ message: 'Vui lòng tải lên ít nhất một file ảnh.' });
+  }
   // Tạo một mảng để lưu trữ thông tin tệp ảnh
   const imagesArray = [];
   // Duyệt qua các thuộc tính trong req.files
@@ -110,15 +129,17 @@ export const update = async (req, res) => {
         // Thêm các thuộc tính khác tùy theo nhu cầu
       });
     }
+
+    // Hiển thị mảng các tệp ảnh
+    req.files.images = imagesArray;
   }
 
-  // Hiển thị mảng các tệp ảnh
-  req.files.images = imagesArray;
-
   // tao mang id_amenities
-  const id_amenities = req.fields.id_amenities.split(',');
-  const amenities = id_amenities.map((item, index) => (new ObjectId(item)))
-  req.fields.id_amenities = amenities
+  if (req.fields.id_amenities) {
+    const id_amenities = req.fields.id_amenities.split(',');
+    const amenities = id_amenities.map((item, index) => (new ObjectId(item)))
+    req.fields.id_amenities = amenities
+  }
   try {
     validateMiddleware(req, res, RoomValidate, async () => {
       // Lấy dữ liệu khách sạn hiện tại từ database

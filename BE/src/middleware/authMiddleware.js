@@ -7,8 +7,10 @@ import { handleJWTError, sendResponse } from "../utils";
 dotenv.config();
 
 export const isAdminMiddleware = async (req, res, next) => {
+  // console.log(req?.cookies?.accessToken);
+
   try {
-    const accessToken = req.cookies.accessToken;
+    const accessToken = req?.cookies?.accessToken;
 
     if (!accessToken) {
       return sendResponse(res, 401, "Bạn chưa đăng nhập");
@@ -35,7 +37,6 @@ export const isAdminMiddleware = async (req, res, next) => {
 export const loginMiddleware = async (req, res, next) => {
   try {
     const accessToken = req.cookies.accessToken;
-
     if (!accessToken) {
       return sendResponse(res, 401, "Bạn chưa đăng nhập");
     }

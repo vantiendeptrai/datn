@@ -47,6 +47,14 @@ export const getOne = async (req, res) => {
 };
 
 export const create = async (req, res) => {
+  // Lọc ra các tệp ảnh có kích thước lớn hơn 0
+  const validImages = Object.values(req.files).filter((file) => file.size > 0);
+
+  // Kiểm tra xem có file ảnh hợp lệ để tiếp tục xử lý
+  if (!validImages.length) {
+    return res.status(400).json({ message: 'Vui lòng tải lên ít nhất một file ảnh.' });
+  }
+
   // Tạo một mảng để lưu trữ thông tin tệp ảnh
   const imagesArray = [];
   // Duyệt qua các thuộc tính trong req.files
@@ -68,12 +76,14 @@ export const create = async (req, res) => {
   // Hiển thị mảng các tệp ảnh
   req.files.images = imagesArray;
   // tao mang id_amenities
-  const id_amenities = req.fields.id_amenities.split(',');
-  const amenities = id_amenities.map((item, index) => (new ObjectId(item)))
-  req.fields.id_amenities = amenities
+  if (req.fields.id_amenities) {
+    const id_amenities = req.fields.id_amenities.split(',');
+    const amenities = id_amenities.map((item, index) => (new ObjectId(item)))
+    req.fields.id_amenities = amenities
+  }
+
 
   try {
-    console.log(req.fields.name);
     validateMiddleware(req, res, HotelValidate, async () => {
 
       // Upload tất cả ảnh lên Cloudinary và lấy các đường dẫn URL
@@ -85,20 +95,24 @@ export const create = async (req, res) => {
         uid: req.files.images[index].name,
         url: imageUrl,
       }));
+      // Biểu thức chính quy cho số điện thoại có định dạng +84xxxxxxxxx hoặc 0xxxxxxxxx
+      const phoneNumberRegex = /^(0|\+84)[3|5|7|8|9][0-9]{8}$/;
+
+      // Sử dụng biểu thức chính quy để kiểm tra số điện thoại
+
+      if (!phoneNumberRegex.test(req.fields.phone)) {
+        return sendResponse(res, 404, 'Số điện thoại không hợp lệ')
+      }
+
       // Tạo dữ liệu mới với thông tin ảnh đã tải lên
       const data = await HotelModel.create({
         ...req.fields,
         images: images, // Liên kết thông tin ảnh với dữ liệu khách sạn
       });
       if (!data) {
-        return res.status(404).json({
-          message: "Thêm khách sạn thất bại",
-        });
+        return sendResponse(res, 404, 'Thêm khách sạn thất bại')
       }
-      return res.status(200).json({
-        message: "Thêm khách sạn thành công",
-        data,
-      })
+      return sendResponse(res, 200, 'Thêm khách sạn thành công', data)
     })
   } catch (error) {
     console.log(error)
@@ -108,6 +122,13 @@ export const create = async (req, res) => {
 
 
 export const update = async (req, res) => {
+  // Lọc ra các tệp ảnh có kích thước lớn hơn 0
+  const validImages = Object.values(req.files).filter((file) => file.size > 0);
+
+  // Kiểm tra xem có file ảnh hợp lệ để tiếp tục xử lý
+  if (!validImages.length) {
+    return res.status(400).json({ message: 'Vui lòng tải lên ít nhất một file ảnh.' });
+  }
   // Tạo một mảng để lưu trữ thông tin tệp ảnh
   const imagesArray = [];
   // Duyệt qua các thuộc tính trong req.files
@@ -131,9 +152,11 @@ export const update = async (req, res) => {
   req.files.images = imagesArray;
 
   // tao mang id_amenities
-  const id_amenities = req.fields.id_amenities.split(',');
-  const amenities = id_amenities.map((item, index) => (new ObjectId(item)))
-  req.fields.id_amenities = amenities
+  if (req.fields.id_amenities) {
+    const id_amenities = req.fields.id_amenities.split(',');
+    const amenities = id_amenities.map((item, index) => (new ObjectId(item)))
+    req.fields.id_amenities = amenities
+  }
   try {
 
     validateMiddleware(req, res, HotelValidate, async () => {
@@ -160,6 +183,14 @@ export const update = async (req, res) => {
             url: imageResult.secure_url,
           });
         }
+      }
+      // Biểu thức chính quy cho số điện thoại có định dạng +84xxxxxxxxx hoặc 0xxxxxxxxx
+      const phoneNumberRegex = /^(0|\+84)[3|5|7|8|9][0-9]{8}$/;
+
+      // Sử dụng biểu thức chính quy để kiểm tra số điện thoại
+
+      if (!phoneNumberRegex.test(req.fields.phone)) {
+        return sendResponse(res, 404, 'Số điện thoại không hợp lệ')
       }
       // Tạo đối tượng mới chứa thông tin cập nhật
       const newData = {

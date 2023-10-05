@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get("/", getAll);
 router.get("/:id", getOne);
-router.post("/", expressFormidable(), create);
-router.patch("/:id", expressFormidable(), update);
+router.post("/", isAdminMiddleware, expressFormidable(), create);
+router.patch("/:id", isAdminMiddleware, expressFormidable(), update);
 
 export default router;
