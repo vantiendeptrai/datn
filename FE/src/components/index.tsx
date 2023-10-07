@@ -1,6 +1,7 @@
 // Auth
 import InfoUser from "./auth/Profile/InfoUser";
 import Sidebar from "./auth/Sidebar";
+import UserInfor from "./auth/UserInfor";
 
 // Client
 import Footer from "./client/Footer/Footer";
@@ -26,6 +27,11 @@ import UserMenu from "./client/NavBar/UserMenu";
 import BillInfo from "./client/Payment/BillInfo";
 import BookingInfo from "./client/Payment/BookingInfo";
 
+// admin
+import Information from "./admin/dashboard/Information";
+import Thead from "./admin/dashboard/Thead";
+import Tbody from "./admin/dashboard/Tbody";
+import InformationM from "./admin/dashboard/InformationM";
 //
 import Avatar from "./Avatar";
 import Button from "./Button";
@@ -36,6 +42,7 @@ export {
   // Auth
   InfoUser,
   Sidebar,
+  UserInfor,
 
   // Client
   Footer,
@@ -60,6 +67,12 @@ export {
   UserMenu,
   BillInfo,
   BookingInfo,
+
+  //admin
+  Information,
+  Thead,
+  Tbody,
+  InformationM,
 
   //
   Avatar,
