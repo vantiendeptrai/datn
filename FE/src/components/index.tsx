@@ -28,6 +28,12 @@ import UserMenu from "./client/NavBar/UserMenu";
 import BillInfo from "./client/Payment/BillInfo";
 import BookingInfo from "./client/Payment/BookingInfo";
 
+// admin
+import Information from "./admin/dashboard/Information";
+import Thead from "./admin/dashboard/Thead";
+import Tbody from "./admin/dashboard/Tbody";
+import InformationM from "./admin/dashboard/InformationM";
+
 //
 import Avatar from "./Avatar";
 import Button from "./Button";
@@ -62,6 +68,12 @@ export {
   UserMenu,
   BillInfo,
   BookingInfo,
+
+  //admin
+  Information,
+  Thead,
+  Tbody,
+  InformationM,
 
   //
   Avatar,
