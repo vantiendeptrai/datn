@@ -114,7 +114,7 @@ const BaseAdmin = () => {
           onCollapse={(value) => setCollapsed(value)}
         >
           <div className="flex justify-center items-center">
-            <Logo />
+            <Logo url="/admin" />
           </div>
 
           <Menu
