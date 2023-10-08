@@ -11,12 +11,6 @@ const roomValidate = joi.object({
     .required()
     .items(
       joi.object({
-        status: joi
-          .string()
-          .required()
-          .messages(validationErrors("Trạng thái ảnh")),
-        name: joi.string().required().messages(validationErrors("Tên ảnh")),
-        uid: joi.string().required().messages(validationErrors("Uid ảnh")),
         url: joi
           .string()
           .required()
