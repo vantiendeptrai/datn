@@ -8,18 +8,6 @@ const hotelSchema = new mongoose.Schema(
     },
     images: [
       {
-        status: {
-          type: String,
-          default: "done",
-        },
-        name: {
-          type: String,
-          required: true,
-        },
-        uid: {
-          type: String,
-          required: true,
-        },
         url: {
           type: String,
           required: true,

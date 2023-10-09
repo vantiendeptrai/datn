@@ -10,12 +10,6 @@ const hotelValidate = joi.object({
     // .required()
     .items(
       joi.object({
-        status: joi
-          .string()
-          .required()
-          .messages(validationErrors("Trạng thái")),
-        name: joi.string().required().messages(validationErrors("Tên")),
-        uid: joi.string().required().messages(validationErrors("Uid")),
         url: joi.string().required().messages(validationErrors("Đường dẫn")),
       })
     )
