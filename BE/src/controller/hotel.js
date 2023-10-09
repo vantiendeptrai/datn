@@ -90,9 +90,6 @@ export const create = async (req, res) => {
       const imagesUrls = await Promise.all(req.files.images.map(uploadImageToCloudinary));
       // Tạo mảng chứa thông tin ảnh với các đường dẫn URL
       const images = imagesUrls.map((imageUrl, index) => ({
-        status: 'done',
-        name: req.files.images[index].name,
-        uid: req.files.images[index].name,
         url: imageUrl,
       }));
       // Biểu thức chính quy cho số điện thoại có định dạng +84xxxxxxxxx hoặc 0xxxxxxxxx
@@ -177,9 +174,6 @@ export const update = async (req, res) => {
             use_filename: true,
           });
           newImages.push({
-            status: 'done',
-            name: image.name,
-            uid: image.name,
             url: imageResult.secure_url,
           });
         }
