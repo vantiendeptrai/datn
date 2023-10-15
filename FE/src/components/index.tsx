@@ -8,6 +8,9 @@ import Sidebar from "./auth/Sidebar";
 import Footer from "./client/Footer/Footer";
 import Attractive from "./client/Home/Attractive";
 import AttractiveCard from "./client/Home/AttractiveCard";
+import Service from "./client/Home/Service";
+import ServiceCard from "./client/Home/ServiceCard";
+import Top from "./client/Home/Top";
 import DetailOverview from "./client/HotelDetail/DetailOverview";
 import InfoHotel from "./client/HotelDetail/InfoHotel";
 import RoomCard from "./client/HotelDetail/RoomCard";
@@ -43,6 +46,9 @@ export {
   Footer,
   Attractive,
   AttractiveCard,
+  Service,
+  ServiceCard,
+  Top,
   DetailOverview,
   InfoHotel,
   RoomCard,

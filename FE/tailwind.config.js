@@ -20,6 +20,11 @@ export default {
         divideDark: "#272B30",
         backgroundDark: "#111315",
       },
+
+      fontFamily: {
+        Montserrat: "Montserrat, sans-serif",
+        Island: "Island Moments, cursive",
+      },
     },
   },
   plugins: [],

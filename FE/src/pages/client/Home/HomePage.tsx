@@ -1,9 +1,13 @@
-import { Attractive } from "../../../components";
+import { Attractive, Service, Top } from "../../../components";
 
 const HomePage = () => {
   return (
     <>
-      <Attractive />
+      <div className="flex flex-col gap-10">
+        <Top />
+        <Service />
+        <Attractive />
+      </div>
     </>
   );
 };
