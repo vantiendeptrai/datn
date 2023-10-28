@@ -11,8 +11,8 @@ import {
   getGoogleOauthToken,
   getGoogleUser,
   sendResponse,
-  handleJWTError,
   sendMailOauthRegister,
+  generateRandomCode,
 } from "../utils";
 
 dotenv.config();
@@ -125,7 +125,19 @@ export const refreshToken = (req, res) => {
 
     return sendResponse(res, 200, "Làm mới token thành công");
   } catch (error) {
-    handleJWTError(error, res);
+    if (error instanceof jwt.TokenExpiredError) {
+      return res.status(401).json({
+        message: "Token đã hết hạn!",
+      });
+    } else if (error instanceof jwt.NotBeforeError) {
+      return res.status(401).json({
+        message: "Token chưa có hiệu lực!",
+      });
+    } else if (error instanceof jwt.JsonWebTokenError) {
+      return res.status(401).json({
+        message: "Token không hợp lệ!",
+      });
+    }
 
     console.error(error);
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi làm mới token");
@@ -195,7 +207,8 @@ export const googleOauth = async (req, res) => {
         image: picture,
       });
 
-      const hashedPassword = await bcrypt.hash(email, 12);
+      const password = await generateRandomCode(12);
+      const hashedPassword = await bcrypt.hash(password, 12);
 
       const user = await UserModel.create({
         id_google: id,
@@ -204,7 +217,7 @@ export const googleOauth = async (req, res) => {
         id_information: information._id,
       });
 
-      sendMailOauthRegister(name, email, email);
+      sendMailOauthRegister(name, email, password);
 
       await loginToken(res, user);
     }
