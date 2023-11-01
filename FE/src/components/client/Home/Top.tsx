@@ -34,33 +34,27 @@ const Top = () => {
 
           <div className="flex flex-row gap-5 col-span-2">
             <div className="col-span-2">
-              <div className="hero_img-box">
-                <img
-                  src="/images/client/home/hero-img-1.jpg"
-                  alt="Hero"
-                  className="w-[400px] h-[350px] rounded-[20px] border-[1px] object-cover border-divideLight dark:border-divideDark"
-                />
-              </div>
+              <img
+                src="/images/client/home/hero-img-1.jpg"
+                alt="Hero"
+                className="w-[400px] h-[350px] rounded-[20px] border-[1px] object-cover border-divideLight dark:border-divideDark"
+              />
             </div>
 
             <div className="col-span-2 mt-0 lg:mt-6">
-              <div className="hero_img-box">
-                <video
-                  src="/images/client/home/hero-video.mp4"
-                  controls
-                  className="w-[400px] h-[350px] rounded-[20px] border-[1px] object-cover border-divideLight dark:border-divideDark"
-                />
-              </div>
+              <video
+                src="/images/client/home/hero-video.mp4"
+                controls
+                className="w-[400px] h-[350px] rounded-[20px] border-[1px] object-cover border-divideLight dark:border-divideDark"
+              />
             </div>
 
             <div className="col-span-2 mt-0 lg:mt-12">
-              <div className="hero_img-box">
-                <img
-                  src="/images/client/home/hero-img-2.jpg"
-                  alt="Hero"
-                  className="w-[400px] h-[350px] rounded-[20px] border-[1px] object-cover border-divideLight dark:border-divideDark"
-                />
-              </div>
+              <img
+                src="/images/client/home/hero-img-2.jpg"
+                alt="Hero"
+                className="w-[400px] h-[350px] rounded-[20px] border-[1px] object-cover border-divideLight dark:border-divideDark"
+              />
             </div>
           </div>
         </div>
