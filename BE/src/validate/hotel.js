@@ -7,7 +7,7 @@ const hotelValidate = joi.object({
   images: joi
     .array()
     .min(1)
-    // .required()
+    .required()
     .items(
       joi.object({
         url: joi.string().required().messages(validationErrors("Đường dẫn")),
