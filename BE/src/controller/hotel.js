@@ -48,7 +48,6 @@ export const getOne = async (req, res) => {
 
 export const create = async (req, res) => {
   const validImages = Object.values(req.files).filter((file) => file.size > 0);
-
   if (!validImages.length) {
     return res
       .status(400)
@@ -84,9 +83,11 @@ export const create = async (req, res) => {
       const imagesUrls = await Promise.all(
         req.files.images.map(uploadImageToCloudinary)
       );
+
       const images = imagesUrls.map((imageUrl, index) => ({
         url: imageUrl,
       }));
+      console.log(images);
       const phoneNumberRegex = /^(0|\+84)[3|5|7|8|9][0-9]{8}$/;
 
       if (!phoneNumberRegex.test(req.fields.phone)) {
