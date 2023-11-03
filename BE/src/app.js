@@ -4,8 +4,6 @@ import express from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 
-import expressFormidable from 'express-formidable';
-
 import {
   AmenitiesRouter,
   AuthRouter,
@@ -24,7 +22,6 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cors());
 app.use(cookieParser());
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 
