@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 import { UserModel } from "../models";
-import { handleJWTError, sendResponse } from "../utils";
+import { sendResponse } from "../utils";
 
 dotenv.config();
 
@@ -27,7 +27,19 @@ export const isAdminMiddleware = async (req, res, next) => {
 
     next();
   } catch (error) {
-    handleJWTError(error, res);
+    if (error instanceof jwt.TokenExpiredError) {
+      return res.status(401).json({
+        message: "Token đã hết hạn!",
+      });
+    } else if (error instanceof jwt.NotBeforeError) {
+      return res.status(401).json({
+        message: "Token chưa có hiệu lực!",
+      });
+    } else if (error instanceof jwt.JsonWebTokenError) {
+      return res.status(401).json({
+        message: "Token không hợp lệ!",
+      });
+    }
 
     console.error(error);
     return sendResponse(res, 500, "Đã có lỗi xảy ra");
@@ -52,7 +64,19 @@ export const loginMiddleware = async (req, res, next) => {
 
     next();
   } catch (error) {
-    handleJWTError(error, res);
+    if (error instanceof jwt.TokenExpiredError) {
+      return res.status(401).json({
+        message: "Token đã hết hạn!",
+      });
+    } else if (error instanceof jwt.NotBeforeError) {
+      return res.status(401).json({
+        message: "Token chưa có hiệu lực!",
+      });
+    } else if (error instanceof jwt.JsonWebTokenError) {
+      return res.status(401).json({
+        message: "Token không hợp lệ!",
+      });
+    }
 
     console.error(error);
     return sendResponse(res, 500, "Đã có lỗi xảy ra");
