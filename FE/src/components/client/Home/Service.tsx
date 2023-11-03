@@ -36,13 +36,12 @@ const Service = () => {
 
           <div className="flex sm:flex-row flex-col gap-5">
             {serviceData.map((item) => (
-              <>
-                <ServiceCard
-                  url={item.url}
-                  title={item.title}
-                  desc={item.desc}
-                />
-              </>
+              <ServiceCard
+                key={item.title}
+                url={item.url}
+                title={item.title}
+                desc={item.desc}
+              />
             ))}
           </div>
         </div>
