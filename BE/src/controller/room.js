@@ -1,26 +1,21 @@
 import { RoomModel } from "../models";
+import { sendResponse } from "../utils";
 import { RoomValidate } from "../validate";
+import { validateMiddleware } from "../middleware";
 
 export const getAll = async (req, res) => {
   try {
     const roomList = await RoomModel.find();
 
     if (!roomList || roomList.length === 0) {
-      return res.status(404).json({
-        message: "Không có danh sách phòng",
-      });
+      return sendResponse(res, 404, "Không có danh sách phòng");
     }
 
-    return res.status(200).json({
-      message: "Danh sách phòng",
-      data: roomList,
-    });
+    return sendResponse(res, 200, "Danh sách phòng", roomList);
   } catch (error) {
     console.error(error);
 
-    return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
-    });
+    return sendResponse(res, 500, "Đã có lỗi xảy ra khi lấy danh sách phòng");
   }
 };
 
@@ -29,91 +24,52 @@ export const getOne = async (req, res) => {
     const room = await RoomModel.findById(req.params.id);
 
     if (!room || room.length === 0) {
-      return res.status(404).json({
-        message: "Không có thông tin phòng",
-      });
+      return sendResponse(res, 404, "Không có thông tin phòng");
     }
 
-    return res.status(200).json({
-      message: "Thông tin phòng",
-      data: room,
-    });
+    return sendResponse(res, 200, "Thông tin phòng", room);
   } catch (error) {
     console.error(error);
 
-    return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
-    });
+    return sendResponse(res, 500, "Đã có lỗi xảy ra khi lấy thông tin phòng");
   }
 };
 
 export const create = async (req, res) => {
   try {
-    const { error } = RoomValidate.validate(req.body, {
-      abortEarly: false,
-    });
+    validateMiddleware(req, res, RoomValidate, async () => {
+      const data = await RoomModel.create(req.body);
 
-    if (error) {
-      const errors = error.details.map((err) => err.message);
-      return res.status(400).json({
-        errors,
-      });
-    }
+      if (!data) {
+        return sendResponse(res, 404, "Thêm phòng thất bại");
+      }
 
-    const data = await RoomModel.create(req.body);
-
-    if (!data) {
-      return res.status(404).json({
-        message: "Thêm phòng thất bại",
-      });
-    }
-
-    return res.status(200).json({
-      message: "Thêm phòng thành công",
-      data,
+      return sendResponse(res, 200, "Thêm phòng thành công", data);
     });
   } catch (error) {
     console.log(error);
 
-    return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
-    });
+    return sendResponse(res, 500, "Đã có lỗi xảy ra khi thêm phòng");
   }
 };
 1;
 
 export const update = async (req, res) => {
   try {
-    const { error } = RoomValidate.validate(req.body, {
-      abortEarly: false,
-    });
-
-    if (error) {
-      const errors = error.details.map((err) => err.message);
-      return res.status(400).json({
-        errors,
+    validateMiddleware(req, res, RoomValidate, async () => {
+      const data = await RoomModel.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
       });
-    }
 
-    const data = await RoomModel.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+      if (!data) {
+        return sendResponse(res, 404, "Cập nhật phòng thất bại");
+      }
 
-    if (!data) {
-      return res.status(404).json({
-        message: "Cập nhật phòng thất bại",
-      });
-    }
-
-    return res.status(200).json({
-      message: "Cập nhật phòng thành công",
-      data,
+      return sendResponse(res, 200, "Cập nhật phòng thành công", data);
     });
   } catch (error) {
     console.log(error);
 
-    return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
-    });
+    return sendResponse(res, 500, "Đã có lỗi xảy ra khi cập nhật phòng");
   }
 };

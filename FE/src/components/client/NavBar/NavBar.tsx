@@ -6,7 +6,7 @@ const NavBar = () => {
       <div className="w-full py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark">
         <Container>
           <div className="flex flex-row items-center justify-between gap-5">
-            <Logo />
+            <Logo url="/" />
 
             <Search />
 

@@ -1,27 +1,26 @@
 import { HotelModel } from "../models";
 import { ReviewModel } from "../models";
+import { sendResponse } from "../utils";
 import { ReviewValidate } from "../validate";
+import { validateMiddleware } from "../middleware";
 
 export const getAll = async (req, res) => {
   try {
     const reviewList = await ReviewModel.find();
 
     if (!reviewList || reviewList.length === 0) {
-      return res.status(404).json({
-        message: "Không có danh sách bình luận",
-      });
+      return sendResponse(res, 404, "Không có danh sách bình luận");
     }
 
-    return res.status(200).json({
-      message: "Danh sách bình luận",
-      data: reviewList,
-    });
+    return sendResponse(res, 200, "Danh sách bình luận", reviewList);
   } catch (error) {
     console.error(error);
 
-    return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
-    });
+    return sendResponse(
+      res,
+      500,
+      "Đã có lỗi xảy ra khi lấy danh sách bình luận"
+    );
   }
 };
 
@@ -30,97 +29,66 @@ export const getOne = async (req, res) => {
     const review = await ReviewModel.findById(req.params.id);
 
     if (!review || review.length === 0) {
-      return res.status(404).json({
-        message: "Không có thông tin bình luận",
-      });
+      return sendResponse(res, 404, "Không có thông tin bình luận");
     }
 
-    return res.status(200).json({
-      message: "Thông tin bình luận",
-      data: review,
-    });
+    return sendResponse(res, 200, "Thông tin bình luận", review);
   } catch (error) {
     console.error(error);
 
-    return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
-    });
+    return sendResponse(
+      res,
+      500,
+      "Đã có lỗi xảy ra khi lấy thông tin bình luận"
+    );
   }
 };
 
 export const create = async (req, res) => {
   try {
-    const { error } = ReviewValidate.validate(req.body, {
-      abortEarly: false,
-    });
+    validateMiddleware(req, res, ReviewValidate, async () => {
+      const data = await ReviewModel.create(req.body);
 
-    if (error) {
-      const errors = error.details.map((err) => err.message);
-      return res.status(400).json({
-        errors,
-      });
-    }
+      if (!data) {
+        return sendResponse(res, 404, "Thêm bình luận thất bại");
+      }
 
-    const data = await ReviewModel.create(req.body);
+      await HotelModel.findByIdAndUpdate(
+        req.body.id_user,
+        { $push: { id_review: data._id } },
+        { new: true }
+      );
 
-    if (!data) {
-      return res.status(404).json({
-        message: "Thêm bình luận thất bại",
-      });
-    }
-
-    await HotelModel.findByIdAndUpdate(
-      req.body.id_user,
-      { $push: { id_review: data._id } },
-      { new: true }
-    );
-
-    return res.status(200).json({
-      message: "Thêm bình luận thành công",
-      data,
+      return sendResponse(res, 200, "Thêm bình luận thành công", data);
     });
   } catch (error) {
     console.log(error);
 
-    return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
-    });
+    return sendResponse(res, 500, "Đã có lỗi xảy ra khi thêm bình luận");
   }
 };
 
 export const update = async (req, res) => {
   try {
-    const { error } = ReviewValidate.validate(req.body, {
-      abortEarly: false,
-    });
+    validateMiddleware(req, res, ReviewValidate, async () => {
+      const data = await ReviewModel.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {
+          new: true,
+        }
+      );
 
-    if (error) {
-      const errors = error.details.map((err) => err.message);
-      return res.status(400).json({
-        errors,
-      });
-    }
+      if (!data) {
+        return sendResponse(res, 404, "Cập nhật bình luận thất bại");
+      }
 
-    const data = await ReviewModel.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-
-    if (!data) {
-      return res.status(404).json({
-        message: "Cập nhật bình luận thất bại",
-      });
-    }
-
-    return res.status(200).json({
-      message: "Cập nhật bình luận thành công",
-      data,
+      return sendResponse(res, 200, "Cập nhật bình luận thành công", data);
     });
   } catch (error) {
     console.log(error);
 
-    return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
-    });
+    return sendResponse(res, 500, "Đã có lỗi xảy ra khi cập nhật bình luận");
   }
 };
 
@@ -129,19 +97,13 @@ export const remove = async (req, res) => {
     const data = await ReviewModel.findByIdAndDelete(req.params.id);
 
     if (!data) {
-      return res.status(404).json({
-        message: "Xóa bình luận thất bại",
-      });
+      return sendResponse(res, 404, "Xóa bình luận thất bại");
     }
 
-    return res.status(200).json({
-      message: "Xóa bình luận thành công",
-    });
+    return sendResponse(res, 200, "Xóa bình luận thành công");
   } catch (error) {
     console.log(error);
 
-    return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
-    });
+    return sendResponse(res, 500, "Đã có lỗi xảy ra khi xóa bình luận");
   }
 };

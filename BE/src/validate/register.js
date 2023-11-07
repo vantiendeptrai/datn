@@ -1,24 +1,20 @@
 import joi from "joi";
 
-import { errorValidateMessages } from "../component";
+import { validationErrors } from "../utils";
 
 const registerValidate = joi.object({
-  name: joi.string().required().messages(errorValidateMessages("Tên")),
-  email: joi
-    .string()
-    .email()
-    .required()
-    .messages(errorValidateMessages("Email")),
+  name: joi.string().required().messages(validationErrors("Tên")),
+  email: joi.string().email().required().messages(validationErrors("Email")),
   password: joi
     .string()
     .required()
     .min(12)
-    .messages(errorValidateMessages("Mật khẩu")),
+    .messages(validationErrors("Mật khẩu")),
   confirmPassword: joi
     .string()
     .valid(joi.ref("password"))
     .required()
-    .messages(errorValidateMessages("Xác nhận mật khẩu")),
+    .messages(validationErrors("Xác nhận mật khẩu")),
 });
 
 export default registerValidate;

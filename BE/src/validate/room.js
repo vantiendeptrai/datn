@@ -1,66 +1,47 @@
 import joi from "joi";
 
-import { errorValidateMessages } from "../component";
+import { validationErrors } from "../utils";
 
 const roomValidate = joi.object({
-  room_number: joi
-    .number()
-    .required()
-    .messages(errorValidateMessages("Số phòng")),
-  room_floor: joi.number().required().messages(errorValidateMessages("Tầng")),
+  room_number: joi.number().required().messages(validationErrors("Số phòng")),
+  room_floor: joi.number().required().messages(validationErrors("Tầng")),
   images: joi
     .array()
     .min(1)
     .required()
     .items(
       joi.object({
-        status: joi
-          .string()
-          .required()
-          .messages(errorValidateMessages("Trạng thái ảnh")),
-        name: joi
-          .string()
-          .required()
-          .messages(errorValidateMessages("Tên ảnh")),
-        uid: joi.string().required().messages(errorValidateMessages("Uid ảnh")),
         url: joi
           .string()
           .required()
-          .messages(errorValidateMessages("Đường dẫn ảnh")),
+          .messages(validationErrors("Đường dẫn ảnh")),
       })
     )
-    .messages(errorValidateMessages("Ảnh")),
+    .messages(validationErrors("Ảnh")),
   capacity: joi
     .number()
     .min(1)
     .required()
-    .messages(errorValidateMessages("Sức chứa")),
-  price: joi
-    .number()
-    .min(0)
-    .required()
-    .messages(errorValidateMessages("Giá phòng")),
+    .messages(validationErrors("Sức chứa")),
+  price: joi.number().min(0).required().messages(validationErrors("Giá phòng")),
   status: joi
     .string()
     .required()
-    .messages(errorValidateMessages("Trạng Thái phòng")),
+    .messages(validationErrors("Trạng Thái phòng")),
   description: joi
     .string()
     .required()
-    .messages(errorValidateMessages("Mô tả phòng")),
+    .messages(validationErrors("Mô tả phòng")),
   id_amenities: joi
     .array()
     .min(1)
     .required()
-    .messages(errorValidateMessages("Tiện nghi phòng")),
-  id_hotel: joi
-    .string()
-    .required()
-    .messages(errorValidateMessages("Id khách sạn")),
+    .messages(validationErrors("Tiện nghi phòng")),
+  id_hotel: joi.string().required().messages(validationErrors("Id khách sạn")),
   id_roomType: joi
     .string()
     .required()
-    .messages(errorValidateMessages("Id loại phòng")),
+    .messages(validationErrors("Id loại phòng")),
 });
 
 export default roomValidate;

@@ -1,10 +1,11 @@
+import toast from "react-hot-toast";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AiOutlineMenu } from "react-icons/ai";
 
 import { Avatar, MenuItem } from "../..";
-import { useUserQuery } from "../../../api/auth";
+import { useLogoutMutation, useUserQuery } from "../../../api/auth";
 import { useLoginModal, useRegisterModal } from "../../../hooks";
 
 const UserMenu = () => {
@@ -12,17 +13,33 @@ const UserMenu = () => {
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const [isOpen, setIsOpen] = useState(false);
-  const { data, isSuccess } = useUserQuery(null);
+  const { data, isSuccess } = useUserQuery("");
+  const [logoutUser] = useLogoutMutation();
 
   const onToggle = () => {
     setIsOpen(!isOpen);
+  };
+
+  const logoutAccount = () => {
+    logoutUser(null)
+      .unwrap()
+      .then((response) => {
+        toast.success(response.message);
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
     <>
       <div className="relative z-10">
         <div onClick={onToggle} className="hidden md:block cursor-pointer">
-          <Avatar imageUser={data?.user.image} />
+          <Avatar key={data} imageUser={data?.data.image} />
         </div>
 
         <div onClick={onToggle} className="block md:hidden cursor-pointer">
@@ -37,17 +54,13 @@ const UserMenu = () => {
                   label="Thông tin cá nhân"
                   onClick={() => navigate("/auth")}
                 />
-                <MenuItem
-                  label="Thông tin đặt phòng"
-                  onClick={() => alert("Thông tin cá nhân")}
-                />
+                {data?.role === "Admin" && (
+                  <MenuItem label="Admin" onClick={() => navigate("/admin")} />
+                )}
 
                 <hr className="border border-divideLight dark:border-divideDark" />
 
-                <MenuItem
-                  label="Đăng xuất"
-                  onClick={() => alert("Đăng xuất")}
-                />
+                <MenuItem label="Đăng xuất" onClick={logoutAccount} />
               </div>
             ) : (
               <div className="flex flex-col cursor-pointer">

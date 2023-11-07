@@ -1,6 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
-const Logo = () => {
+type LogoProps = {
+  url: string;
+};
+
+const Logo = ({ url }: LogoProps) => {
   const navigate = useNavigate();
 
   return (
@@ -10,7 +14,7 @@ const Logo = () => {
         src="/logo.png"
         width={100}
         height={100}
-        onClick={() => navigate("/")}
+        onClick={() => navigate(url)}
         className="hidden md:block cursor-pointer"
       />
     </>
