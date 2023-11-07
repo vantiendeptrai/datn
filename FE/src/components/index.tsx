@@ -3,7 +3,7 @@
 // Auth
 import InfoUser from "./auth/Profile/InfoUser";
 import Sidebar from "./auth/Sidebar";
-import UserInfor from "./auth/Privacy/UserInfor";
+
 // Client
 import Footer from "./client/Footer/Footer";
 import Attractive from "./client/Home/Attractive";
@@ -42,7 +42,6 @@ export {
   // Auth
   InfoUser,
   Sidebar,
-  UserInfor,
 
   // Client
   Footer,
