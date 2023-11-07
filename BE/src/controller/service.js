@@ -1,26 +1,21 @@
+import { sendResponse } from "../utils";
 import { ServiceModel } from "../models";
 import { ServiceValidate } from "../validate";
+import { validateMiddleware } from "../middleware";
 
 export const getAll = async (req, res) => {
   try {
     const serviceList = await ServiceModel.find();
 
     if (!serviceList || serviceList.length === 0) {
-      return res.status(404).json({
-        message: "Không có danh sách dịch vụ",
-      });
+      return sendResponse(res, 404, "Không có danh sách dịch vụ");
     }
 
-    return res.status(200).json({
-      message: "Danh sách dịch vụ",
-      data: serviceList,
-    });
+    return sendResponse(res, 200, "Danh sách dịch vụ", serviceList);
   } catch (error) {
     console.error(error);
 
-    return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
-    });
+    return sendResponse(res, 500, "Đã có lỗi xảy ra khi lấy danh sách dịch vụ");
   }
 };
 
@@ -29,91 +24,56 @@ export const getOne = async (req, res) => {
     const service = await ServiceModel.findById(req.params.id);
 
     if (!service || service.length === 0) {
-      return res.status(404).json({
-        message: "Không có thông tin dịch vụ",
-      });
+      return sendResponse(res, 404, "Không có thông tin dịch vụ");
     }
 
-    return res.status(200).json({
-      message: "Thông tin dịch vụ",
-      data: service,
-    });
+    return sendResponse(res, 200, "Thông tin dịch vụ", service);
   } catch (error) {
     console.error(error);
 
-    return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
-    });
+    return sendResponse(res, 500, "Đã có lỗi xảy ra khi lấy thông tin dịch vụ");
   }
 };
 
 export const create = async (req, res) => {
   try {
-    const { error } = ServiceValidate.validate(req.body, {
-      abortEarly: false,
-    });
+    validateMiddleware(req, res, ServiceValidate, async () => {
+      const data = await ServiceModel.create(req.body);
 
-    if (error) {
-      const errors = error.details.map((err) => err.message);
-      return res.status(400).json({
-        errors,
-      });
-    }
+      if (!data) {
+        return sendResponse(res, 404, "Thêm dịch vụ thất bại");
+      }
 
-    const data = await ServiceModel.create(req.body);
-
-    if (!data) {
-      return res.status(404).json({
-        message: "Thêm dịch vụ thất bại",
-      });
-    }
-
-    return res.status(200).json({
-      message: "Thêm dịch vụ thành công",
-      data: data,
+      return sendResponse(res, 200, "Thêm dịch vụ thành công", data);
     });
   } catch (error) {
     console.log(error);
 
-    return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
-    });
+    return sendResponse(res, 500, "Đã có lỗi xảy ra khi thêm dịch vụ");
   }
 };
 
 export const update = async (req, res) => {
   try {
-    const { error } = ServiceValidate.validate(req.body, {
-      abortEarly: false,
-    });
+    validateMiddleware(req, res, ServiceValidate, async () => {
+      const data = await ServiceModel.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {
+          new: true,
+        }
+      );
 
-    if (error) {
-      const errors = error.details.map((err) => err.message);
-      return res.status(400).json({
-        errors,
-      });
-    }
+      if (!data) {
+        return sendResponse(res, 404, "Cập nhật dịch vụ thất bại");
+      }
 
-    const data = await ServiceModel.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-
-    if (!data) {
-      return res.status(404).json({
-        message: "Cập nhật dịch vụ thất bại",
-      });
-    }
-
-    return res.status(200).json({
-      message: "Cập nhật dịch vụ thành công",
-      data,
+      return sendResponse(res, 200, "Cập nhật dịch vụ thành công", data);
     });
   } catch (error) {
     console.log(error);
 
-    return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
-    });
+    return sendResponse(res, 500, "Đã có lỗi xảy ra khi cập nhật dịch vụ");
   }
 };
 
@@ -122,19 +82,13 @@ export const remove = async (req, res) => {
     const data = await ServiceModel.findByIdAndDelete(req.params.id);
 
     if (!data) {
-      return res.status(404).json({
-        message: "Xóa dịch vụ thất bại",
-      });
+      return sendResponse(res, 404, "Xóa dịch vụ thất bại");
     }
 
-    return res.status(200).json({
-      message: "Xóa dịch vụ thành công",
-    });
+    return sendResponse(res, 200, "Xóa dịch vụ thành công");
   } catch (error) {
     console.log(error);
 
-    return res.status(500).json({
-      message: "Đã có lỗi xảy ra",
-    });
+    return sendResponse(res, 500, "Đã có lỗi xảy ra khi xóa dịch vụ");
   }
 };
