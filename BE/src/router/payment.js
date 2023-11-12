@@ -1,12 +1,11 @@
 import express from "express";
 
-import { getAll, getOne, create, update } from "../controller/payment";
-
+import { getAll, create } from "../controller/payment";
+import { isAdminMiddleware } from "../middleware";
+import { loginMiddleware } from "../middleware";
 const router = express.Router();
 
-router.get("/", getAll);
-router.get("/:id", getOne);
-router.post("/", create);
-router.patch("/:id", update);
+router.get("/", loginMiddleware, getAll);
+router.post("/", isAdminMiddleware, create);
 
 export default router;

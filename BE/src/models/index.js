@@ -9,6 +9,7 @@ import RoomModel from "./room";
 import RoomTypeModel from "./roomType";
 import ServiceModel from "./service";
 import UserModel from "./user";
+import CustomerModel from "./customer";
 
 export {
   AmenitiesModel,
@@ -22,4 +23,5 @@ export {
   RoomTypeModel,
   ServiceModel,
   UserModel,
+  CustomerModel,
 };

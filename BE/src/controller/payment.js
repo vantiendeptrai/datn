@@ -3,6 +3,31 @@ import { PaymentModel } from "../models";
 import { PaymentValidate } from "../validate";
 import { validateMiddleware } from "../middleware";
 
+
+export const create = async (req, res) => {
+  try {
+    validateMiddleware(req, res, PaymentValidate, async () => {
+      const { paymentMethod } = req.body
+      const oldMethod = await PaymentModel.findOne({ paymentMethod })
+      if (oldMethod) {
+        return sendResponse(res, 400, 'Không được trùng tên phương thức thanh toán')
+      }
+      const data = await PaymentModel.create(req.body);
+
+      if (!data) {
+        return sendResponse(res, 404, "Thanh toán thất bại");
+      }
+
+      return sendResponse(res, 200, "Thanh toán thành công", data);
+    });
+  } catch (error) {
+
+    console.log(error);
+
+    return sendResponse(res, 500, "Đã có lỗi xảy ra khi thanh toán");
+  }
+};
+
 export const getAll = async (req, res) => {
   try {
     const paymentList = await PaymentModel.find();
@@ -23,64 +48,48 @@ export const getAll = async (req, res) => {
   }
 };
 
-export const getOne = async (req, res) => {
-  try {
-    const payment = await PaymentModel.findById(req.params.id);
+// export const getOne = async (req, res) => {
+//   try {
+//     const payment = await PaymentModel.findById(req.params.id);
 
-    if (!payment || payment.length === 0) {
-      return sendResponse(res, 404, "Không có thông tin thanh toán");
-    }
+//     if (!payment || payment.length === 0) {
+//       return sendResponse(res, 404, "Không có thông tin thanh toán");
+//     }
 
-    return sendResponse(res, 200, "Thông tin thanh toán", payment);
-  } catch (error) {
-    console.error(error);
+//     return sendResponse(res, 200, "Thông tin thanh toán", payment);
+//   } catch (error) {
+//     console.error(error);
 
-    return sendResponse(
-      res,
-      500,
-      "Đã có lỗi xảy ra khi lấy thông tin thanh toán"
-    );
-  }
-};
+//     return sendResponse(
+//       res,
+//       500,
+//       "Đã có lỗi xảy ra khi lấy thông tin thanh toán"
+//     );
+//   }
+// };
 
-export const create = async (req, res) => {
-  try {
-    validateMiddleware(req, res, PaymentValidate, async () => {
-      const data = await PaymentModel.create(req.body);
 
-      if (!data) {
-        return sendResponse(res, 404, "Thanh toán thất bại");
-      }
 
-      return sendResponse(res, 200, "Thanh toán thành công", data);
-    });
-  } catch (error) {
-    console.log(error);
+// export const update = async (req, res) => {
+//   try {
+//     validateMiddleware(req, res, PaymentValidate, async () => {
+//       const data = await PaymentModel.findByIdAndUpdate(
+//         req.params.id,
+//         req.body,
+//         {
+//           new: true,
+//         }
+//       );
 
-    return sendResponse(res, 500, "Đã có lỗi xảy ra khi thanh toán");
-  }
-};
+//       if (!data) {
+//         return sendResponse(res, 404, "Cập nhật thanh toán thất bại");
+//       }
 
-export const update = async (req, res) => {
-  try {
-    validateMiddleware(req, res, PaymentValidate, async () => {
-      const data = await PaymentModel.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        {
-          new: true,
-        }
-      );
+//       return sendResponse(res, 200, "Cập nhật thanh toán thành công", data);
+//     });
+//   } catch (error) {
+//     console.log(error);
 
-      if (!data) {
-        return sendResponse(res, 404, "Cập nhật thanh toán thất bại");
-      }
-
-      return sendResponse(res, 200, "Cập nhật thanh toán thành công", data);
-    });
-  } catch (error) {
-    console.log(error);
-
-    return sendResponse(res, 500, "Đã có lỗi xảy ra khi cập nhật thanh toán");
-  }
-};
+//     return sendResponse(res, 500, "Đã có lỗi xảy ra khi cập nhật thanh toán");
+//   }
+// };

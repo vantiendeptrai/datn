@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const BookingSchema = new mongoose.Schema(
   {
     id_user: {
-      type: String,
-      required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
     },
     check_in: {
       type: Date,
@@ -29,17 +29,14 @@ const BookingSchema = new mongoose.Schema(
       ],
       default: "Đang chờ xử lý",
     },
-    id_bill: {
-      type: String,
-      required: true,
-    },
     id_room: {
-      type: String,
-      required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Room'
     },
-    passport: {
-      type: String,
-      required: true,
+    id_payment_method: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Payment'
+      // required: true,
     },
   },
   { timestamps: true, versionKey: false }
