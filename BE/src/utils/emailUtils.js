@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 
 import { emailOauthRegister, emailRegister } from "../views";
+import { emailBooking } from "../views/formEmail";
 
 dotenv.config();
 
@@ -31,5 +32,15 @@ export const sendMailOauthRegister = async (name, email, password) => {
     subject: "Đăng ký tài khoản thành công",
     text: `Chào bạn, ${name}`,
     html: emailOauthRegister(name, password),
+  });
+};
+
+export const sendMailBook = async (name, room, check_in, check_out, phone, address) => {
+  await transporter.sendMail({
+    from: process.env.MAIL,
+    to: email,
+    subject: "Đặt phòng thành công",
+    text: `Chào bạn, ${name}`,
+    html: emailBooking(name, room, check_in, check_out, phone, address),
   });
 };

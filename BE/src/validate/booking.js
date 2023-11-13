@@ -15,7 +15,7 @@ const bookingValidate = joi.object({
   phone: joi.string().required().messages(validationErrors("Số điện thoại")),
   address: joi.string().required().messages(validationErrors("Địa chỉ")),
   id_payment_method: joi.string().required().messages(validationErrors("Phương thức thanh toán")),
-  name: joi.string().required().messages(validationErrors('Tên khách hàng'))
+  // name: joi.string().required().messages(validationErrors('Tên khách hàng'))
 });
 
 export default bookingValidate;

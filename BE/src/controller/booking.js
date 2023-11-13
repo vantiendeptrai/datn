@@ -7,90 +7,34 @@ import { BookingModel } from "../models";
 import { BookingValidate } from "../validate";
 import { validateMiddleware } from "../middleware";
 import { sendResponse } from "../utils";
+import { sendMailBook } from "../utils/emailUtils";
 
 export const create = async (req, res) => {
   try {
     validateMiddleware(req, res, BookingValidate, async () => {
-
+      const { phone, address } = req.body;
       const user = await UserModel.findOne({ email: req.user.email })
-      if (user.id_information) {
-        const newBooking = await BookingModel.create({
-          id_customer: user._id,
-          ...req.body
-        });
-        if (!newBooking) {
-          return sendResponse(res, 404, 'Không đặt được phòng');
-        }
 
-        // Gửi email thông báo đặt phòng thành công
-        const transporter = nodemailer.createTransport({
-          service: "gmail",
-          auth: {
-            user: "your_gmail_username@gmail.com",
-            pass: "your_gmail_password",
-          },
-        });
 
-        const emailContent = {
-          from: "your_gmail_username@gmail.com",
-          to: req.body.email,
-          subject: "Xác nhận đặt phòng thành công",
-          text: `Chúng tôi xác nhận đặt phòng của bạn từ ${req.body.checkIn} đến ${req.body.checkOut}. Cảm ơn quý khách!`,
-        };
+      const info = await InformationModel.findOneAndUpdate(
+        { _id: user.id_information },
+        { $set: { phone: phone, address: address } },
+        { new: true }, // Trả về văn bản đã cập nhật thay vì bản gốc
 
-        transporter.sendMail(emailContent, (error, info) => {
-          if (error) {
-            console.log("Gửi email thất bại:", error);
-          } else {
-            console.log("Email đã được gửi thành công:", info.response);
-          }
-        });
-
-        return sendResponse(res, 200, 'Đặt phòng thành công', newBooking)
-      }
-      const infor = await InformationModel.create(req.body)
-      if (infor) {
-        UserModel.findOneAndUpdate(
-          { email: user.email },
-          { $set: { id_information: infor._id } },
-          { new: true }, // Trả về văn bản đã cập nhật thay vì bản gốc
-
-        );
-      }
+      );
       const newBooking = await BookingModel.create({
-        id_customer: user._id,
+        id_user: user._id,
         ...req.body
       });
+      const infoRoom = await newBooking.populate('id_room').execPopulate();
       if (!newBooking) {
         return sendResponse(res, 404, 'Không đặt được phòng');
       }
 
-      // Gửi email thông báo đặt phòng thành công
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: "your_gmail_username@gmail.com",
-          pass: "your_gmail_password",
-        },
-      });
-
-      const emailContent = {
-        from: "your_gmail_username@gmail.com",
-        to: req.body.email,
-        subject: "Xác nhận đặt phòng thành công",
-        text: `Chúng tôi xác nhận đặt phòng của bạn từ ${req.body.checkIn} đến ${req.body.checkOut}. Cảm ơn quý khách!`,
-      };
-
-      transporter.sendMail(emailContent, (error, info) => {
-        if (error) {
-          console.log("Gửi email thất bại:", error);
-        } else {
-          console.log("Email đã được gửi thành công:", info.response);
-        }
-      });
-
+      sendMailBook(info.name, infoRoom.room_number, infoRoom.check_in, infoRoom.check_out, info.phone, info.address)
       return sendResponse(res, 200, 'Đặt phòng thành công', newBooking)
     });
+
   } catch (error) {
     return sendResponse(res, 500, 'Lỗi server')
   }
