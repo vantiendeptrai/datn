@@ -7,7 +7,6 @@ import PaymentModel from "./payment";
 import ReviewModel from "./review";
 import RoomModel from "./room";
 import RoomTypeModel from "./roomType";
-import ServiceModel from "./service";
 import UserModel from "./user";
 
 export {
@@ -20,6 +19,5 @@ export {
   ReviewModel,
   RoomModel,
   RoomTypeModel,
-  ServiceModel,
   UserModel,
 };

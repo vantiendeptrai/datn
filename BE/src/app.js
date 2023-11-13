@@ -14,7 +14,6 @@ import {
   ReviewRouter,
   RoomRouter,
   RoomTypeRouter,
-  ServicesRouter,
 } from "./router";
 
 dotenv.config();
@@ -34,7 +33,7 @@ app.use("/payment", PaymentRouter);
 app.use("/review", ReviewRouter);
 app.use("/room", RoomRouter);
 app.use("/room-type", RoomTypeRouter);
-app.use("/services", ServicesRouter);
+
 
 mongoose.connect(process.env.DB_URL);
 

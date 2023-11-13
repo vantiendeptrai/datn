@@ -6,9 +6,9 @@ const amenitiesSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    surcharge: {
-      type: Boolean,
-      default: false,
+    price: {
+      type: Number,
+      default: 0,
     },
   },
   { versionKey: false, timestamps: true }

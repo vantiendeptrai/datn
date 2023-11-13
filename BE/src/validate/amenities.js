@@ -4,7 +4,7 @@ import { validationErrors } from "../utils";
 
 const amenitiesValidate = joi.object({
   name: joi.string().required().messages(validationErrors("Tên tiện nghi")),
-  surcharge: joi.boolean().optional(),
+  price: joi.number().required().messages(validationErrors("Gía"))
 });
 
 export default amenitiesValidate;
