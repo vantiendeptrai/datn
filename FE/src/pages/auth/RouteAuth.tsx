@@ -3,9 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import {
   BaseAuth,
   BillingInformationPage,
-  NotificationsPage,
+  // NotificationsPage,
   Page404,
-  PrivacyPage,
+  // PrivacyPage,
   ProfilePage,
   SecurityPage,
 } from "..";
@@ -21,8 +21,8 @@ const RouteClient = () => {
             path="/billing-information"
             element={<BillingInformationPage />}
           />
-          <Route path="/privacy" element={<PrivacyPage />} />
-          <Route path="/notifications" element={<NotificationsPage />} />
+          {/* <Route path="/privacy" element={<PrivacyPage />} /> */}
+          {/* <Route path="/notifications" element={<NotificationsPage />} /> */}
         </Route>
 
         <Route path="/*" element={<Page404 />} />
