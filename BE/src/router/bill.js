@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/", getAll);
 router.get("/:id", getOne);
-router.post("/", create);
-router.patch("/:id", update);
+router.post("/", isAdminMiddleware, create);
+router.patch("/:id", isAdminMiddleware, update);
 
 export default router;
