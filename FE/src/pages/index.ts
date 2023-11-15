@@ -12,8 +12,8 @@ import UserManager from "./admin/User/UserManager";
 import RouteAuth from "./auth/RouteAuth";
 import BaseAuth from "./auth/BaseAuth";
 import BillingInformationPage from "./auth/BillingInformation/BillingInformationPage";
-import NotificationsPage from "./auth/Notifications/NotificationsPage";
-import PrivacyPage from "./auth/Privacy/PrivacyPage";
+// import NotificationsPage from "./auth/Notifications/NotificationsPage";
+// import PrivacyPage from "./auth/Privacy/PrivacyPage";
 import ProfilePage from "./auth/Profile/ProfilePage";
 import SecurityPage from "./auth/Security/SecurityPage";
 
@@ -51,8 +51,8 @@ export {
   RouteAuth,
   BaseAuth,
   BillingInformationPage,
-  NotificationsPage,
-  PrivacyPage,
+  // NotificationsPage,
+  // PrivacyPage,
   ProfilePage,
   SecurityPage,
 
