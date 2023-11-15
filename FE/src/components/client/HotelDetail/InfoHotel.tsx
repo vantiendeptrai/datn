@@ -3,21 +3,27 @@ import { AiOutlineMail, AiOutlinePhone, AiOutlineStar } from "react-icons/ai";
 
 import { Button } from "../..";
 
-const InfoHotel = () => {
+type HotelDetail = {
+  name: string;
+  address: string;
+  email: string;
+  phone: string;
+};
+
+const InfoHotel = ({ name, address, email, phone }: HotelDetail) => {
   return (
     <>
       <div className="h-auto md:h-36 relative top-[50%] md:top-[80%] left-1/2 transform translate-x-[-50%] rounded-lg shadow-lg p-5 bg-light dark:bg-dark w-[75%]">
         <div className="flex flex-col md:flex-row">
           <div className="w-full flex flex-col gap-3">
             <h1 className="text-xl lg:text-3xl font-semibold text-textLight dark:text-textDark">
-              Mường Thanh Grand Sài Gòn Centre
+              {name}
             </h1>
 
             <div className="flex gap-1 md:items-center text-textLight2nd dark:text-textDark2nd">
               <CiLocationOn size={20} />
               <p className="text-xs lg:text-sm mt-0.5 text-justify">
-                Số 8-8A Mạc Đĩnh Chi, Phường Bến Nghé, Quận 1, Thành Phố Hồ Chí
-                Minh, Việt Nam
+                {address}
               </p>
             </div>
 
@@ -25,14 +31,14 @@ const InfoHotel = () => {
               <div className="flex gap-1 items-center">
                 <AiOutlineMail className="text-xs md:text-xl" />
                 <a href="#" className="text-xs">
-                  info@saigoncentre.muongthanh.vn
+                  {email}
                 </a>
               </div>
 
               <div className="flex gap-1 items-center">
                 <AiOutlinePhone className="text-xs md:text-xl" />
                 <a href="#" className="text-xs">
-                  +84 283 827 9595
+                  +{phone}
                 </a>
               </div>
             </div>

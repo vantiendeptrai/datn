@@ -3,11 +3,7 @@ import joi from "joi";
 import { validationErrors } from "../utils";
 
 const billValidate = joi.object({
-  id_user: joi.string().required().messages(validationErrors("Id người dùng")),
-  id_payment: joi
-    .string()
-    .required()
-    .messages(validationErrors("Id thanh toán")),
+  id_booking: joi.string().required().messages(validationErrors("Id Booking chưa nhập")),
   description: joi.string().required().messages(validationErrors("Mô tả")),
 });
 

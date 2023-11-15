@@ -6,7 +6,12 @@ import { MdManageHistory } from "react-icons/md";
 
 import { Container } from "../..";
 
-const DetailOverview = () => {
+type hotelDetail = {
+  name: string;
+  description: string;
+};
+
+const DetailOverview = ({ name, description }: hotelDetail) => {
   return (
     <>
       <Container>
@@ -14,22 +19,18 @@ const DetailOverview = () => {
           <div className="w-auto md:w-[70%] text-justify">
             <div className="box-border">
               <p className="text-textLight2nd dark:text-textDark2nd">
-                <strong className="text-textLight dark:text-textDark">
-                  Mường Thanh Grand Sài Gòn Centre
-                </strong>{" "}
-                nằm trên tuyến phố rợp bóng cây xanh, một khu vực yên tĩnh giữa
-                trung tâm sôi động của TP. HCM. Từ khách sạn chỉ mất 5 phút đi
-                bộ đến nhà thờ Đức Bà, 10 phút đến Nhà hát Thành phố, và 10 phút
-                đi taxi đến chợ Bến Thành, rất thuận lợi cho du khách lưu trú và
-                tham quan các điểm du lịch nổi tiếng của TP. HCM.
+                <strong className="text-textLight dark:text-textDark pr-1">
+                  {name}
+                </strong>
+                {description}
                 <br />
               </p>
               <br />
               <p className="text-textLight2nd dark:text-textDark2nd">
-                Với tổng cộng 124 phòng tiêu chuẩn quốc tế, khách sạn{" "}
+                Với tổng cộng 124 phòng tiêu chuẩn quốc tế, khách sạn
                 <strong className="text-textLight dark:text-textDark">
                   Mường Thanh Grand Sài Gòn Centre
-                </strong>{" "}
+                </strong>
                 có nhiều loại phòng phù hợp với khách công vụ và cho đoàn khách
                 du lịch. Tất cả các loại phòng được thiết kế trang nhã, tinh tế
                 với chất liệu gần gũi với thiên nhiên. Bên cạnh đó, hệ thống cửa
