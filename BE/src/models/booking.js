@@ -23,9 +23,13 @@ const BookingSchema = new mongoose.Schema(
       enum: [
         "Đang chờ xử lý",
         "Đã xác nhận",
+        "Chờ thanh toán",
         "Đã hủy bỏ",
         "Vắng mặt",
-        "Hoàn thành",
+        "Thanh toán thành công",
+        "Đã hoàn tiền",
+        "Đã nhận phòng",
+        "Đã trả phòng"
       ],
       default: "Đang chờ xử lý",
     },
@@ -33,11 +37,7 @@ const BookingSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Room'
     },
-    id_payment_method: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Payment'
-      // required: true,
-    },
+
   },
   { timestamps: true, versionKey: false }
 );

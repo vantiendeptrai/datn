@@ -7,7 +7,25 @@ import { BookingModel } from "../models";
 import { BookingValidate } from "../validate";
 import { validateMiddleware } from "../middleware";
 import { sendResponse } from "../utils";
-import { sendMailBook } from "../utils/emailUtils";
+import { sendMailBook, sendMailBookError } from "../utils/emailUtils";
+
+export const getAllBooking = async (req, res) => {
+  try {
+    const data = await BookingModel.find().populate('id_room').populate('id_user')
+      .populate({
+        path: 'id_user',
+        populate: {
+          path: 'id_information'
+        }
+      })
+    if (data) {
+
+    }
+  } catch (error) {
+    console.log(error);
+    return sendResponse(res, 500, 'Lỗi server')
+  }
+}
 
 export const create = async (req, res) => {
   try {
@@ -26,12 +44,14 @@ export const create = async (req, res) => {
         id_user: user._id,
         ...req.body
       });
-      const infoRoom = await newBooking.populate('id_room').execPopulate();
+      await newBooking.populate('id_room')
+      const infoRoom = newBooking.id_room;
+
       if (!newBooking) {
         return sendResponse(res, 404, 'Không đặt được phòng');
       }
 
-      sendMailBook(info.name, infoRoom.room_number, infoRoom.check_in, infoRoom.check_out, info.phone, info.address)
+      // sendMailBook(info.name, user.email, infoRoom.room_number, newBooking.check_in, newBooking.check_out, info.phone, info.address)
       return sendResponse(res, 200, 'Đặt phòng thành công', newBooking)
     });
 
@@ -40,96 +60,79 @@ export const create = async (req, res) => {
   }
 };
 
-// export const getAllProducts = async (req, res) => {
-//   try {
-//     const allProducts = await BookingModel.find();
+export const updateBooking = async (req, res) => {
+  try {
+    const booking = await BookingModel.findOne({ _id: req.params.id })
+    // nếu status là đang chờ xử lý thì chuyển đổi sang status khác
+    if (booking.status == 'Đang chờ xử lý') {
+      const newStatus = await BookingModel.findOneAndUpdate(
+        { _id: booking._id },
+        { status: req.body.status },
+        { new: true }
+      )
 
-//     if (allProducts.length === 0) {
-//       return res.status(404).json({
-//         message: "Hiện tại không có phòng nào",
-//       });
-//     }
+      const updatedBooking = await BookingModel.findById(newStatus._id)
+        .populate('id_room')
+        .populate('id_user')
+        .populate({
+          path: 'id_user',
+          populate: {
+            path: 'id_information'
+          }
+        })
+      updatedBooking.id_user.password = undefined
+      if (newStatus.status == 'Đã hủy bỏ') {
+        sendMailBookError(
+          updatedBooking.id_user.id_information.name,
+          updatedBooking.id_user.email,
+          updatedBooking.id_room.room_number,
+          updatedBooking.check_in,
+          updatedBooking.check_out,
+          updatedBooking.id_user.id_information.phone,
+          updatedBooking.id_user.id_information.address
+        )
 
-//     return res.status(200).json({
-//       message: "Lấy danh sách phòng thành công",
-//       products: allProducts,
-//     });
-//   } catch (error) {
-//     return res.status(500).json({
-//       message: error.message,
-//     });
-//   }
-// };
+        return sendResponse(res, 200, 'Hủy đặt phòng thành công', updatedBooking)
+      }
+      if (newStatus.status == 'Đã xác nhận') {
+        sendMailBook(
+          updatedBooking.id_user.id_information.name,
+          updatedBooking.id_user.email,
+          updatedBooking.id_room.room_number,
+          updatedBooking.check_in,
+          updatedBooking.check_out,
+          updatedBooking.id_user.id_information.phone,
+          updatedBooking.id_user.id_information.address
+        )
+        return sendResponse(res, 200, 'Cập nhật trạng thái thành công', updatedBooking)
 
-// export const getBookingDetail = async (req, res) => {
-//   try {
-//     const productId = req.params.id;
+      }
+      return sendResponse(res, 200, 'Cập nhật trạng thái thành công', updatedBooking)
 
-//     const productDetails = await BookingModel.findById(productId);
+    } else if (booking.status == 'Hoàn thành' || booking.status == 'Đã hủy bỏ' || booking.status == 'Vắng mặt') {
+      return sendResponse(res, 404, 'Không được cập nhật trạng thái')
 
-//     if (!productDetails) {
-//       return res.status(404).json({
-//         message: "Không tìm thấy phòng bạn cần tìm",
-//       });
-//     }
+    }
+    const newStatus = await BookingModel.findOneAndUpdate(
+      { _id: booking._id },
+      { status: req.body.status },
+      { new: true }
+    )
+    // Retrieve the updated document using findById and then populate
+    const updatedBooking = await BookingModel.findById(newStatus._id)
+      .populate('id_room')
+      .populate('id_user')
+      .populate({
+        path: 'id_user',
+        populate: {
+          path: 'id_information'
+        }
+      })
+    updatedBooking.id_user.password = undefined
+    return sendResponse(res, 200, 'Cập nhật trạng thái thành công', updatedBooking)
 
-//     return res.status(200).json({
-//       message: "Đã lấy được phòng bạn cần",
-//       product: productDetails,
-//     });
-//   } catch (error) {
-//     return res.status(500).json({
-//       message: error.message,
-//     });
-//   }
-// };
-
-// export const remove = async (req, res) => {
-//   try {
-//     const bookingId = req.params.id;
-
-//     const deletedBooking = await BookingModel.findByIdAndDelete(bookingId);
-
-//     if (!deletedBooking) {
-//       return res.status(404).json({
-//         message: "Không tìm thấy đặt phòng để xóa",
-//       });
-//     }
-
-//     return res.status(200).json({
-//       message: "Xóa đặt phòng thành công",
-//       booking: deletedBooking,
-//     });
-//   } catch (error) {
-//     return res.status(500).json({
-//       message: error.message,
-//     });
-//   }
-// };
-
-// export const update = async (req, res) => {
-//   try {
-//     const bookingId = req.params.id;
-
-//     const updatedBooking = await BookingModel.findByIdAndUpdate(
-//       bookingId,
-//       req.body,
-//       { new: true }
-//     );
-
-//     if (!updatedBooking) {
-//       return res.status(404).json({
-//         message: "Không tìm thấy đặt phòng để cập nhật",
-//       });
-//     }
-
-//     return res.status(200).json({
-//       message: "Cập nhật thông tin đặt phòng thành công",
-//       booking: updatedBooking,
-//     });
-//   } catch (error) {
-//     return res.status(500).json({
-//       message: error.message,
-//     });
-//   }
-// };
+  } catch (error) {
+    console.log(error);
+    return sendResponse(res, 500, 'Lỗi server')
+  }
+}
