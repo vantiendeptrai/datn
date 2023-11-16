@@ -10,7 +10,7 @@ import { uploadImageToCloudinary } from "../utils/upImages";
 
 export const getAll = async (req, res) => {
   try {
-    const roomList = await RoomModel.find();
+    const roomList = await RoomModel.find().populate('id_amenities').populate('id_hotel').populate('id_roomType');
 
     if (!roomList || roomList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách phòng");
@@ -26,7 +26,7 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
-    const room = await RoomModel.findById(req.params.id);
+    const room = await RoomModel.findById(req.params.id).populate('id_amenities').populate('id_hotel').populate('id_roomType');
 
     if (!room || room.length === 0) {
       return sendResponse(res, 404, "Không có thông tin phòng");
