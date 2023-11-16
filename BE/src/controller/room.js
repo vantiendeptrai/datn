@@ -1,10 +1,12 @@
-import cloudinary from 'cloudinary';
-import { ObjectId } from "mongodb";
 import { RoomModel } from "../models";
-import { uploadImageToCloudinary } from "../utils/upImages";
 import { sendResponse } from "../utils";
 import { RoomValidate } from "../validate";
-import { validateMiddleware } from "../middleware";
+import { validateFormMiddleware } from "../middleware";
+
+import cloudinary from "cloudinary";
+
+import { ObjectId } from "mongodb";
+import { uploadImageToCloudinary } from "../utils/upImages";
 
 export const getAll = async (req, res) => {
   try {
@@ -39,52 +41,40 @@ export const getOne = async (req, res) => {
 };
 
 export const create = async (req, res) => {
-  // Lọc ra các tệp ảnh có kích thước lớn hơn 0
-  const validImages = Object.values(req.files).filter((file) => file.size > 0);
-
-  // Kiểm tra xem có file ảnh hợp lệ để tiếp tục xử lý
-  if (!validImages.length) {
-    return res.status(400).json({ message: 'Vui lòng tải lên ít nhất một file ảnh.' });
-  }
-  // Tạo một mảng để lưu trữ thông tin tệp ảnh
   const imagesArray = [];
-  // Duyệt qua các thuộc tính trong req.files
+
   for (const field in req.files) {
     if (req.files.hasOwnProperty(field)) {
       const file = req.files[field];
-      // Thêm thông tin của tệp vào mảng
       imagesArray.push({
-        fieldName: field,
-        size: file.size,
-        path: file.path,
-        name: file.name,
-        type: file.type,
-        lastModifiedDate: file.lastModifiedDate
-        // Thêm các thuộc tính khác tùy theo nhu cầu
+        name: field,
+        url: file.path,
       });
     }
-
-    // Hiển thị mảng các tệp ảnh
-    req.files.images = imagesArray;
   }
 
-  // tao mang id_amenities
+  req.fields.images = imagesArray;
+
   if (req.fields.id_amenities) {
-    const id_amenities = req.fields.id_amenities.split(',');
-    const amenities = id_amenities.map((item, index) => (new ObjectId(item)))
-    req.fields.id_amenities = amenities
+    const id_amenities = req.fields.id_amenities.split(",");
+
+    const amenities = id_amenities.map((item) => new ObjectId(item));
+    req.fields.id_amenities = amenities;
   }
+
   try {
-    validateMiddleware(req, res, RoomValidate, async () => {
-      // Upload tất cả ảnh lên Cloudinary và lấy các đường dẫn URL
-      const imagesUrls = await Promise.all(req.files.images.map(uploadImageToCloudinary));
-      // Tạo mảng chứa thông tin ảnh với các đường dẫn URL
-      const images = imagesUrls.map((imageUrl, index) => ({
+    validateFormMiddleware(req, res, RoomValidate, async () => {
+      const newImages = await Promise.all(
+        req.fields.images.map(uploadImageToCloudinary)
+      );
+
+      const images = newImages.map((imageUrl, index) => ({
         url: imageUrl,
       }));
+
       const data = await RoomModel.create({
         ...req.fields,
-        images: images,
+        images,
       });
 
       if (!data) {
@@ -98,87 +88,58 @@ export const create = async (req, res) => {
 
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi thêm phòng");
   }
-}
-
+};
 
 export const update = async (req, res) => {
-  // Lọc ra các tệp ảnh có kích thước lớn hơn 0
-  const validImages = Object.values(req.files).filter((file) => file.size > 0);
-
-  // Kiểm tra xem có file ảnh hợp lệ để tiếp tục xử lý
-  if (!validImages.length) {
-    return res.status(400).json({ message: 'Vui lòng tải lên ít nhất một file ảnh.' });
-  }
-  // Tạo một mảng để lưu trữ thông tin tệp ảnh
   const imagesArray = [];
-  // Duyệt qua các thuộc tính trong req.files
+
   for (const field in req.files) {
     if (req.files.hasOwnProperty(field)) {
       const file = req.files[field];
-      // Thêm thông tin của tệp vào mảng
       imagesArray.push({
-        fieldName: field,
-        size: file.size,
-        path: file.path,
-        name: file.name,
-        type: file.type,
-        lastModifiedDate: file.lastModifiedDate
-        // Thêm các thuộc tính khác tùy theo nhu cầu
+        name: field,
+        url: file.path,
       });
     }
-
-    // Hiển thị mảng các tệp ảnh
-    req.files.images = imagesArray;
   }
 
-  // tao mang id_amenities
+  req.fields.images = imagesArray;
+
   if (req.fields.id_amenities) {
-    const id_amenities = req.fields.id_amenities.split(',');
-    const amenities = id_amenities.map((item, index) => (new ObjectId(item)))
-    req.fields.id_amenities = amenities
-  }
-  try {
-    validateMiddleware(req, res, RoomValidate, async () => {
-      // Lấy dữ liệu khách sạn hiện tại từ database
-      const existingData = await RoomModel.findById(req.params.id);
-      // Lấy mảng ảnh hiện tại từ dữ liệu khách sạn hiện tại
-      const existingImages = existingData.images;
-      // Tạo mảng mới để lưu trữ ảnh sau cập nhật
-      let newImages = existingImages;
+    const id_amenities = req.fields.id_amenities.split(",");
 
-      // Nếu có sự cập nhật ảnh
-      if (req.files && req.files.images) {
-        newImages = [];
-        // Duyệt qua các ảnh mới để tải lên và thêm vào mảng newImages
-        for (const image of req.files.images) {
-          const imageResult = await cloudinary.v2.uploader.upload(image.path, {
-            folder: 'room-images',
-            use_filename: true,
-          });
-          newImages.push({
-            url: imageResult.secure_url,
-          });
-        }
-      }
-      // Tạo đối tượng mới chứa thông tin cập nhật
+    const amenities = id_amenities.map((item) => new ObjectId(item));
+    req.fields.id_amenities = amenities;
+  }
+
+  try {
+    validateFormMiddleware(req, res, RoomValidate, async () => {
+      const newImages = await Promise.all(
+        req.fields.images.map(uploadImageToCloudinary)
+      );
+
+      const images = newImages.map((imageUrl, index) => ({
+        url: imageUrl,
+      }));
+
       const newData = {
         ...req.fields,
-        images: newImages,
+        images,
       };
-      // Thực hiện cập nhật dữ liệu khách sạn
+
       const data = await RoomModel.findByIdAndUpdate(req.params.id, newData, {
         new: true,
       });
+
       if (!data) {
         return sendResponse(res, 404, "Cập nhật phòng thất bại");
       }
 
       return sendResponse(res, 200, "Cập nhật phòng thành công", data);
-
     });
-
   } catch (error) {
     console.log(error);
+
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi cập nhật phòng");
   }
 };

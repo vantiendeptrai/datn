@@ -7,9 +7,10 @@ const hotelValidate = joi.object({
   images: joi
     .array()
     .min(1)
-    // .required()
+    .required()
     .items(
       joi.object({
+        name: joi.string().required().messages(validationErrors("Tên")),
         url: joi.string().required().messages(validationErrors("Đường dẫn")),
       })
     )
@@ -25,7 +26,7 @@ const hotelValidate = joi.object({
     .messages(validationErrors("Số điện thoại khách sạn")),
   status: joi
     .string()
-    .required()
+    .optional()
     .messages(validationErrors("Trạng thái khách sạn")),
   email: joi.string().required().messages(validationErrors("Email khách sạn")),
   description: joi

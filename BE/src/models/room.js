@@ -29,6 +29,7 @@ const roomSchema = new mongoose.Schema(
     },
     status: {
       type: String,
+      default: "Có sẵn",
       enum: ["Có sẵn", "Đã đặt", "Đang sử dụng", "Bảo trì", "Đang dọn dẹp"],
     },
     description: {

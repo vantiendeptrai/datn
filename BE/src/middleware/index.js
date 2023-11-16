@@ -1,4 +1,12 @@
 import { isAdminMiddleware, loginMiddleware } from "./authMiddleware";
-import { validateMiddleware } from "./validateMiddleware";
+import {
+  validateMiddleware,
+  validateFormMiddleware,
+} from "./validateMiddleware";
 
-export { isAdminMiddleware, loginMiddleware, validateMiddleware };
+export {
+  isAdminMiddleware,
+  loginMiddleware,
+  validateMiddleware,
+  validateFormMiddleware,
+};
