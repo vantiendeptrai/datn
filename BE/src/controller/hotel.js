@@ -1,15 +1,16 @@
 import { HotelModel } from "../models";
 import { sendResponse } from "../utils";
 import { HotelValidate } from "../validate";
+import { uploadImageToCloudinary } from "../utils";
 import { validateFormMiddleware } from "../middleware";
-
-import { uploadImageToCloudinary } from "../utils/upImages";
 
 import { ObjectId } from "mongodb";
 
 export const getAll = async (req, res) => {
   try {
-    const hotelList = await HotelModel.find().populate('id_amenities').populate('id_review');
+    const hotelList = await HotelModel.find()
+      .populate("id_amenities")
+      .populate("id_review");
 
     if (!hotelList || hotelList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách khách sạn");
@@ -29,7 +30,9 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
-    const hotel = await HotelModel.findById(req.params.id).populate('id_amenities').populate('id_review');
+    const hotel = await HotelModel.findById(req.params.id)
+      .populate("id_amenities")
+      .populate("id_review");
 
     if (!hotel || hotel.length === 0) {
       return sendResponse(res, 404, "Không có thông tin khách sạn");
